@@ -118,6 +118,8 @@ namespace WoblaExplorer
                             {
                                 _searchWindow = null;
                             };
+                            _searchWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                            _searchWindow.Owner = this;
                             _searchWindow.Show();
                         }
                         else

@@ -31,36 +31,44 @@ namespace WoblaExplorer
             };
         }
 
-        private void LbSearchResults_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void DefaultCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            
+            e.CanExecute = true;
         }
 
-        private void LbSearchResults_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        private void OpenExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            
-        }
-
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            var menuItem = (MenuItem) sender;
-            var menuHeader = menuItem.Header.ToString();
-            switch (menuHeader)
+            var listBoxItem = e.OriginalSource as ListBoxItem;
+            var fsEntry = listBoxItem?.DataContext as FileSystemInfo;
+            if (fsEntry != null)
             {
-                case "Open":
-                    var fs = (FileSystemInfo) LbSearchResults.SelectedItem;
-                    if (fs != null)
-                    {
-                        Process.Start(fs.FullName);
-                    }
-                    break;
-                case "Show in Windows Explorer":
-                    var file = (FileSystemInfo) LbSearchResults.SelectedItem;
-                    if (file != null)
-                    {
-                        Process.Start("explorer.exe", @"/select, " + file.FullName);
-                    }
-                    break;
+                Process.Start(fsEntry.FullName);
+            }
+            else
+            {
+                var selectedItem = LbSearchResults.SelectedItem as FileSystemInfo;
+                if (selectedItem != null)
+                {
+                    Process.Start(selectedItem.FullName);
+                }
+            }
+        }
+
+        private void ShowInExplorerExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var listBoxItem = e.OriginalSource as ListBoxItem;
+            var fsEntry = listBoxItem?.DataContext as FileSystemInfo;
+            if (fsEntry != null)
+            {
+                Process.Start("explorer.exe", @"/select, " + fsEntry.FullName);
+            }
+            else
+            {
+                var selectedItem = LbSearchResults.SelectedItem as FileSystemInfo;
+                if (selectedItem != null)
+                {
+                    Process.Start("explorer.exe", @"/select, " + selectedItem.FullName);
+                }
             }
         }
     }

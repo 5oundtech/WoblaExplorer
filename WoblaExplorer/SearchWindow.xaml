@@ -1,13 +1,19 @@
 ﻿<Window x:Class="WoblaExplorer.SearchWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WoblaExplorer.CustomCommands"
         Title="SearchWindow" Height="400" Width="600" x:Name="SWindow">
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" CanExecute="DefaultCommand_CanExecute" Executed="OpenExecuted"></CommandBinding>
+        <CommandBinding Command="local:Commands.ShowInExplorer" CanExecute="DefaultCommand_CanExecute" Executed="ShowInExplorerExecuted"></CommandBinding>
+    </Window.CommandBindings>
+    
     <Grid>
-        <ListBox Name="LbSearchResults" MouseDoubleClick="LbSearchResults_OnMouseDoubleClick" MouseRightButtonUp="LbSearchResults_OnMouseRightButtonUp">
+        <ListBox Name="LbSearchResults">
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Open" Click="MenuItem_OnClick"/>
-                    <MenuItem Header="Show in Windows Explorer" Click="MenuItem_OnClick"/>
+                    <MenuItem Header="Open" Command="Open"/>
+                    <MenuItem Header="Show in Windows Explorer" Command="local:Commands.ShowInExplorer"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
