@@ -292,17 +292,17 @@ namespace WoblaExplorer
 
         private void RenameExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            
+            //TODO make rename func
         }
 
         private void CopyToExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            
+            //TODO Copy func
         }
 
         private void RemoveExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            
+            //TODO remove func
         }
 
         private void ExitExecuted(object sender, ExecutedRoutedEventArgs e)
