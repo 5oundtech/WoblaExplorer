@@ -232,22 +232,6 @@ namespace WoblaExplorer
             await PbVisualization.TogglePbVisibilityAsync();
         }
 
-        private async void BtnDiveBack_OnClick(object sender, RoutedEventArgs e)
-        {
-            await PbVisualization.TogglePbVisibilityAsync();
-
-            var task = Task.Factory.StartNew(() => _fileDiver.DiveBack());
-            var fs = await task;
-
-            await ListViewExplorer.Dispatcher.InvokeAsync(() =>
-            {
-                ListViewExplorer.ItemsSource = fs;
-            });
-            ChangeWindowTitle();
-
-            await PbVisualization.TogglePbVisibilityAsync();
-        }
-
         private async void ChangeWindowTitle()
         {
             string fileDiverPath = _fileDiver.CurrentPath;
@@ -268,20 +252,48 @@ namespace WoblaExplorer
             e.CanExecute = true;
         }
 
-        private void OpenCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        private async void OpenCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             var listViewItem = e.OriginalSource as ListViewItem;
             var fsEntry = listViewItem?.DataContext as FileSystemInfo;
             if (fsEntry != null)
             {
-                Process.Start(fsEntry.FullName);
+                if (fsEntry.IsDirectory())
+                {
+                    await PbVisualization.TogglePbVisibilityAsync();
+
+                    var task = Task.Factory.StartNew(() => _fileDiver.DiveInto(fsEntry.FullName));
+                    ListViewExplorer.ItemsSource = await task;
+
+                    ChangeWindowTitle();
+
+                    await PbVisualization.TogglePbVisibilityAsync();
+                }
+                else
+                {
+                    Process.Start(fsEntry.FullName);
+                }
             }
             else
             {
                 var selectedItem = ListViewExplorer.SelectedItem as FileSystemInfo;
                 if (selectedItem != null)
                 {
-                    Process.Start(selectedItem.FullName);
+                    if (selectedItem.IsDirectory())
+                    {
+                        await PbVisualization.TogglePbVisibilityAsync();
+
+                        var task = Task.Factory.StartNew(() => _fileDiver.DiveInto(selectedItem.FullName));
+                        ListViewExplorer.ItemsSource = await task;
+
+                        ChangeWindowTitle();
+
+                        await PbVisualization.TogglePbVisibilityAsync();
+                    }
+                    else
+                    {
+                        Process.Start(selectedItem.FullName);
+                    }
                 }
             }
         }
@@ -392,6 +404,22 @@ namespace WoblaExplorer
         {
             ErrorPopup.IsOpen = true;
             e.Handled = true;
+        }
+
+        private async void BackspaceExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            await PbVisualization.TogglePbVisibilityAsync();
+
+            var task = Task.Factory.StartNew(() => _fileDiver.DiveBack());
+            var fs = await task;
+
+            await ListViewExplorer.Dispatcher.InvokeAsync(() =>
+            {
+                ListViewExplorer.ItemsSource = fs;
+            });
+            ChangeWindowTitle();
+
+            await PbVisualization.TogglePbVisibilityAsync();
         }
     }
 }
