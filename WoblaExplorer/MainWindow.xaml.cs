@@ -196,6 +196,18 @@ namespace WoblaExplorer
             }
         }
 
+        private async void ListViewExplorer_Refresh()
+        {
+            await PbVisualization.TogglePbVisibilityAsync();
+
+            var task = Task.Factory.StartNew(() => _fileDiver.DiveInto(_fileDiver.CurrentPath));
+            ListViewExplorer.ItemsSource = await task;
+
+            ChangeWindowTitle();
+
+            await PbVisualization.TogglePbVisibilityAsync();
+        }
+
         private async void CbDrives_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             await PbVisualization.TogglePbVisibilityAsync();
@@ -294,7 +306,54 @@ namespace WoblaExplorer
 
         private void RenameExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            //TODO make rename func
+            var listViewItem = e.OriginalSource as ListViewItem;
+            var fsEntry = listViewItem?.DataContext as FileSystemInfo;
+            if (fsEntry != null)
+            {
+                var renameDialog = new RenameDialog(fsEntry.Name)
+                {
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    Owner = this
+                };
+                if (renameDialog.ShowDialog() != true) return;
+                try
+                {
+                    var dialogRes = renameDialog.Filename.Clone().ToString();
+                    var dirName = fsEntry.FullName.Substring(0, fsEntry.FullName.Length - fsEntry.Name.Length);
+                    Directory.Move(fsEntry.FullName, dirName + dialogRes);
+                    ListViewExplorer_Refresh();
+                }
+                catch (Exception exception)
+                {
+                    ErrorPopup.IsOpen = true;
+                    SystemSounds.Exclamation.Play();
+                }
+            }
+            else
+            {
+                var selectedItem = ListViewExplorer.SelectedItem as FileSystemInfo;
+                if (selectedItem != null)
+                {
+                    var renameDialog = new RenameDialog(selectedItem.Name)
+                    {
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                        Owner = this
+                    };
+                    if (renameDialog.ShowDialog() != true) return;
+                    try
+                    {
+                        var dialogRes = renameDialog.Filename.Clone().ToString();
+                        var dirName = selectedItem.FullName.Substring(0, selectedItem.FullName.Length - selectedItem.Name.Length);
+                        Directory.Move(selectedItem.FullName, dirName + dialogRes);
+                        ListViewExplorer_Refresh();
+                    }
+                    catch (Exception exception)
+                    {
+                        ErrorPopup.IsOpen = true;
+                        SystemSounds.Exclamation.Play();
+                    }
+                }
+            }
         }
 
         private void CopyToExecuted(object sender, ExecutedRoutedEventArgs e)
