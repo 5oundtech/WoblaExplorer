@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using WoblaExplorer.FilesUtil;
 using WoblaExplorer.Util;
@@ -198,7 +199,22 @@ namespace WoblaExplorer
             {
                 await PbVisualization.TogglePbVisibilityAsync();
 
-                var task = Task.Factory.StartNew(() => _fileDiver.DiveInto(newPath));
+                var task = Task.Factory.StartNew(() =>
+                {
+                    try
+                    {
+                        return _fileDiver.DiveInto(newPath);
+                    }
+                    catch (Exception)
+                    {
+                        Dispatcher.InvokeAsync(() =>
+                        {
+                            ErrorPopup.IsOpen = true;
+                            SystemSounds.Exclamation.Play();
+                        });
+                        return null;
+                    }
+                });
                 ListViewExplorer.ItemsSource = await task;
 
                 ChangeWindowTitle();
@@ -211,7 +227,22 @@ namespace WoblaExplorer
         {
             await PbVisualization.TogglePbVisibilityAsync();
 
-            var task = Task.Factory.StartNew(() => _fileDiver.DiveInto(_fileDiver.CurrentPath));
+            var task = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    return _fileDiver.DiveInto(_fileDiver.CurrentPath);
+                }
+                catch (Exception)
+                {
+                    Dispatcher.InvokeAsync(() =>
+                    {
+                        ErrorPopup.IsOpen = true;
+                        SystemSounds.Exclamation.Play();
+                    });
+                    return null;
+                }
+            });
             ListViewExplorer.ItemsSource = await task;
 
             ChangeWindowTitle();
@@ -246,7 +277,7 @@ namespace WoblaExplorer
                 ListViewExplorer.ItemsSource = await task;
                 ChangeWindowTitle();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ErrorPopup.IsOpen = true;
                 SystemSounds.Exclamation.Play();
@@ -454,6 +485,15 @@ namespace WoblaExplorer
             ChangeWindowTitle();
 
             await PbVisualization.TogglePbVisibilityAsync();
+        }
+
+        private void PopupLeftMouseButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var popup = sender as Popup;
+            if (popup != null)
+            {
+                popup.IsOpen = false;
+            }
         }
     }
 }

@@ -78,7 +78,7 @@
                     </StackPanel>
                 </Border>
             </Popup>
-            <Popup Name="ErrorPopup" StaysOpen="False" PopupAnimation="Slide" Placement="Center" AllowsTransparency="True" MouseEnter="ErrorPopup_OnMouseEnter">
+            <Popup Name="ErrorPopup" StaysOpen="False" PopupAnimation="Slide" Placement="Center" AllowsTransparency="True" MouseEnter="ErrorPopup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
                 <Border BorderBrush="DarkRed" BorderThickness="2" Background="White">
                     <StackPanel Margin="5">
                         <TextBlock Margin="5" FontFamily="FontAwesome">К сожалению возникла проблема &#xf071;</TextBlock>
