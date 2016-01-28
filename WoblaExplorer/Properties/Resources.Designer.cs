@@ -89,5 +89,32 @@ namespace WoblaExplorer.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose new place to item.
+        /// </summary>
+        internal static string MwCopyToDescription {
+            get {
+                return ResourceManager.GetString("MwCopyToDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one object at time can be renamed.
+        /// </summary>
+        internal static string MwRenameError {
+            get {
+                return ResourceManager.GetString("MwRenameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to completed in .
+        /// </summary>
+        internal static string MwSearchCompleted {
+            get {
+                return ResourceManager.GetString("MwSearchCompleted", resourceCulture);
+            }
+        }
     }
 }

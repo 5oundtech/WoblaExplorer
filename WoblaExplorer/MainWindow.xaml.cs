@@ -212,7 +212,7 @@ namespace WoblaExplorer
                     stopwatch.Stop();
                     if (_searchWindow != null)
                     {
-                        _searchWindow.Title += $" || Completed in {stopwatch.Elapsed}";
+                        _searchWindow.Title += $" || {Properties.Resources.MwSearchCompleted} {stopwatch.Elapsed}";
                     }
                 }
                 catch
@@ -221,7 +221,7 @@ namespace WoblaExplorer
                         stopwatch.Stop();
                     if (_searchWindow != null)
                     {
-                        _searchWindow.Title += $" || Completed in {stopwatch.Elapsed}";
+                        _searchWindow.Title += $" || {Properties.Resources.MwSearchCompleted} {stopwatch.Elapsed}";
                     }
                     SearchPopup.IsOpen = true;
                     SystemSounds.Exclamation.Play();
@@ -457,7 +457,7 @@ namespace WoblaExplorer
         {
             if (ListViewExplorer.SelectedItems.Count > 1)
             {
-                CustomErrorPopupTextBlock.Text = "Только один объект может быть переименован за раз!";
+                CustomErrorPopupTextBlock.Text = Properties.Resources.MwRenameError;
                 CustomErrorPopup.IsOpen = true;
                 SystemSounds.Exclamation.Play();
                 return;
@@ -518,7 +518,7 @@ namespace WoblaExplorer
             var folder = new FolderBrowserDialog
             {
                 ShowNewFolderButton = true,
-                Description = "Choose new place to item"
+                Description = Properties.Resources.MwCopyToDescription
             };
             if (folder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -580,10 +580,10 @@ namespace WoblaExplorer
                     finally
                     {
                         ListViewExplorer_Refresh();
-                        await PbVisualization.TogglePbVisibilityAsync();
                     }
                 }
             }
+            await PbVisualization.TogglePbVisibilityAsync();
         }
 
         private async void RemoveExecuted(object sender, ExecutedRoutedEventArgs e)

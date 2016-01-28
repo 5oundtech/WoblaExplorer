@@ -128,12 +128,12 @@
     <value>..\Resources\fontawesome-webfont.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="MwCopyToDescription" xml:space="preserve">
-    <value>Choose new place to item</value>
+    <value>Выберите новое расположение для объекта</value>
   </data>
   <data name="MwRenameError" xml:space="preserve">
-    <value>Only one object at time can be renamed</value>
+    <value>Только один объект может быть переименован за раз</value>
   </data>
   <data name="MwSearchCompleted" xml:space="preserve">
-    <value>completed in </value>
+    <value>выполнено за</value>
   </data>
 </root>
