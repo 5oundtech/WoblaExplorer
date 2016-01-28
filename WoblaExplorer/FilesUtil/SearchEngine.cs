@@ -64,6 +64,10 @@ namespace WoblaExplorer.FilesUtil
             {
                 new DirectoryInfo(path).GetFileSystemInfos().ToList().ForEach(info =>
                 {
+                    if (info.Attributes.HasFlag(FileAttributes.System))
+                    {
+                        return;
+                    }
                     token.ThrowIfCancellationRequested();
                     if (info.Name.ToLower(CultureInfo.CurrentCulture).Contains(find.ToLower(CultureInfo.CurrentCulture)))
                     {
