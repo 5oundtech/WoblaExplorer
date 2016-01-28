@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Security.Principal;
 using System.Windows;
 
 namespace WoblaExplorer
@@ -67,6 +70,33 @@ namespace WoblaExplorer
             m_Languages.Clear();
             m_Languages.Add(new CultureInfo("en-GB"));
             m_Languages.Add(new CultureInfo("ru-RU"));
+
+            if (!IsRunAsAdministrator())
+            {
+                var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase)
+                {
+                    UseShellExecute = true,
+                    Verb = "runas"
+                };
+                try
+                {
+                    Process.Start(processInfo);
+
+                    Application.Current.Shutdown();
+                }
+                catch (Exception)
+                {
+                    
+                }
+            }
+        }
+
+        private bool IsRunAsAdministrator()
+        {
+            var wi = WindowsIdentity.GetCurrent();
+            var wp = new WindowsPrincipal(wi);
+
+            return wp.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
         private void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
