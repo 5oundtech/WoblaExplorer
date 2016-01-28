@@ -25,17 +25,10 @@ namespace WoblaExplorer.FilesUtil
         /// <exception cref="AggregateException">Occurs when app have no right to access dir or smth else.</exception>
         public FileSystemInfo[] DiveBack()
         {
-            try
+            DirectoryInfo newPath = new DirectoryInfo(CurrentPath);
+            if (newPath.Parent != null)
             {
-                DirectoryInfo newPath = new DirectoryInfo(CurrentPath);
-                if (newPath.Parent != null)
-                {
-                    return DiveInto(newPath.Parent.FullName);
-                }
-            }
-            catch (AggregateException e)
-            {
-                MessageBox.Show(e.Message);
+                return DiveInto(newPath.Parent.FullName);
             }
 
             return DiveInto(CurrentPath);
@@ -69,15 +62,15 @@ namespace WoblaExplorer.FilesUtil
 
                 return fsInfo;
             }
+            catch (IOException ioException)
+            {
+                throw;
+            }
             catch (ArgumentNullException argumentNullException)
             {
                 throw;
             }
             catch (ArgumentException argumentException)
-            {
-                throw;
-            }
-            catch (PathTooLongException pathTooLongException)
             {
                 throw;
             }

@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Media;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using System.Xml;
-using WoblaExplorer.CustomCommands;
 using WoblaExplorer.FilesUtil;
 using WoblaExplorer.Util;
 using Point = System.Drawing.Point;
@@ -68,7 +63,7 @@ namespace WoblaExplorer
             };
 
             var settings = Properties.Settings.Default;
-            string path = string.Empty;
+            string path;
             if (string.IsNullOrWhiteSpace(settings.LastDirectory))
             {
                 path = CbDrives.SelectedValue.ToString();
@@ -76,16 +71,32 @@ namespace WoblaExplorer
             else
             {
                 path = settings.LastDirectory;
+                CbDrives.SelectedItem = path.Substring(0, 3);
             }
             MainWindowX.Left = settings.WindowLocation.X;
             MainWindowX.Top = settings.WindowLocation.Y;
             MainWindowX.Height = settings.WindowSize.Height;
             MainWindowX.Width = settings.WindowSize.Width;
 
-            var task = Task.Factory.StartNew(() => _fileDiver.DiveInto(path));
-            var fs = await task;
-            await Task.Delay(300);
-            ListViewExplorer.ItemsSource = fs;
+            var task = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    return _fileDiver.DiveInto(path);
+                }
+                catch (Exception)
+                {
+                    Dispatcher.InvokeAsync(() =>
+                    {
+                        ErrorPopup.IsOpen = true;
+                        SystemSounds.Exclamation.Play();
+                    });
+                    return null;
+                }
+            });
+            ListViewExplorer.ItemsSource = await task;
+            ListViewExplorer.Focus();
+
             ChangeWindowTitle();
         }
 
@@ -214,13 +225,25 @@ namespace WoblaExplorer
 
             try
             {
+                if (!((ComboBox) sender).IsFocused) return;
                 string path = ((ComboBox) sender).SelectedValue.ToString();
-                var task = Task.Factory.StartNew(() => _fileDiver.DiveInto(path));
-                var fs = await task;
-                await ListViewExplorer.Dispatcher.InvokeAsync(() =>
+                var task = Task.Factory.StartNew(() =>
                 {
-                    ListViewExplorer.ItemsSource = fs;
+                    try
+                    {
+                        return _fileDiver.DiveInto(path);
+                    }
+                    catch
+                    {
+                        Dispatcher.InvokeAsync(() =>
+                        {
+                            ErrorPopup.IsOpen = true;
+                            SystemSounds.Exclamation.Play();
+                        });
+                        return null;
+                    }
                 });
+                ListViewExplorer.ItemsSource = await task;
                 ChangeWindowTitle();
             }
             catch (Exception ex)
@@ -335,7 +358,7 @@ namespace WoblaExplorer
                     Directory.Move(fsEntry.FullName, dirName + dialogRes);
                     ListViewExplorer_Refresh();
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                     ErrorPopup.IsOpen = true;
                     SystemSounds.Exclamation.Play();
@@ -359,7 +382,7 @@ namespace WoblaExplorer
                         Directory.Move(selectedItem.FullName, dirName + dialogRes);
                         ListViewExplorer_Refresh();
                     }
-                    catch (Exception exception)
+                    catch (Exception)
                     {
                         ErrorPopup.IsOpen = true;
                         SystemSounds.Exclamation.Play();
@@ -410,13 +433,24 @@ namespace WoblaExplorer
         {
             await PbVisualization.TogglePbVisibilityAsync();
 
-            var task = Task.Factory.StartNew(() => _fileDiver.DiveBack());
-            var fs = await task;
-
-            await ListViewExplorer.Dispatcher.InvokeAsync(() =>
+            var task = Task.Factory.StartNew(() =>
             {
-                ListViewExplorer.ItemsSource = fs;
+                try
+                {
+                    return _fileDiver.DiveBack();
+                }
+                catch (Exception)
+                {
+                    Dispatcher.InvokeAsync(() =>
+                    {
+                        ErrorPopup.IsOpen = true;
+                        SystemSounds.Exclamation.Play();
+                    });
+                    return null;
+                }
             });
+
+            ListViewExplorer.ItemsSource = await task;
             ChangeWindowTitle();
 
             await PbVisualization.TogglePbVisibilityAsync();

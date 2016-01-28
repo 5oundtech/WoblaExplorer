@@ -44,7 +44,7 @@
                 <ComboBox DockPanel.Dock="Left" Name="CbDrives" Width="60" SelectionChanged="CbDrives_OnSelectionChanged" Height="25"></ComboBox>
                 <Button DockPanel.Dock="Right" Name="BtnDiveBack" Command="Backspace" Width="60" Margin="30, 0, 0, 0" Height="25" FontFamily="FontAwesome">&#xf060; Back</Button>
             </DockPanel>
-            <TextBox Grid.Column="1" Grid.Row="0" Margin="20, 0, 0, 0" Name="TbSearchInput" Text="Item to find..." Width="Auto" AutoWordSelection="True" Height="25" KeyUp="TbSearchInput_OnKeyUp"></TextBox>
+            <TextBox Grid.Column="1" Grid.Row="0" Margin="20, 0, 0, 0" Name="TbSearchInput" Text="Item to find..." ToolTip="Input item to find" Width="Auto" AutoWordSelection="True" Height="25" KeyUp="TbSearchInput_OnKeyUp"></TextBox>
             <Button Grid.Column="2" Grid.Row="0" Name="BtnSearch" Width="70" Margin="10, 0, 0, 0" Click="BtnSearch_OnClick" Height="25" FontFamily="FontAwesome">Search &#xf002;</Button>
         </Grid>
 

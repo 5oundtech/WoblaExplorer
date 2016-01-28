@@ -29,7 +29,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome">
-                    Автор Woblavobla. Профиль ВКонтакте &#xf061; <Hyperlink NavigateUri="https://vk.com/woblavobla" Click="Hyperlink_OnClick">vk.com/woblavobla</Hyperlink>
+                    Автор Woblavobla. Страница проекта в GitHub &#xf061; <Hyperlink NavigateUri="https://github.com/5oundtech/WoblaExplorer" Click="Hyperlink_OnClick">GitHub page</Hyperlink>
                 </TextBlock>
             </StackPanel>
         </StackPanel>
