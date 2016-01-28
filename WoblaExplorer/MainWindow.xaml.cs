@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Media;
@@ -7,9 +8,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Forms;
 using System.Windows.Input;
+using Microsoft.Win32;
 using WoblaExplorer.FilesUtil;
 using WoblaExplorer.Util;
+using Application = System.Windows.Application;
+using ComboBox = System.Windows.Controls.ComboBox;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using ListView = System.Windows.Controls.ListView;
+using ListViewItem = System.Windows.Controls.ListViewItem;
+using MessageBox = System.Windows.MessageBox;
+using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 
@@ -321,7 +331,22 @@ namespace WoblaExplorer
                 {
                     await PbVisualization.TogglePbVisibilityAsync();
 
-                    var task = Task.Factory.StartNew(() => _fileDiver.DiveInto(fsEntry.FullName));
+                    var task = Task.Factory.StartNew(() =>
+                    {
+                        try
+                        {
+                            return _fileDiver.DiveInto(fsEntry.FullName);
+                        }
+                        catch (Exception)
+                        {
+                            Dispatcher.InvokeAsync(() =>
+                            {
+                                ErrorPopup.IsOpen = true;
+                                SystemSounds.Exclamation.Play();
+                            });
+                            return null;
+                        }
+                    });
                     ListViewExplorer.ItemsSource = await task;
 
                     ChangeWindowTitle();
@@ -342,7 +367,22 @@ namespace WoblaExplorer
                     {
                         await PbVisualization.TogglePbVisibilityAsync();
 
-                        var task = Task.Factory.StartNew(() => _fileDiver.DiveInto(selectedItem.FullName));
+                        var task = Task.Factory.StartNew(() =>
+                        {
+                            try
+                            {
+                                return _fileDiver.DiveInto(selectedItem.FullName);
+                            }
+                            catch (Exception)
+                            {
+                                Dispatcher.InvokeAsync(() =>
+                                {
+                                    ErrorPopup.IsOpen = true;
+                                    SystemSounds.Exclamation.Play();
+                                });
+                                return null;
+                            }
+                        });
                         ListViewExplorer.ItemsSource = await task;
 
                         ChangeWindowTitle();
@@ -377,6 +417,10 @@ namespace WoblaExplorer
 
         private void RenameExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            if (ListViewExplorer.SelectedItems.Count > 1)
+            {
+                return; //TODO make a custom popup error
+            }
             var listViewItem = e.OriginalSource as ListViewItem;
             var fsEntry = listViewItem?.DataContext as FileSystemInfo;
             if (fsEntry != null)
@@ -427,14 +471,123 @@ namespace WoblaExplorer
             }
         }
 
-        private void CopyToExecuted(object sender, ExecutedRoutedEventArgs e)
+        private async void CopyToExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            //TODO Copy func
+            await PbVisualization.TogglePbVisibilityAsync();
+            var folder = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true,
+                Description = "Choose new place to item"
+            };
+            if (folder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                var destinationPath = folder.SelectedPath;
+                var fsEntries = ListViewExplorer.SelectedItems;
+                if (fsEntries != null)
+                {
+                    try
+                    {
+                        foreach (FileSystemInfo entry in fsEntries)
+                        {
+                            if (entry.IsDirectory())
+                            {
+                                var task = Task.Factory.StartNew(() =>
+                                {
+                                    try
+                                    {
+                                        _fileDiver.CopyAllInDir((DirectoryInfo) entry,
+                                            new DirectoryInfo(destinationPath));
+                                    }
+                                    catch (Exception)
+                                    {
+                                        Dispatcher.InvokeAsync(() =>
+                                        {
+                                            ErrorPopup.IsOpen = true;
+                                            SystemSounds.Exclamation.Play();
+                                        });
+                                    }
+                                });
+                                await task;
+                            }
+                            else
+                            {
+                                var task = Task.Factory.StartNew(() =>
+                                {
+                                    try
+                                    {
+                                        File.Copy(entry.FullName,
+                                            Path.Combine(destinationPath, entry.Name), true);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        Dispatcher.InvokeAsync(() =>
+                                        {
+                                            ErrorPopup.IsOpen = true;
+                                            SystemSounds.Exclamation.Play();
+                                        });
+                                    }
+                                });
+                                await task;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        ErrorPopup.IsOpen = true;
+                        SystemSounds.Exclamation.Play();
+                    }
+                    finally
+                    {
+                        ListViewExplorer_Refresh();
+                        await PbVisualization.TogglePbVisibilityAsync();
+                    }
+                }
+            }
         }
 
-        private void RemoveExecuted(object sender, ExecutedRoutedEventArgs e)
+        private async void RemoveExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            //TODO remove func
+            await PbVisualization.TogglePbVisibilityAsync();
+            var fsEntries = ListViewExplorer.SelectedItems;
+            if (fsEntries != null)
+            {
+                try
+                {
+                    foreach (FileSystemInfo entry in fsEntries)
+                    {
+                        if (entry.IsDirectory())
+                        {
+                            var task = Task.Factory.StartNew(() =>
+                            {
+                                try
+                                {
+                                    Directory.Delete(entry.FullName, true);
+                                }
+                                catch (Exception)
+                                {
+                                    Dispatcher.InvokeAsync(() =>
+                                    {
+                                        ErrorPopup.IsOpen = true;
+                                        SystemSounds.Exclamation.Play();
+                                    });
+                                }
+                            });
+                            await task;
+                        }
+                        else
+                        {
+                            entry.Delete();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    ErrorPopup.IsOpen = true;
+                    SystemSounds.Exclamation.Play();
+                }
+            }
+            ListViewExplorer_Refresh();
+            await PbVisualization.TogglePbVisibilityAsync();
         }
 
         private void ExitExecuted(object sender, ExecutedRoutedEventArgs e)

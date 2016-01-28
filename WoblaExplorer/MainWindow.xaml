@@ -64,9 +64,9 @@
                         <Separator></Separator>
                         <MenuItem Header="Rename" Command="local:Commands.Rename"></MenuItem>
                         <Separator></Separator>
-                        <MenuItem Header="Copy To"></MenuItem>
+                        <MenuItem Header="Copy To" Command="local:Commands.CopyTo"></MenuItem>
                         <Separator></Separator>
-                        <MenuItem Header="Remove"></MenuItem>
+                        <MenuItem Header="Remove" Command="local:Commands.Remove"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
             </ListView>
