@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WoblaExplorer.Resources"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <!-- MainWindow -->
+    <v:String x:Key="MwFileConMehuHeader">Файл</v:String>
+    <v:String x:Key="MwFileConMenuLanguage">Язык</v:String>
+    <v:String x:Key="MwFileConMenuExit">Выход</v:String>
+    <v:String x:Key="MwHelpConMenuHeader">Помощь</v:String>
+    <v:String x:Key="MwHelpConMenuAbout">О программе</v:String>
+    <v:String x:Key="MwBtnDiveBack">&#xf060; Назад</v:String>
+    <v:String x:Key="MwTbSearchInputText">Название объета</v:String>
+    <v:String x:Key="MwTbSearchInputTooltip">Введите название объекта для поиска в текстовое поле</v:String>
+    <v:String x:Key="MwBtnSearch">Поиск &#xf002;</v:String>
+    <v:String x:Key="MwMainLvContextMenuOpen">Открыть</v:String>
+    <v:String x:Key="MwMainLvContextMenuShowInExplorer">Показать в проводнике</v:String>
+    <v:String x:Key="MwMainLvContextMenuRename">Переименовать</v:String>
+    <v:String x:Key="MwMainLvContextMenuCopyTo">Скопировать в</v:String>
+    <v:String x:Key="MwMainLvContextMenuRemove">Удалить</v:String>
+    <v:String x:Key="MwSearchPopupFirstTextBlock">Возникла проблема во время поиска &#xf071;</v:String>
+    <v:String x:Key="MwSearchPopupSecondTextBlock">Для корректного поиска, пожалуйста, перезапустите приложение </v:String>
+    <v:String x:Key="MwSearchPopupSecondTextBlockBoldPart">от имени Администратора &#xf023;</v:String>
+    <v:String x:Key="MwErrorPopupTextBlock">К сожалению, возникла проблема &#xf071;</v:String>
+    <v:String x:Key="MwCustomErrorPopupFirstTextBlock">К сожалению, возникла проблема &#xf071;</v:String>
+    <!-- AboutWindow -->
+    <v:String x:Key="AwFirstTextBlock">Это приложение ничем не защищено</v:String>
+    <v:String x:Key="AwSecondTextBlock">Надежда на вашу сознательность &#xf118;</v:String>
+    <v:String x:Key="AwThirdTextBlock">Автор Woblavobla. Страница проекта в GitHub &#xf061;</v:String>
+    <!-- RenameDialog -->
+    <v:String x:Key="RdTitle">Введите новое имя файла</v:String>
+    <v:String x:Key="RdTextBlock">Введите новое имя файла ниже:</v:String>
+    <v:String x:Key="RdBtnOk">ОК</v:String>
+    <v:String x:Key="RdBtnCancel">Отмена</v:String>
+    <!-- SearchWindow -->
+    <v:String x:Key="SwTitle">Окно поиска</v:String>
+</ResourceDictionary>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WoblaExplorer"
         mc:Ignorable="d"
-        Title="Enter new file name" Height="150" Width="300" Name="RenameDialogX"
+        Title="{DynamicResource RdTitle}" Height="150" Width="300" Name="RenameDialogX"
         ContentRendered="RenameDialog_OnContentRendered">
     <Grid>
         <Grid.RowDefinitions>
@@ -15,8 +15,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0, 10, 0, 0">
-            <TextBlock HorizontalAlignment="Center">
-                Enter new file name below:
+            <TextBlock HorizontalAlignment="Center" Text="{DynamicResource RdTextBlock}">
             </TextBlock>
         </Grid>
         <Grid Grid.Row="1" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch">
@@ -24,8 +23,8 @@
         </Grid>
         <Grid Grid.Row="2" Margin="0, 10, 0, 0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="BtnOk" IsDefault="True" Width="80" Height="30" Click="BtnOk_OnClick">OK</Button>
-                <Button Name="BtnCancel" IsCancel="True" Width="80" Height="30" Margin="10, 0, 0, 0">Cancel</Button>
+                <Button Name="BtnOk" IsDefault="True" Width="80" Height="30" Click="BtnOk_OnClick" Content="{DynamicResource RdBtnOk}"></Button>
+                <Button Name="BtnCancel" IsCancel="True" Width="80" Height="30" Margin="10, 0, 0, 0" Content="{DynamicResource RdBtnCancel}"></Button>
             </StackPanel>
         </Grid>
     </Grid>

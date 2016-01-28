@@ -2,7 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:WoblaExplorer.Resources"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <!-- MainWindow -->
     <v:String x:Key="MwFileConMehuHeader">File</v:String>
+    <v:String x:Key="MwFileConMenuLanguage">Language</v:String>
     <v:String x:Key="MwFileConMenuExit">Exit</v:String>
     <v:String x:Key="MwHelpConMenuHeader">Help</v:String>
     <v:String x:Key="MwHelpConMenuAbout">About</v:String>
@@ -17,7 +19,18 @@
     <v:String x:Key="MwMainLvContextMenuRemove">Remove</v:String>
     <v:String x:Key="MwSearchPopupFirstTextBlock">A problem occured during the search &#xf071;</v:String>
     <v:String x:Key="MwSearchPopupSecondTextBlock">To correct search please restart the application </v:String>
-    <v:String x:Key="MwSearchPopupSecondTextBlockBoldPart">as administrator &#xf023;</v:String>
+    <v:String x:Key="MwSearchPopupSecondTextBlockBoldPart">as Administrator &#xf023;</v:String>
     <v:String x:Key="MwErrorPopupTextBlock">Unfortunately a problem occurred &#xf071;</v:String>
     <v:String x:Key="MwCustomErrorPopupFirstTextBlock">Unfortunately a problem occurred &#xf071;</v:String>
+    <!-- AboutWindow -->
+    <v:String x:Key="AwFirstTextBlock">This application is not protected by anything</v:String>
+    <v:String x:Key="AwSecondTextBlock">I hope for your conscience &#xf118;</v:String>
+    <v:String x:Key="AwThirdTextBlock">Author Woblavobla. Project page at GitHub &#xf061;</v:String>
+    <!-- RenameDialog -->
+    <v:String x:Key="RdTitle">Enter new file name</v:String>
+    <v:String x:Key="RdTextBlock">Enter new file name below:</v:String>
+    <v:String x:Key="RdBtnOk">OK</v:String>
+    <v:String x:Key="RdBtnCancel">Cancel</v:String>
+    <!-- SearchWindow -->
+    <v:String x:Key="SwTitle">SearchWindow</v:String>
 </ResourceDictionary>

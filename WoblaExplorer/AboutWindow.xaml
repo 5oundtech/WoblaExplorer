@@ -18,18 +18,17 @@
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome" FontSize="20" Text="{Binding ElementName=AboutWindowX, Path=AssemblyVersion}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome">
-                    Данная программа ничем не защищена
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome" Text="{DynamicResource AwFirstTextBlock}">
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome" Text="{DynamicResource AwSecondTextBlock}">
                 </TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome">
-                    Надежда на вашу сознательность &#xf118;
-                </TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome">
-                    Автор Woblavobla. Страница проекта в GitHub &#xf061; <Hyperlink NavigateUri="https://github.com/5oundtech/WoblaExplorer" Click="Hyperlink_OnClick">GitHub page</Hyperlink>
+                    <Run Text="{DynamicResource AwThirdTextBlock}"></Run>
+                    <Hyperlink NavigateUri="https://github.com/5oundtech/WoblaExplorer" Click="Hyperlink_OnClick">GitHub page</Hyperlink>
                 </TextBlock>
             </StackPanel>
         </StackPanel>

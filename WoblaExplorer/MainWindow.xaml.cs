@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Media;
 using System.Threading;
@@ -16,6 +17,7 @@ using ComboBox = System.Windows.Controls.ComboBox;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ListView = System.Windows.Controls.ListView;
 using ListViewItem = System.Windows.Controls.ListViewItem;
+using MenuItem = System.Windows.Controls.MenuItem;
 using MessageBox = System.Windows.MessageBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using Point = System.Drawing.Point;
@@ -39,8 +41,22 @@ namespace WoblaExplorer
 
             _fileDiver = new FileDiver();
 
+            App.LanguageChanged += LanguageChanged;
+
+            CultureInfo currentLanguage = App.Language;
+            foreach (var language in App.Languages)
+            {
+                var menuItem = new MenuItem();
+                menuItem.Header = language.DisplayName;
+                menuItem.Tag = language;
+                menuItem.IsChecked = Equals(currentLanguage);
+                menuItem.Click += ChangeLanguageClick;
+                LanguageMenu.Items.Add(menuItem);
+            }
             try
             {
+                App.Language = Properties.Settings.Default.DefaultLanguage;
+
                 MainWindowX.WindowStartupLocation = WindowStartupLocation.Manual;
 
                 _tokenSource = new CancellationTokenSource();
@@ -58,6 +74,30 @@ namespace WoblaExplorer
             catch (UnauthorizedAccessException unauthorizedAccessException)
             {
                 MessageBox.Show(unauthorizedAccessException.Message);
+            }
+        }
+
+        private void ChangeLanguageClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var menuItem = sender as MenuItem;
+            if (menuItem != null)
+            {
+                CultureInfo language = menuItem.Tag as CultureInfo;
+                if (language != null)
+                {
+                    App.Language = language;
+                }
+            }
+        }
+
+        private void LanguageChanged(object sender, EventArgs eventArgs)
+        {
+            CultureInfo currentLang = App.Language;
+
+            foreach (MenuItem item in LanguageMenu.Items)
+            {
+                CultureInfo info = item.Tag as CultureInfo;
+                item.IsChecked = info != null && info.Equals(currentLang);
             }
         }
 

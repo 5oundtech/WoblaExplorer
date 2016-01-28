@@ -11,5 +11,8 @@
     <Setting Name="LastDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="DefaultLanguage" Type="System.Globalization.CultureInfo" Scope="User">
+      <Value Profile="(Default)">ru-RU</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
