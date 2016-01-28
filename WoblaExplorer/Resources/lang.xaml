@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WoblaExplorer.Resources"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="MwFileConMehuHeader">File</v:String>
+    <v:String x:Key="MwFileConMenuExit">Exit</v:String>
+    <v:String x:Key="MwHelpConMenuHeader">Help</v:String>
+    <v:String x:Key="MwHelpConMenuAbout">About</v:String>
+    <v:String x:Key="MwBtnDiveBack">&#xf060; Back</v:String>
+    <v:String x:Key="MwTbSearchInputText">Item name</v:String>
+    <v:String x:Key="MwTbSearchInputTooltip">Input item name in textbox</v:String>
+    <v:String x:Key="MwBtnSearch">Search &#xf002;</v:String>
+    <v:String x:Key="MwMainLvContextMenuOpen">Open</v:String>
+    <v:String x:Key="MwMainLvContextMenuShowInExplorer">Show in explorer</v:String>
+    <v:String x:Key="MwMainLvContextMenuRename">Rename</v:String>
+    <v:String x:Key="MwMainLvContextMenuCopyTo">CopyTo</v:String>
+    <v:String x:Key="MwMainLvContextMenuRemove">Remove</v:String>
+    <v:String x:Key="MwSearchPopupFirstTextBlock">A problem occured during the search &#xf071;</v:String>
+    <v:String x:Key="MwSearchPopupSecondTextBlock">To correct search please restart the application </v:String>
+    <v:String x:Key="MwSearchPopupSecondTextBlockBoldPart">as administrator &#xf023;</v:String>
+    <v:String x:Key="MwErrorPopupTextBlock">Unfortunately a problem occurred &#xf071;</v:String>
+    <v:String x:Key="MwCustomErrorPopupFirstTextBlock">Unfortunately a problem occurred &#xf071;</v:String>
+</ResourceDictionary>
