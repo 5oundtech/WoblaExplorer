@@ -256,7 +256,10 @@ namespace WoblaExplorer
 
             try
             {
-                if (!((ComboBox) sender).IsFocused) return;
+                if (!((ComboBox) sender).IsFocused)
+                {
+                    return;
+                }
                 string path = ((ComboBox) sender).SelectedValue.ToString();
                 var task = Task.Factory.StartNew(() =>
                 {
@@ -282,8 +285,10 @@ namespace WoblaExplorer
                 ErrorPopup.IsOpen = true;
                 SystemSounds.Exclamation.Play();
             }
-
-            await PbVisualization.TogglePbVisibilityAsync();
+            finally
+            {
+                await PbVisualization.TogglePbVisibilityAsync();
+            }
         }
 
         private async void ChangeWindowTitle()
