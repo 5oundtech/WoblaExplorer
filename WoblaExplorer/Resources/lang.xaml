@@ -7,6 +7,7 @@
     <v:String x:Key="MwFileConMenuLanguage">Language</v:String>
     <v:String x:Key="MwFileConMenuExit">Exit</v:String>
     <v:String x:Key="MwHelpConMenuHeader">Help</v:String>
+    <v:String x:Key="MwHelpConMenuUpdates">Check for updates</v:String>
     <v:String x:Key="MwHelpConMenuAbout">About</v:String>
     <v:String x:Key="MwBtnDiveBack">&#xf060; Back</v:String>
     <v:String x:Key="MwTbSearchInputText">Item name</v:String>

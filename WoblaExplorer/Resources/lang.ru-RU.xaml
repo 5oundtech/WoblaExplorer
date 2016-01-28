@@ -7,6 +7,7 @@
     <v:String x:Key="MwFileConMenuLanguage">Язык</v:String>
     <v:String x:Key="MwFileConMenuExit">Выход</v:String>
     <v:String x:Key="MwHelpConMenuHeader">Помощь</v:String>
+    <v:String x:Key="MwHelpConMenuUpdates">Проверить обновления</v:String>
     <v:String x:Key="MwHelpConMenuAbout">О программе</v:String>
     <v:String x:Key="MwBtnDiveBack">&#xf060; Назад</v:String>
     <v:String x:Key="MwTbSearchInputText">Название объета</v:String>
