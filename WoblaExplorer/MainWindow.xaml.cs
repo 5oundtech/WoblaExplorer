@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Media;
@@ -10,7 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using System.Windows.Input;
-using Microsoft.Win32;
 using WoblaExplorer.FilesUtil;
 using WoblaExplorer.Util;
 using Application = System.Windows.Application;
@@ -65,7 +63,7 @@ namespace WoblaExplorer
 
         private async void InitExplorer()
         {
-            this.Closing += (sender, args) =>
+            Closing += (sender, args) =>
             {
                 Properties.Settings.Default.LastDirectory = _fileDiver.CurrentPath;
                 Properties.Settings.Default.WindowSize = new Size((int)MainWindowX.Width, (int)MainWindowX.Height);
@@ -419,7 +417,10 @@ namespace WoblaExplorer
         {
             if (ListViewExplorer.SelectedItems.Count > 1)
             {
-                return; //TODO make a custom popup error
+                CustomErrorPopupTextBlock.Text = "Только один объект может быть переименован за раз!";
+                CustomErrorPopup.IsOpen = true;
+                SystemSounds.Exclamation.Play();
+                return;
             }
             var listViewItem = e.OriginalSource as ListViewItem;
             var fsEntry = listViewItem?.DataContext as FileSystemInfo;
@@ -606,15 +607,9 @@ namespace WoblaExplorer
             aboutWindow.ShowDialog();
         }
 
-        private void SearchPopup_OnMouseEnter(object sender, MouseEventArgs e)
+        private void Popup_OnMouseEnter(object sender, MouseEventArgs e)
         {
-            SearchPopup.IsOpen = true;
-            e.Handled = true;
-        }
-
-        private void ErrorPopup_OnMouseEnter(object sender, MouseEventArgs e)
-        {
-            ErrorPopup.IsOpen = true;
+            ((Popup) sender).IsOpen = true;
             e.Handled = true;
         }
 

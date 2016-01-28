@@ -71,19 +71,28 @@
                 </ListView.ContextMenu>
             </ListView>
             <Popup Name="SearchPopup" StaysOpen="False" PopupAnimation="Slide" Placement="Center" AllowsTransparency="True"
-                   MouseEnter="SearchPopup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
+                   MouseEnter="Popup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
                 <Border BorderBrush="DarkBlue" BorderThickness="2" Background="White">
                     <StackPanel Margin="5">
-                        <TextBlock Margin="5" FontFamily="FontAwesome">Возникла проблема во время поиска</TextBlock>
-                        <TextBlock Margin="5" FontFamily="FontAwesome">Для полноценной работы поиска перезапустите приложение от <Bold>имени Администратора &#xf023;</Bold></TextBlock>
+                        <TextBlock Margin="5" FontFamily="FontAwesome" HorizontalAlignment="Center">Возникла проблема во время поиска &#xf071;</TextBlock>
+                        <TextBlock Margin="5" FontFamily="FontAwesome" HorizontalAlignment="Center">Для полноценной работы поиска перезапустите приложение от <Bold>имени Администратора &#xf023;</Bold></TextBlock>
                     </StackPanel>
                 </Border>
             </Popup>
             <Popup Name="ErrorPopup" StaysOpen="False" PopupAnimation="Slide" Placement="Center" AllowsTransparency="True"
-                   MouseEnter="ErrorPopup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
+                   MouseEnter="Popup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
                 <Border BorderBrush="DarkRed" BorderThickness="2" Background="White">
                     <StackPanel Margin="5">
-                        <TextBlock Margin="5" FontFamily="FontAwesome">К сожалению возникла проблема &#xf071;</TextBlock>
+                        <TextBlock Margin="5" FontFamily="FontAwesome" HorizontalAlignment="Center">К сожалению возникла проблема &#xf071;</TextBlock>
+                    </StackPanel>
+                </Border>
+            </Popup>
+            <Popup Name="CustomErrorPopup" StaysOpen="False" PopupAnimation="Slide" Placement="Center" AllowsTransparency="True"
+                   MouseEnter="Popup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
+                <Border BorderBrush="Blue" BorderThickness="2" Background="White">
+                    <StackPanel Margin="5">
+                        <TextBlock Margin="5" FontFamily="FontAwesome" HorizontalAlignment="Center">К сожалению возникла проблема &#xf071;</TextBlock>
+                        <TextBlock Name="CustomErrorPopupTextBlock" FontFamily="FontAwesome" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Border>
             </Popup>

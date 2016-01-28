@@ -23,7 +23,7 @@ namespace WoblaExplorer
         private void BtnOk_OnClick(object sender, RoutedEventArgs e)
         {
             Filename = TbFileName.Text.Clone().ToString();
-            this.DialogResult = true;
+            DialogResult = true;
         }
 
         private void RenameDialog_OnContentRendered(object sender, EventArgs e)

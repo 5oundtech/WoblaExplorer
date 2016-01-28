@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Security;
-using System.Windows;
 using WoblaExplorer.Util;
 
 namespace WoblaExplorer.FilesUtil
