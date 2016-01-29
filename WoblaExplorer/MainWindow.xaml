@@ -13,7 +13,8 @@
         <CommandBinding Command="local:Commands.CopyTo" Executed="CopyToExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.Remove" Executed="RemoveExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.Exit" Executed="ExitExecuted" CanExecute="DefaultCommands_CanExecute"/>
-        <CommandBinding Command="local:Commands.AboutDialog" Executed="AboutDialogExecuted" CanExecute="DefaultCommands_CanExecute"></CommandBinding>
+        <CommandBinding Command="local:Commands.AboutDialog" Executed="AboutDialogExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.PropertiesDialog" Executed="PropertiesDialogExecuted" CanExecute="DefaultCommands_CanExecute"/>
     </Window.CommandBindings>
 
     <Grid>
@@ -56,6 +57,8 @@
                       >
                 <ListView.InputBindings>
                     <KeyBinding Command="Open" Key="Enter"></KeyBinding>
+                    <KeyBinding Command="Backspace" Key="Left"></KeyBinding>
+                    <KeyBinding Command="Open" Key="Right"></KeyBinding>
                     <KeyBinding Command="Backspace" Key="Back"></KeyBinding>
                 </ListView.InputBindings>
                 <ListView.ContextMenu>
@@ -69,6 +72,8 @@
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuCopyTo}" Command="local:Commands.CopyTo"></MenuItem>
                         <Separator></Separator>
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuRemove}" Command="local:Commands.Remove"></MenuItem>
+                        <Separator></Separator>
+                        <MenuItem Header="{DynamicResource MwMainLvContextMenuProperties}" Command="local:Commands.PropertiesDialog"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
             </ListView>

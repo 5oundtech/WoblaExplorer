@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Media;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,6 +37,7 @@ namespace WoblaExplorer
         private CancellationTokenSource _tokenSource;
         private Task _searchTask;
         private SearchWindow _searchWindow;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -75,6 +78,11 @@ namespace WoblaExplorer
             {
                 MessageBox.Show(unauthorizedAccessException.Message);
             }
+        }
+
+        private void OnExplorerDirChanged(object sender, EventArgs eventArgs)
+        {
+            throw new NotImplementedException();
         }
 
         private void ChangeLanguageClick(object sender, RoutedEventArgs routedEventArgs)
@@ -686,6 +694,143 @@ namespace WoblaExplorer
             if (popup != null)
             {
                 popup.IsOpen = false;
+            }
+        }
+
+        private async void PropertiesDialogExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var entries = ListViewExplorer.SelectedItems;
+            if (entries.Count > 1)
+            {
+                var properties = new PropertiesWindow()
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                properties.Show();
+                properties.Title += $" {((FileSystemInfo) entries[0]).Name}, ...";
+                properties.TbFileName.Text = $"{((FileSystemInfo) entries[0]).Name}, ...";
+                properties.TbFilePath.Text = $"{_fileDiver.CurrentPath}";
+                properties.MultipleFilesPanel.Visibility = Visibility.Visible;
+                var task = new Task(async () =>
+                {
+                    try
+                    {
+                        long dirsCount = 0;
+                        long filesCount = 0;
+                        long filesSize = 0;
+                        foreach (FileSystemInfo entry in entries)
+                        {
+                            if (entry.IsDirectory())
+                            {
+                                var dir = new DirectoryInfo(entry.FullName);
+                                var dirs = dir.GetDirectories("*", SearchOption.AllDirectories);
+                                var files = dir.GetFiles("*", SearchOption.AllDirectories);
+
+                                dirsCount += dirs.Length;
+                                filesCount += files.Length;
+
+                                files.ToList().ForEach(file =>
+                                {
+                                    filesSize += file.Length;
+                                });
+
+                                dirsCount++;
+                            }
+                            else
+                            {
+                                var file = new FileInfo(entry.FullName);
+                                filesSize += file.Length;
+                                filesCount++;
+                            }
+
+                            await Dispatcher.InvokeAsync(() =>
+                            {
+                                properties.TbDirsCount.Text = dirsCount.ToString();
+                                properties.TbFilesCount.Text = filesCount.ToString();
+                                properties.TbFileSizeBytes.Text = $"{filesSize:N}";
+                                properties.TbFileSizeMb.Text = $"{filesSize.BytesToMb():F3}";
+                                properties.TbFileSizeGb.Text = $"{filesSize.BytesToGb():F3}";
+                            });
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Dispatcher.InvokeAsync(() =>
+                        {
+                            ErrorPopup.IsOpen = true;
+                            SystemSounds.Exclamation.Play();
+                        });
+                    }
+                });
+                task.Start();
+                await task;
+            }
+            else
+            {
+                var entry = entries[0] as FileSystemInfo;
+                if (entry.IsDirectory())
+                {
+                    var dir = entry as DirectoryInfo;
+                    if (dir != null)
+                    {
+                        var calcTask = new Task(async () =>
+                        {
+                            try
+                            {
+                                var dirs = dir.GetDirectories("*", SearchOption.AllDirectories);
+                                var files = dir.GetFiles("*", SearchOption.AllDirectories);
+                                await Dispatcher.InvokeAsync(() =>
+                                {
+                                    var properties = new PropertiesWindow()
+                                    {
+                                        Owner = this,
+                                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                                    };
+                                    properties.Show();
+                                    properties.Title += $" {dir.Name}, ...";
+                                    properties.TbFileName.Text = $"{dir.Name}, ...";
+                                    properties.TbFilePath.Text = dir.FullName;
+                                    properties.TbFilesCount.Text = files.Length.ToString();
+                                    properties.TbDirsCount.Text = dirs.Length.ToString();
+                                    properties.MultipleFilesPanel.Visibility = Visibility.Visible;
+
+                                    long filesSize = 0;
+                                    files.ToList().ForEach(async file =>
+                                    {
+                                        filesSize += file.Length;
+
+                                        await Dispatcher.InvokeAsync(() =>
+                                        {
+                                            properties.TbFileSizeBytes.Text = $"{filesSize:N}";
+                                            properties.TbFileSizeMb.Text = $"{filesSize.BytesToMb():F3}";
+                                            properties.TbFileSizeGb.Text = $"{filesSize.BytesToGb():F3}";
+                                        });
+                                    });
+                                });
+                            }
+                            catch (Exception)
+                            {
+                                Dispatcher.InvokeAsync(() =>
+                                {
+                                    ErrorPopup.IsOpen = true;
+                                    SystemSounds.Exclamation.Play();
+                                });
+                            }
+                        });
+                        calcTask.Start();
+                        await calcTask;
+                    }
+                }
+                else
+                {
+                    var properties = new PropertiesWindow((FileInfo) entry)
+                    {
+                        Owner = this,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
+                    properties.Show();
+                }
             }
         }
     }

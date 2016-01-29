@@ -18,6 +18,7 @@
     <v:String x:Key="MwMainLvContextMenuRename">Переименовать</v:String>
     <v:String x:Key="MwMainLvContextMenuCopyTo">Скопировать в</v:String>
     <v:String x:Key="MwMainLvContextMenuRemove">Удалить</v:String>
+    <v:String x:Key="MwMainLvContextMenuProperties">Свойства</v:String>
     <v:String x:Key="MwSearchPopupFirstTextBlock">Возникла проблема во время поиска &#xf071;</v:String>
     <v:String x:Key="MwSearchPopupSecondTextBlock">Для корректного поиска, пожалуйста, перезапустите приложение </v:String>
     <v:String x:Key="MwSearchPopupSecondTextBlockBoldPart">от имени Администратора &#xf023;</v:String>
@@ -34,4 +35,15 @@
     <v:String x:Key="RdBtnCancel">Отмена</v:String>
     <!-- SearchWindow -->
     <v:String x:Key="SwTitle">Окно поиска</v:String>
+    <!-- PropertiesWindow -->
+    <v:String x:Key="PwTitle">Свойства: </v:String>
+    <v:String x:Key="PwFileNameLabel">Имя файла: </v:String>
+    <v:String x:Key="PwFilePathLabel">Полный путь: </v:String>
+    <v:String x:Key="PwFileExtensionLabel">Расширение файла: </v:String>
+    <v:String x:Key="PwFileSizeBytesLabel">Размер(байт): </v:String>
+    <v:String x:Key="PwFileSizeMbLabel">Размер(Мб): </v:String>
+    <v:String x:Key="PwFileSizeGbLabel">Размер(Гб): </v:String>
+    <v:String x:Key="PwFilesCountLabel">Количество файлов: </v:String>
+    <v:String x:Key="PwDirsCountLabel">Количество папок: </v:String>
+    <v:String x:Key="PwContextMenuCopy">Копировать</v:String>
 </ResourceDictionary>

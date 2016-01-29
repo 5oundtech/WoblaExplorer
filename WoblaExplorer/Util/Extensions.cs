@@ -12,11 +12,28 @@ namespace WoblaExplorer.Util
 {
     public static class Extensions
     {
+#region files
         public static bool IsDirectory(this FileSystemInfo self)
         {
             return Directory.Exists(self.FullName);
         }
 
+        public static double BytesToKb(this long bytes)
+        {
+            return bytes/1024.0;
+        }
+
+        public static double BytesToMb(this long bytes)
+        {
+            return (bytes/1024.0)/1024.0;
+        }
+
+        public static double BytesToGb(this long bytes)
+        {
+            return ((bytes/1024.0)/1024.0)/1024.0;
+        }
+#endregion
+        #region UI
         public static void TogglePbVisibility(this ProgressBar self)
         {
             self.Visibility = self.Visibility == Visibility.Hidden || self.Visibility == Visibility.Collapsed
@@ -51,5 +68,6 @@ namespace WoblaExplorer.Util
 
             return imageSource;
         }
+        #endregion
     }
 }

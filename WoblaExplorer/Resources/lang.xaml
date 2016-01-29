@@ -18,6 +18,7 @@
     <v:String x:Key="MwMainLvContextMenuRename">Rename</v:String>
     <v:String x:Key="MwMainLvContextMenuCopyTo">CopyTo</v:String>
     <v:String x:Key="MwMainLvContextMenuRemove">Remove</v:String>
+    <v:String x:Key="MwMainLvContextMenuProperties">Properties</v:String>
     <v:String x:Key="MwSearchPopupFirstTextBlock">A problem occured during the search &#xf071;</v:String>
     <v:String x:Key="MwSearchPopupSecondTextBlock">To correct search please restart the application </v:String>
     <v:String x:Key="MwSearchPopupSecondTextBlockBoldPart">as Administrator &#xf023;</v:String>
@@ -34,4 +35,15 @@
     <v:String x:Key="RdBtnCancel">Cancel</v:String>
     <!-- SearchWindow -->
     <v:String x:Key="SwTitle">SearchWindow</v:String>
+    <!-- PropertiesWindow -->
+    <v:String x:Key="PwTitle">Properties: </v:String>
+    <v:String x:Key="PwFileNameLabel">Filename: </v:String>
+    <v:String x:Key="PwFilePathLabel">Full path: </v:String>
+    <v:String x:Key="PwFileExtensionLabel">File extension: </v:String>
+    <v:String x:Key="PwFileSizeBytesLabel">Size(bytes): </v:String>
+    <v:String x:Key="PwFileSizeMbLabel">Size(Mb): </v:String>
+    <v:String x:Key="PwFileSizeGbLabel">Size(Gb): </v:String>
+    <v:String x:Key="PwFilesCountLabel">Files count: </v:String>
+    <v:String x:Key="PwDirsCountLabel">Dirs count: </v:String>
+    <v:String x:Key="PwContextMenuCopy">Copy</v:String>
 </ResourceDictionary>

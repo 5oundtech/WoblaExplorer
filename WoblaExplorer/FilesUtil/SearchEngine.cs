@@ -104,7 +104,7 @@ namespace WoblaExplorer.FilesUtil
             }
             catch (PathTooLongException pathTooLongException)
             {
-                // TODO: Handle the PathTooLongException 
+                //
             }
         }
     }

@@ -21,5 +21,8 @@ namespace WoblaExplorer.CustomCommands
 
         public static RoutedCommand AboutDialog = new RoutedCommand("AboutDialog", typeof (Commands),
             new InputGestureCollection {new KeyGesture(Key.F1, ModifierKeys.None)});
+
+        public static RoutedCommand PropertiesDialog = new RoutedCommand(nameof(PropertiesDialog), typeof (Commands),
+            new InputGestureCollection {new KeyGesture(Key.F12)});
     }
 }
