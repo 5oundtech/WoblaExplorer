@@ -8,7 +8,7 @@ Simple explorer-like application with some new features.
 - [x] Make app localizable at runtime (now its half russian half english)
 - [ ] Make properties window
 - [ ] Make tooltip on current app or file with short info
-- [ ] Autoupdater
+- [x] Autoupdater -> [Codeplex ClickOnce installer](https://woblaexplorer.codeplex.com/)
 
 I'm developing this app alone so i'll appreciate any help. (Criticism, pull requests etc)
 
