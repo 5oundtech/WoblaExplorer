@@ -6,7 +6,7 @@ Simple explorer-like application with some new features.
 - [x] Simple error handler not message box
 - [x] Basic features of windows explorer (open, copy, paste, remove, rename etc)
 - [x] Make app localizable at runtime (now its half russian half english)
-- [ ] Make properties window
+- [x] Make properties window
 - [ ] Make tooltip on current app or file with short info
 - [x] Autoupdater -> [Codeplex ClickOnce installer](https://woblaexplorer.codeplex.com/)
 
