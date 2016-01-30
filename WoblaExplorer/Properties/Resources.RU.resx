@@ -130,6 +130,12 @@
   <data name="MwCopyToDescription" xml:space="preserve">
     <value>Выберите новое расположение для объекта</value>
   </data>
+  <data name="MwRemoveDialogText" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить этот файл(ы)?</value>
+  </data>
+  <data name="MwRemoveDialogTitle" xml:space="preserve">
+    <value>Удалить файл</value>
+  </data>
   <data name="MwRenameError" xml:space="preserve">
     <value>Только один объект может быть переименован за раз</value>
   </data>

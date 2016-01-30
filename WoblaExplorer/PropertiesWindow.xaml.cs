@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,13 +26,24 @@ namespace WoblaExplorer
         {
             InitializeComponent();
 
-            Title += info.Name;
-            TbFileName.Text = info.Name;
-            TbFilePath.Text = info.FullName;
-            TbFileExtension.Text = info.Extension;
-            TbFileSizeBytes.Text = $"{info.Length:N}";
-            TbFileSizeMb.Text = $"{info.Length.BytesToMb():F3}";
-            TbFileSizeGb.Text = $"{info.Length.BytesToGb():F3}";
+            try
+            {
+                Title += info.Name;
+                TbFileName.Text = info.Name;
+                TbFilePath.Text = info.FullName;
+                TbFileExtension.Text = info.Extension;
+                TbFileSizeBytes.Text = $"{info.Length:N}";
+                TbFileSizeMb.Text = $"{info.Length.BytesToMb():F3}";
+                TbFileSizeGb.Text = $"{info.Length.BytesToGb():F3}";
+            }
+            catch (IOException ioException)
+            {
+
+            }
+            catch (SecurityException securityException)
+            {
+                
+            }
         }
 
         public PropertiesWindow()

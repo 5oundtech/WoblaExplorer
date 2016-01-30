@@ -100,6 +100,24 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this item(s)?.
+        /// </summary>
+        internal static string MwRemoveDialogText {
+            get {
+                return ResourceManager.GetString("MwRemoveDialogText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete file.
+        /// </summary>
+        internal static string MwRemoveDialogTitle {
+            get {
+                return ResourceManager.GetString("MwRemoveDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Only one object at time can be renamed.
         /// </summary>
         internal static string MwRenameError {

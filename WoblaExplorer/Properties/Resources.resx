@@ -130,6 +130,12 @@
   <data name="MwCopyToDescription" xml:space="preserve">
     <value>Choose new place to item</value>
   </data>
+  <data name="MwRemoveDialogText" xml:space="preserve">
+    <value>Are you sure you want to delete this item(s)?</value>
+  </data>
+  <data name="MwRemoveDialogTitle" xml:space="preserve">
+    <value>Delete file</value>
+  </data>
   <data name="MwRenameError" xml:space="preserve">
     <value>Only one object at time can be renamed</value>
   </data>

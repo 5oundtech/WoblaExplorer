@@ -600,6 +600,13 @@ namespace WoblaExplorer
             var fsEntries = ListViewExplorer.SelectedItems;
             if (fsEntries != null)
             {
+                var dialogResult = MessageBox.Show(Properties.Resources.MwRemoveDialogText, Properties.Resources.MwRemoveDialogTitle,
+MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+                if (dialogResult != MessageBoxResult.Yes)
+                {
+                    await PbVisualization.TogglePbVisibilityAsync();
+                    return;
+                }
                 try
                 {
                     foreach (FileSystemInfo entry in fsEntries)
@@ -712,6 +719,7 @@ namespace WoblaExplorer
                 properties.TbFileName.Text = $"{((FileSystemInfo) entries[0]).Name}, ...";
                 properties.TbFilePath.Text = $"{_fileDiver.CurrentPath}";
                 properties.MultipleFilesPanel.Visibility = Visibility.Visible;
+                await properties.MainProgressBar.TogglePbVisibilityAsync();
                 var task = new Task(async () =>
                 {
                     try
@@ -724,10 +732,10 @@ namespace WoblaExplorer
                             if (entry.IsDirectory())
                             {
                                 var dir = new DirectoryInfo(entry.FullName);
-                                var dirs = dir.GetDirectories("*", SearchOption.AllDirectories);
+                                var dirs = dir.GetDirectories("*", SearchOption.AllDirectories).Length;
                                 var files = dir.GetFiles("*", SearchOption.AllDirectories);
 
-                                dirsCount += dirs.Length;
+                                dirsCount += dirs;
                                 filesCount += files.Length;
 
                                 files.ToList().ForEach(file =>
@@ -765,6 +773,7 @@ namespace WoblaExplorer
                 });
                 task.Start();
                 await task;
+                await properties.MainProgressBar.TogglePbVisibilityAsync();
             }
             else
             {
@@ -774,39 +783,40 @@ namespace WoblaExplorer
                     var dir = entry as DirectoryInfo;
                     if (dir != null)
                     {
+                        var properties = new PropertiesWindow()
+                        {
+                            Owner = this,
+                            WindowStartupLocation = WindowStartupLocation.CenterOwner
+                        };
+                        properties.Show();
+                        properties.Title += $" {dir.Name}";
+                        properties.TbFileName.Text = $"{dir.Name}";
+                        properties.TbFilePath.Text = dir.FullName;
+                        await properties.MainProgressBar.TogglePbVisibilityAsync();
                         var calcTask = new Task(async () =>
                         {
                             try
                             {
-                                var dirs = dir.GetDirectories("*", SearchOption.AllDirectories);
+                                var dirs = dir.GetDirectories("*", SearchOption.AllDirectories).Length;
                                 var files = dir.GetFiles("*", SearchOption.AllDirectories);
                                 await Dispatcher.InvokeAsync(() =>
                                 {
-                                    var properties = new PropertiesWindow()
-                                    {
-                                        Owner = this,
-                                        WindowStartupLocation = WindowStartupLocation.CenterOwner
-                                    };
-                                    properties.Show();
-                                    properties.Title += $" {dir.Name}, ...";
-                                    properties.TbFileName.Text = $"{dir.Name}, ...";
-                                    properties.TbFilePath.Text = dir.FullName;
                                     properties.TbFilesCount.Text = files.Length.ToString();
-                                    properties.TbDirsCount.Text = dirs.Length.ToString();
+                                    properties.TbDirsCount.Text = dirs.ToString();
                                     properties.MultipleFilesPanel.Visibility = Visibility.Visible;
+                                });
 
-                                    long filesSize = 0;
-                                    files.ToList().ForEach(async file =>
-                                    {
-                                        filesSize += file.Length;
+                                long filesSize = 0;
+                                files.ToList().ForEach(file =>
+                                {
+                                    filesSize += file.Length;
+                                });
 
-                                        await Dispatcher.InvokeAsync(() =>
-                                        {
-                                            properties.TbFileSizeBytes.Text = $"{filesSize:N}";
-                                            properties.TbFileSizeMb.Text = $"{filesSize.BytesToMb():F3}";
-                                            properties.TbFileSizeGb.Text = $"{filesSize.BytesToGb():F3}";
-                                        });
-                                    });
+                                await Dispatcher.InvokeAsync(() =>
+                                {
+                                    properties.TbFileSizeBytes.Text = $"{filesSize:N}";
+                                    properties.TbFileSizeMb.Text = $"{filesSize.BytesToMb():F3}";
+                                    properties.TbFileSizeGb.Text = $"{filesSize.BytesToGb():F3}";
                                 });
                             }
                             catch (Exception)
@@ -820,6 +830,7 @@ namespace WoblaExplorer
                         });
                         calcTask.Start();
                         await calcTask;
+                        await properties.MainProgressBar.TogglePbVisibilityAsync();
                     }
                 }
                 else
