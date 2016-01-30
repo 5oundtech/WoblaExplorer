@@ -9,6 +9,7 @@ Simple explorer-like application with some new features.
 - [x] Make properties window
 - [ ] Make tooltip on current app or file with short info
 - [x] Autoupdater -> [Codeplex ClickOnce installer](https://woblaexplorer.codeplex.com/)
+- [ ] Ability to rerun app as Administrator
 
 I'm developing this app alone so i'll appreciate any help. (Criticism, pull requests etc)
 
