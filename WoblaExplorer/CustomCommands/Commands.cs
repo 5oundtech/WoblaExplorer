@@ -24,5 +24,8 @@ namespace WoblaExplorer.CustomCommands
 
         public static RoutedCommand PropertiesDialog = new RoutedCommand(nameof(PropertiesDialog), typeof (Commands),
             new InputGestureCollection {new KeyGesture(Key.F12)});
+
+        public static RoutedCommand ReRunAsAdministrator = new RoutedCommand(nameof(ReRunAsAdministrator),
+            typeof (Commands), new InputGestureCollection {});
     }
 }

@@ -15,6 +15,7 @@
         <CommandBinding Command="local:Commands.Exit" Executed="ExitExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.AboutDialog" Executed="AboutDialogExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.PropertiesDialog" Executed="PropertiesDialogExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.ReRunAsAdministrator" Executed="ReRunAsAdministratorExecuted" CanExecute="DefaultCommands_CanExecute"/>
     </Window.CommandBindings>
 
     <Grid>
@@ -26,11 +27,12 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Menu>
-                <MenuItem Header="{DynamicResource MwFileConMehuHeader}">
+                <MenuItem Header="{DynamicResource MwFileConMehuHeader}" FontFamily="FontAwesome">
+                    <MenuItem Header="{DynamicResource MwFileConMenuRunAsAdmin}" Command="local:Commands.ReRunAsAdministrator"></MenuItem>
                     <MenuItem Header="{DynamicResource MwFileConMenuLanguage}" x:Name="LanguageMenu"></MenuItem>
                     <MenuItem Header="{DynamicResource MwFileConMenuExit}" Command="local:Commands.Exit"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="{DynamicResource MwHelpConMenuHeader}">
+                <MenuItem Header="{DynamicResource MwHelpConMenuHeader}" FontFamily="FontAwesome">
                     <MenuItem Header="{DynamicResource MwHelpConMenuAbout}" Command="local:Commands.AboutDialog"></MenuItem>
                 </MenuItem>
             </Menu>

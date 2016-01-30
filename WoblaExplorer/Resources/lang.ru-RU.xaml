@@ -4,6 +4,7 @@
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <!-- MainWindow -->
     <v:String x:Key="MwFileConMehuHeader">Файл</v:String>
+    <v:String x:Key="MwFileConMenuRunAsAdmin">Перезапустить от имени Администратора &#xf023;</v:String>
     <v:String x:Key="MwFileConMenuLanguage">Язык</v:String>
     <v:String x:Key="MwFileConMenuExit">Выход</v:String>
     <v:String x:Key="MwHelpConMenuHeader">Помощь</v:String>

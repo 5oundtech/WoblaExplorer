@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -842,6 +843,25 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                     };
                     properties.Show();
                 }
+            }
+        }
+
+        private void ReRunAsAdministratorExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase)
+            {
+                UseShellExecute = true,
+                Verb = "runas"
+            };
+
+            try
+            {
+                Process.Start(processInfo);
+
+                Application.Current.Shutdown();
+            }
+            catch (Exception)
+            {
             }
         }
     }
