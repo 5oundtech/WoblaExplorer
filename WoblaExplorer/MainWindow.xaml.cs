@@ -725,41 +725,39 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 {
                     try
                     {
-                        long dirsCount = 0;
-                        long filesCount = 0;
-                        long filesSize = 0;
+                        long[] mainArray = {0, 0, 0};
                         foreach (FileSystemInfo entry in entries)
                         {
                             if (entry.IsDirectory())
                             {
                                 var dir = new DirectoryInfo(entry.FullName);
-                                var dirs = dir.GetDirectories("*", SearchOption.AllDirectories).Length;
-                                var files = dir.GetFiles("*", SearchOption.AllDirectories);
+                                dir.EnumerateDirectories("*", SearchOption.AllDirectories)
+                                    .AsParallel()
+                                    .ForAll(item => mainArray[0]++);
+                                dir.EnumerateFiles("*", SearchOption.AllDirectories).AsParallel().ForAll(
+                                    item =>
+                                    {
+                                        mainArray[2] += item.Length;
+                                        mainArray[1]++;
+                                    });
 
-                                dirsCount += dirs;
-                                filesCount += files.Length;
-
-                                files.ToList().ForEach(file =>
-                                {
-                                    filesSize += file.Length;
-                                });
-
-                                dirsCount++;
+                                mainArray[0]++;
                             }
                             else
                             {
                                 var file = new FileInfo(entry.FullName);
-                                filesSize += file.Length;
-                                filesCount++;
+                                mainArray[2] += file.Length;
+                                mainArray[1]++;
                             }
 
                             await Dispatcher.InvokeAsync(() =>
                             {
-                                properties.TbDirsCount.Text = dirsCount.ToString();
-                                properties.TbFilesCount.Text = filesCount.ToString();
-                                properties.TbFileSizeBytes.Text = $"{filesSize:N}";
-                                properties.TbFileSizeMb.Text = $"{filesSize.BytesToMb():F3}";
-                                properties.TbFileSizeGb.Text = $"{filesSize.BytesToGb():F3}";
+                                if (properties.Visibility != Visibility.Visible) return;
+                                properties.TbDirsCount.Text = mainArray[0].ToString();
+                                properties.TbFilesCount.Text = mainArray[1].ToString();
+                                properties.TbFileSizeBytes.Text = $"{mainArray[2]}";
+                                properties.TbFileSizeMb.Text = $"{mainArray[2].BytesToMb():F3}";
+                                properties.TbFileSizeGb.Text = $"{mainArray[2].BytesToGb():F3}";
                             });
                         }
                     }
@@ -798,24 +796,31 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                         {
                             try
                             {
-                                var dirs = dir.GetDirectories("*", SearchOption.AllDirectories).Length;
-                                var files = dir.GetFiles("*", SearchOption.AllDirectories);
+                                long dirsCount = 0;
+                                dir.EnumerateDirectories("*", SearchOption.AllDirectories).AsParallel().ForAll(
+                                    item => dirsCount++);
                                 await Dispatcher.InvokeAsync(() =>
                                 {
-                                    properties.TbFilesCount.Text = files.Length.ToString();
-                                    properties.TbDirsCount.Text = dirs.ToString();
+                                    if (properties.Visibility != Visibility.Visible) return;
+                                    properties.TbDirsCount.Text = dirsCount.ToString();
                                     properties.MultipleFilesPanel.Visibility = Visibility.Visible;
                                 });
 
                                 long filesSize = 0;
-                                files.ToList().ForEach(file =>
-                                {
-                                    filesSize += file.Length;
-                                });
+                                long filesCount = 0;
+                                dir.EnumerateFiles("*", SearchOption.AllDirectories)
+                                    .AsParallel()
+                                    .ForAll(item =>
+                                    {
+                                        filesCount++;
+                                        filesSize += item.Length;
+                                    });
 
                                 await Dispatcher.InvokeAsync(() =>
                                 {
-                                    properties.TbFileSizeBytes.Text = $"{filesSize:N}";
+                                    if (properties.Visibility != Visibility.Visible) return;
+                                    properties.TbFilesCount.Text = filesCount.ToString();
+                                    properties.TbFileSizeBytes.Text = $"{filesSize}";
                                     properties.TbFileSizeMb.Text = $"{filesSize.BytesToMb():F3}";
                                     properties.TbFileSizeGb.Text = $"{filesSize.BytesToGb():F3}";
                                 });
