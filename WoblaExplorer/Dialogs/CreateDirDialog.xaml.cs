@@ -34,7 +34,7 @@ namespace WoblaExplorer.Dialogs
         private void BtnOk_OnClick(object sender, RoutedEventArgs e)
         {
             DirName = TbDirectoryName.Text;
-            this.DialogResult = true;
+            DialogResult = true;
         }
     }
 }

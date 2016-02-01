@@ -65,7 +65,7 @@ namespace WoblaExplorer
 
         public App()
         {
-            App.LanguageChanged += App_LanguageChanged;
+            LanguageChanged += App_LanguageChanged;
 
             m_Languages.Clear();
             m_Languages.Add(new CultureInfo("en-GB"));

@@ -38,7 +38,7 @@ namespace WoblaExplorer.Windows
         private SearchEngine _searchEngine;
         private CancellationTokenSource _tokenSource;
         private Task _searchTask;
-        private Windows.SearchWindow _searchWindow;
+        private SearchWindow _searchWindow;
 
         public MainWindow()
         {
@@ -177,7 +177,7 @@ namespace WoblaExplorer.Windows
                     {
                         if (_searchWindow == null)
                         {
-                            _searchWindow = new Windows.SearchWindow(_tokenSource);
+                            _searchWindow = new SearchWindow(_tokenSource);
                             _searchWindow.LbSearchResults.Items.Add(args.FoundedItem);
                             _searchWindow.Closing += (sender1, eventArgs) =>
                             {
@@ -483,7 +483,7 @@ namespace WoblaExplorer.Windows
             var fsEntry = listViewItem?.DataContext as FileSystemInfo;
             if (fsEntry != null)
             {
-                var renameDialog = new Dialogs.RenameDialog(fsEntry.Name)
+                var renameDialog = new RenameDialog(fsEntry.Name)
                 {
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     Owner = this
@@ -507,7 +507,7 @@ namespace WoblaExplorer.Windows
                 var selectedItem = ListViewExplorer.SelectedItem as FileSystemInfo;
                 if (selectedItem != null)
                 {
-                    var renameDialog = new Dialogs.RenameDialog(selectedItem.Name)
+                    var renameDialog = new RenameDialog(selectedItem.Name)
                     {
                         WindowStartupLocation = WindowStartupLocation.CenterOwner,
                         Owner = this
@@ -718,7 +718,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             var entries = ListViewExplorer.SelectedItems;
             if (entries.Count > 1)
             {
-                var properties = new Windows.PropertiesWindow()
+                var properties = new PropertiesWindow()
                 {
                     Owner = this,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -790,7 +790,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                     var dir = entry as DirectoryInfo;
                     if (dir != null)
                     {
-                        var properties = new Windows.PropertiesWindow()
+                        var properties = new PropertiesWindow()
                         {
                             Owner = this,
                             WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -849,7 +849,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 }
                 else
                 {
-                    var properties = new Windows.PropertiesWindow((FileInfo) entry)
+                    var properties = new PropertiesWindow((FileInfo) entry)
                     {
                         Owner = this,
                         WindowStartupLocation = WindowStartupLocation.CenterOwner
