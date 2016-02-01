@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Reflection;
+using System.Runtime.Remoting.Channels;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -956,83 +957,163 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             ListViewExplorer_Refresh();
         }
 
-        private async void CheckForUpdatesExecuted(object sender, ExecutedRoutedEventArgs e)
+        private void CheckForUpdatesExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            UpdateCheckInfo info = null;
+            CheckForUpdates();
+        }
+
+        private UpdateDialog _updateDialog;
+        private ApplicationDeployment _appDeploy;
+
+        private void BeginUpdate()
+        {
+            _appDeploy = ApplicationDeployment.CurrentDeployment;
+            _updateDialog.TbUpdateStage.Text = Properties.Resources.UdUpdateStageUpdating;
+            _updateDialog.Title = Properties.Resources.UdUpdateStageUpdating;
+            _appDeploy.UpdateCompleted += (sender, args) =>
+            {
+                if (args.Error != null)
+                {
+                    MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + args.Error.Message);
+                    return;
+                }
+                if (args.Cancelled)
+                {
+                    _updateDialog.Close();
+                    return;
+                }
+
+                MessageBox.Show(Properties.Resources.MwAppUpdatedText, Properties.Resources.MwAppUpdatedHeader,
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                _updateDialog.Close();
+            };
+            _appDeploy.UpdateProgressChanged += (sender, args) =>
+            {
+                switch (args.State)
+                {
+                    case DeploymentProgressState.DownloadingApplicationFiles:
+                        _updateDialog.TbUpdateState.Text =
+                            Properties.Resources.DeploymentProgressStateDownloadingApplicationFiles;
+                        break;
+                    case DeploymentProgressState.DownloadingApplicationInformation:
+                        _updateDialog.TbUpdateState.Text =
+                            Properties.Resources.DeploymentProgressStateDownloadingApplicationInformation;
+                        break;
+                    default:
+                        _updateDialog.TbUpdateState.Text =
+                            Properties.Resources.DeploymentProgressStateDownloadingDeploymentInformation;
+                        break;
+                }
+                _updateDialog.PbDownloadProgress.Value = args.ProgressPercentage;
+            };
+            try
+            {
+                _appDeploy.UpdateAsync();
+            }
+            catch (DeploymentDownloadException dde)
+            {
+                MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + dde.Message);
+                return;
+            }
+            catch (InvalidDeploymentException ide)
+            {
+                MessageBox.Show(Properties.Resources.MwInvalidDeploymentException + ide.Message);
+                return;
+            }
+            catch (InvalidOperationException ioe)
+            {
+                MessageBox.Show(Properties.Resources.MwInvalidOperationException + ioe.Message);
+                return;
+            }
+        }
+
+        private void CheckForUpdates()
+        {
             if (ApplicationDeployment.IsNetworkDeployed)
             {
-                var appDeployment = ApplicationDeployment.CurrentDeployment;
-                var updateCheckTask = Task.Factory.StartNew(async () =>
+                _appDeploy = ApplicationDeployment.CurrentDeployment;
+                _updateDialog = new UpdateDialog
                 {
-                    try
+                    TbUpdateStage = {Text = Properties.Resources.UdUpdateStageCheck},
+                    Title = Properties.Resources.UdUpdateStageUpdating
+                };
+                _appDeploy.CheckForUpdateProgressChanged += (sender, args) =>
+                {
+                    _updateDialog.PbDownloadProgress.Value = args.ProgressPercentage;
+
+                    switch (args.State)
                     {
-                        info = appDeployment.CheckForDetailedUpdate();
+                        case DeploymentProgressState.DownloadingApplicationFiles:
+                            _updateDialog.TbUpdateState.Text =
+                                Properties.Resources.DeploymentProgressStateDownloadingApplicationFiles;
+                            break;
+                        case DeploymentProgressState.DownloadingApplicationInformation:
+                            _updateDialog.TbUpdateState.Text =
+                                Properties.Resources.DeploymentProgressStateDownloadingApplicationInformation;
+                            break;
+                        default:
+                            _updateDialog.TbUpdateState.Text =
+                                Properties.Resources.DeploymentProgressStateDownloadingDeploymentInformation;
+                            break;
                     }
-                    catch (DeploymentDownloadException dde)
+                };
+                _appDeploy.CheckForUpdateCompleted += (sender, args) =>
+                {
+                    if (args.Error != null)
                     {
-                        MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + dde.Message);
+                        MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + args.Error.Message);
                         return;
                     }
-                    catch (InvalidDeploymentException ide)
+                    if (args.Cancelled)
                     {
-                        MessageBox.Show(Properties.Resources.MwInvalidDeploymentException + ide.Message);
-                        return;
-                    }
-                    catch (InvalidOperationException ioe)
-                    {
-                        MessageBox.Show(Properties.Resources.MwInvalidOperationException + ioe.Message);
+                        _updateDialog.Close();
                         return;
                     }
 
-                    if (info.UpdateAvailable)
+                    if (args.UpdateAvailable)
                     {
-                        bool doUpdate = false;
-
-                        await Dispatcher.InvokeAsync(() =>
+                        var dialogResult = MessageBox.Show(Properties.Resources.MwUpdateDialogContentBeforeVersion +
+                                                           args.AvailableVersion +
+                                                           Properties.Resources.MwUpdateDialogContentAfterVersion,
+                            Properties.Resources.MwUpdateDialogHeader, MessageBoxButton.YesNo,
+                            MessageBoxImage.Information);
+                        if (dialogResult == MessageBoxResult.Yes)
                         {
-                            var dialogResult = MessageBox.Show(Properties.Resources.MwUpdateDialogContentBeforeVersion +
-                                                               info.AvailableVersion +
-                                                               Properties.Resources.MwUpdateDialogContentAfterVersion,
-                                Properties.Resources.MwUpdateDialogHeader, MessageBoxButton.YesNo,
-                                MessageBoxImage.Information);
-                            if (dialogResult == MessageBoxResult.Yes)
-                            {
-                                doUpdate = true;
-                            }
-                        });
-
-                        if (doUpdate)
+                            _updateDialog.PbDownloadProgress.Value = 0;
+                            BeginUpdate();
+                        }
+                        else
                         {
-                            try
-                            {
-                                appDeployment.Update();
-                                await Dispatcher.InvokeAsync(() =>
-                                {
-                                    MessageBox.Show(Properties.Resources.MwAppUpdatedText,
-                                        Properties.Resources.MwAppUpdatedHeader, MessageBoxButton.OK,
-                                        MessageBoxImage.Exclamation);
-                                });
-                                var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
-                                Process.Start(processInfo);
-                                Application.Current.Shutdown();
-                            }
-                            catch (DeploymentDownloadException dde)
-                            {
-                                MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + dde.Message);
-                                return;
-                            }
+                            _updateDialog.Close();
                         }
                     }
                     else
                     {
-                        await Dispatcher.InvokeAsync(() =>
-                        {
-                            MessageBox.Show(Properties.Resources.MwNoUpdatesText, Properties.Resources.MwNoUpdatesHeader,
+                        MessageBox.Show(Properties.Resources.MwNoUpdatesText, Properties.Resources.MwNoUpdatesHeader,
                                 MessageBoxButton.OK, MessageBoxImage.Information);
-                        });
                     }
-                });
-                await updateCheckTask;
+                };
+
+                try
+                {
+                    _appDeploy.CheckForUpdateAsync();
+                    _updateDialog.ShowDialog();
+                }
+                catch (DeploymentDownloadException dde)
+                {
+                    MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + dde.Message);
+                    return;
+                }
+                catch (InvalidDeploymentException ide)
+                {
+                    MessageBox.Show(Properties.Resources.MwInvalidDeploymentException + ide.Message);
+                    return;
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    MessageBox.Show(Properties.Resources.MwInvalidOperationException + ioe.Message);
+                    return;
+                }
             }
             else
             {

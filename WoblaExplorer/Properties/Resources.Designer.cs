@@ -61,6 +61,33 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading application files.
+        /// </summary>
+        internal static string DeploymentProgressStateDownloadingApplicationFiles {
+            get {
+                return ResourceManager.GetString("DeploymentProgressStateDownloadingApplicationFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading application manifest.
+        /// </summary>
+        internal static string DeploymentProgressStateDownloadingApplicationInformation {
+            get {
+                return ResourceManager.GetString("DeploymentProgressStateDownloadingApplicationInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading deployment manifest.
+        /// </summary>
+        internal static string DeploymentProgressStateDownloadingDeploymentInformation {
+            get {
+                return ResourceManager.GetString("DeploymentProgressStateDownloadingDeploymentInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon ExplorerIcon {
@@ -100,7 +127,7 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Application has been updated and now it will be restarted..
+        ///   Looks up a localized string similar to Application has been updated you need to restart it..
         /// </summary>
         internal static string MwAppUpdatedText {
             get {
@@ -240,6 +267,24 @@ namespace WoblaExplorer.Properties {
         internal static string MwWrongAppUpdate {
             get {
                 return ResourceManager.GetString("MwWrongAppUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for updates....
+        /// </summary>
+        internal static string UdUpdateStageCheck {
+            get {
+                return ResourceManager.GetString("UdUpdateStageCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading updates....
+        /// </summary>
+        internal static string UdUpdateStageUpdating {
+            get {
+                return ResourceManager.GetString("UdUpdateStageUpdating", resourceCulture);
             }
         }
     }
