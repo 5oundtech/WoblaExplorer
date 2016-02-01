@@ -1034,6 +1034,8 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 _appDeploy = ApplicationDeployment.CurrentDeployment;
                 _updateDialog = new UpdateDialog
                 {
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    Owner = this,
                     TbUpdateStage = {Text = Properties.Resources.UdUpdateStageCheck},
                     Title = Properties.Resources.UdUpdateStageUpdating
                 };
@@ -1091,6 +1093,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                     {
                         MessageBox.Show(Properties.Resources.MwNoUpdatesText, Properties.Resources.MwNoUpdatesHeader,
                                 MessageBoxButton.OK, MessageBoxImage.Information);
+                        _updateDialog.Close();
                     }
                 };
 
