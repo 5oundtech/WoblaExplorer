@@ -10,6 +10,7 @@ Simple explorer-like application with some new features.
 - [ ] Make tooltip on current app or file with short info
 - [x] Autoupdater -> [Codeplex ClickOnce installer](https://woblaexplorer.codeplex.com/)
 - [x] Ability to rerun app as Administrator (Context Menu File->Run as Administrator)
+- [x] Create menu (only folders)
 
 I'm developing this app alone so i'll appreciate any help. (Criticism, pull requests etc)
 
