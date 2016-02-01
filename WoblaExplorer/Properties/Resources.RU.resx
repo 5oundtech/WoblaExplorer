@@ -127,11 +127,32 @@
   <data name="FontAwesome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fontawesome-webfont.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="MwAppUpdatedHeader" xml:space="preserve">
+    <value>Обновление завершено</value>
+  </data>
+  <data name="MwAppUpdatedText" xml:space="preserve">
+    <value>Приложение было обновлено и сейчас будет перезапущенно.</value>
+  </data>
   <data name="MwCopyToDescription" xml:space="preserve">
     <value>Выберите новое расположение для объекта</value>
   </data>
   <data name="MwCreateDirInFileError" xml:space="preserve">
     <value>Нельзя создать папку внутри файла!</value>
+  </data>
+  <data name="MwDeploymentDownloadException" xml:space="preserve">
+    <value>В данный момент новая версия приложения не может быть загружена. \n\nПожалуйста проверьте своё интернет подключение или попробуйте позже. Ошибка: </value>
+  </data>
+  <data name="MwInvalidDeploymentException" xml:space="preserve">
+    <value>Не удалось проверить обновления для приложения. Пакет установки поврежден. Пожалуйста переустановите приложение и попробуйте еще раз. Ошибка: </value>
+  </data>
+  <data name="MwInvalidOperationException" xml:space="preserve">
+    <value>Это приложение не может быть обновлено. Так как установлено не правильно или не с официальнного источника. Ошибка: </value>
+  </data>
+  <data name="MwNoUpdatesHeader" xml:space="preserve">
+    <value>Обновления не найдены</value>
+  </data>
+  <data name="MwNoUpdatesText" xml:space="preserve">
+    <value>Ваше приложение имеет актуальную версию.</value>
   </data>
   <data name="MwRemoveDialogText" xml:space="preserve">
     <value>Вы уверены, что хотите удалить этот файл(ы)?</value>
@@ -144,5 +165,17 @@
   </data>
   <data name="MwSearchCompleted" xml:space="preserve">
     <value>выполнено за</value>
+  </data>
+  <data name="MwUpdateDialogContentAfterVersion" xml:space="preserve">
+    <value> сейчас?</value>
+  </data>
+  <data name="MwUpdateDialogContentBeforeVersion" xml:space="preserve">
+    <value>Доступно обновленпие. \nХотите ли вы обновить приложение до версии </value>
+  </data>
+  <data name="MwUpdateDialogHeader" xml:space="preserve">
+    <value>Доступно обновление</value>
+  </data>
+  <data name="MwWrongAppUpdate" xml:space="preserve">
+    <value>Это приложение не может быть обновлено. Так как установлено не правильно или не с официальнного источника.</value>
   </data>
 </root>

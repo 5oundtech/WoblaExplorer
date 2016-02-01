@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Deployment.Application;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -953,6 +954,89 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 }
             }
             ListViewExplorer_Refresh();
+        }
+
+        private async void CheckForUpdatesExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            UpdateCheckInfo info = null;
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                var appDeployment = ApplicationDeployment.CurrentDeployment;
+                var updateCheckTask = Task.Factory.StartNew(async () =>
+                {
+                    try
+                    {
+                        info = appDeployment.CheckForDetailedUpdate();
+                    }
+                    catch (DeploymentDownloadException dde)
+                    {
+                        MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + dde.Message);
+                        return;
+                    }
+                    catch (InvalidDeploymentException ide)
+                    {
+                        MessageBox.Show(Properties.Resources.MwInvalidDeploymentException + ide.Message);
+                        return;
+                    }
+                    catch (InvalidOperationException ioe)
+                    {
+                        MessageBox.Show(Properties.Resources.MwInvalidOperationException + ioe.Message);
+                        return;
+                    }
+
+                    if (info.UpdateAvailable)
+                    {
+                        bool doUpdate = false;
+
+                        await Dispatcher.InvokeAsync(() =>
+                        {
+                            var dialogResult = MessageBox.Show(Properties.Resources.MwUpdateDialogContentBeforeVersion +
+                                                               info.AvailableVersion +
+                                                               Properties.Resources.MwUpdateDialogContentAfterVersion,
+                                Properties.Resources.MwUpdateDialogHeader, MessageBoxButton.YesNo,
+                                MessageBoxImage.Information);
+                            if (dialogResult == MessageBoxResult.Yes)
+                            {
+                                doUpdate = true;
+                            }
+                        });
+
+                        if (doUpdate)
+                        {
+                            try
+                            {
+                                appDeployment.Update();
+                                await Dispatcher.InvokeAsync(() =>
+                                {
+                                    MessageBox.Show(Properties.Resources.MwAppUpdatedText,
+                                        Properties.Resources.MwAppUpdatedHeader, MessageBoxButton.OK,
+                                        MessageBoxImage.Exclamation);
+                                });
+                                Process.Start(Application.ResourceAssembly.Location);
+                                Application.Current.Shutdown();
+                            }
+                            catch (DeploymentDownloadException dde)
+                            {
+                                MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + dde.Message);
+                                return;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        await Dispatcher.InvokeAsync(() =>
+                        {
+                            MessageBox.Show(Properties.Resources.MwNoUpdatesText, Properties.Resources.MwNoUpdatesHeader,
+                                MessageBoxButton.OK, MessageBoxImage.Information);
+                        });
+                    }
+                });
+                await updateCheckTask;
+            }
+            else
+            {
+                MessageBox.Show(Properties.Resources.MwWrongAppUpdate);
+            }
         }
     }
 }

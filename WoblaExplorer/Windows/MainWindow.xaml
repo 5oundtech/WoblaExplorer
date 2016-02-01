@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WoblaExplorer.CustomCommands"
         Title="WoblaExplorer" Height="350" Width="525" Name="MainWindowX">
     <Window.CommandBindings>
-        <CommandBinding Command="Backspace" Executed="BackspaceExecuted" CanExecute="DefaultCommands_CanExecute"></CommandBinding>
+        <CommandBinding Command="Backspace" Executed="BackspaceExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="Open" Executed="OpenCommandExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.ShowInExplorer" Executed="ShowInExplorerExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.Rename" Executed="RenameExecuted" CanExecute="DefaultCommands_CanExecute"/>
@@ -16,7 +16,8 @@
         <CommandBinding Command="local:Commands.AboutDialog" Executed="AboutDialogExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.PropertiesDialog" Executed="PropertiesDialogExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.ReRunAsAdministrator" Executed="ReRunAsAdministratorExecuted" CanExecute="DefaultCommands_CanExecute"/>
-        <CommandBinding Command="local:Commands.CreateDirectory" Executed="CreateDirectoryExecuted" CanExecute="DefaultCommands_CanExecute"></CommandBinding>
+        <CommandBinding Command="local:Commands.CreateDirectory" Executed="CreateDirectoryExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.CheckForUpdates" Executed="CheckForUpdatesExecuted" CanExecute="DefaultCommands_CanExecute"/>
     </Window.CommandBindings>
 
     <Grid>
@@ -34,6 +35,7 @@
                     <MenuItem Header="{DynamicResource MwFileConMenuExit}" Command="local:Commands.Exit"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MwHelpConMenuHeader}" FontFamily="{StaticResource FontAwesome}" >
+                    <MenuItem Header="{DynamicResource MwHelpConMenuUpdates}" Command="local:Commands.CheckForUpdates"></MenuItem>
                     <MenuItem Header="{DynamicResource MwHelpConMenuAbout}" Command="local:Commands.AboutDialog"></MenuItem>
                 </MenuItem>
             </Menu>

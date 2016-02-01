@@ -91,6 +91,24 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update completed.
+        /// </summary>
+        internal static string MwAppUpdatedHeader {
+            get {
+                return ResourceManager.GetString("MwAppUpdatedHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application has been updated and now it will be restarted..
+        /// </summary>
+        internal static string MwAppUpdatedText {
+            get {
+                return ResourceManager.GetString("MwAppUpdatedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose new place to item.
         /// </summary>
         internal static string MwCopyToDescription {
@@ -105,6 +123,51 @@ namespace WoblaExplorer.Properties {
         internal static string MwCreateDirInFileError {
             get {
                 return ResourceManager.GetString("MwCreateDirInFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The new version of the application cannot be downloaded at this time. \n\nPlease check your network connection, or try again later. Error: .
+        /// </summary>
+        internal static string MwDeploymentDownloadException {
+            get {
+                return ResourceManager.GetString("MwDeploymentDownloadException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot check for a new version of the application. The ClickOnce deployment is corrupt. Please redeploy the application and try again. Error: .
+        /// </summary>
+        internal static string MwInvalidDeploymentException {
+            get {
+                return ResourceManager.GetString("MwInvalidDeploymentException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This application cannot be updated. It is likely not a ClickOnce application. Error: .
+        /// </summary>
+        internal static string MwInvalidOperationException {
+            get {
+                return ResourceManager.GetString("MwInvalidOperationException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No updates found.
+        /// </summary>
+        internal static string MwNoUpdatesHeader {
+            get {
+                return ResourceManager.GetString("MwNoUpdatesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your app have latest version..
+        /// </summary>
+        internal static string MwNoUpdatesText {
+            get {
+                return ResourceManager.GetString("MwNoUpdatesText", resourceCulture);
             }
         }
         
@@ -141,6 +204,42 @@ namespace WoblaExplorer.Properties {
         internal static string MwSearchCompleted {
             get {
                 return ResourceManager.GetString("MwSearchCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  now?.
+        /// </summary>
+        internal static string MwUpdateDialogContentAfterVersion {
+            get {
+                return ResourceManager.GetString("MwUpdateDialogContentAfterVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An update is available. \nWould you like to update the application to version .
+        /// </summary>
+        internal static string MwUpdateDialogContentBeforeVersion {
+            get {
+                return ResourceManager.GetString("MwUpdateDialogContentBeforeVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An update is available.
+        /// </summary>
+        internal static string MwUpdateDialogHeader {
+            get {
+                return ResourceManager.GetString("MwUpdateDialogHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This application cannot be updated. It is likely not a ClickOnce application..
+        /// </summary>
+        internal static string MwWrongAppUpdate {
+            get {
+                return ResourceManager.GetString("MwWrongAppUpdate", resourceCulture);
             }
         }
     }

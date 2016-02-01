@@ -127,11 +127,32 @@
   <data name="FontAwesome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fontawesome-webfont.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="MwAppUpdatedHeader" xml:space="preserve">
+    <value>Update completed</value>
+  </data>
+  <data name="MwAppUpdatedText" xml:space="preserve">
+    <value>Application has been updated and now it will be restarted.</value>
+  </data>
   <data name="MwCopyToDescription" xml:space="preserve">
     <value>Choose new place to item</value>
   </data>
   <data name="MwCreateDirInFileError" xml:space="preserve">
     <value>Can't create a directory inside file!</value>
+  </data>
+  <data name="MwDeploymentDownloadException" xml:space="preserve">
+    <value>The new version of the application cannot be downloaded at this time. \n\nPlease check your network connection, or try again later. Error: </value>
+  </data>
+  <data name="MwInvalidDeploymentException" xml:space="preserve">
+    <value>Cannot check for a new version of the application. The ClickOnce deployment is corrupt. Please redeploy the application and try again. Error: </value>
+  </data>
+  <data name="MwInvalidOperationException" xml:space="preserve">
+    <value>This application cannot be updated. It is likely not a ClickOnce application. Error: </value>
+  </data>
+  <data name="MwNoUpdatesHeader" xml:space="preserve">
+    <value>No updates found</value>
+  </data>
+  <data name="MwNoUpdatesText" xml:space="preserve">
+    <value>Your app have latest version.</value>
   </data>
   <data name="MwRemoveDialogText" xml:space="preserve">
     <value>Are you sure you want to delete this item(s)?</value>
@@ -144,5 +165,17 @@
   </data>
   <data name="MwSearchCompleted" xml:space="preserve">
     <value>completed in </value>
+  </data>
+  <data name="MwUpdateDialogContentAfterVersion" xml:space="preserve">
+    <value> now?</value>
+  </data>
+  <data name="MwUpdateDialogContentBeforeVersion" xml:space="preserve">
+    <value>An update is available. \nWould you like to update the application to version </value>
+  </data>
+  <data name="MwUpdateDialogHeader" xml:space="preserve">
+    <value>An update is available</value>
+  </data>
+  <data name="MwWrongAppUpdate" xml:space="preserve">
+    <value>This application cannot be updated. It is likely not a ClickOnce application.</value>
   </data>
 </root>

@@ -30,5 +30,8 @@ namespace WoblaExplorer.CustomCommands
 
         public static RoutedCommand CreateDirectory = new RoutedCommand(nameof(CreateDirectory), typeof (Commands),
             new InputGestureCollection {new KeyGesture(Key.N, ModifierKeys.Control)});
+
+        public static RoutedCommand CheckForUpdates = new RoutedCommand(nameof(CheckForUpdates), typeof (Commands),
+            new InputGestureCollection());
     }
 }
