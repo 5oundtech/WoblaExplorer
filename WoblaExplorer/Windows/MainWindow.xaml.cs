@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Deployment.Application;
 using System.Diagnostics;
 using System.Globalization;
@@ -970,42 +971,10 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             _appDeploy = ApplicationDeployment.CurrentDeployment;
             _updateDialog.TbUpdateStage.Text = Properties.Resources.UdUpdateStageUpdating;
             _updateDialog.Title = Properties.Resources.UdUpdateStageUpdating;
-            _appDeploy.UpdateCompleted += (sender, args) =>
-            {
-                if (args.Error != null)
-                {
-                    MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + args.Error.Message);
-                    return;
-                }
-                if (args.Cancelled)
-                {
-                    _updateDialog.Close();
-                    return;
-                }
-
-                MessageBox.Show(Properties.Resources.MwAppUpdatedText, Properties.Resources.MwAppUpdatedHeader,
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-                _updateDialog.Close();
-            };
-            _appDeploy.UpdateProgressChanged += (sender, args) =>
-            {
-                switch (args.State)
-                {
-                    case DeploymentProgressState.DownloadingApplicationFiles:
-                        _updateDialog.TbUpdateState.Text =
-                            Properties.Resources.DeploymentProgressStateDownloadingApplicationFiles;
-                        break;
-                    case DeploymentProgressState.DownloadingApplicationInformation:
-                        _updateDialog.TbUpdateState.Text =
-                            Properties.Resources.DeploymentProgressStateDownloadingApplicationInformation;
-                        break;
-                    default:
-                        _updateDialog.TbUpdateState.Text =
-                            Properties.Resources.DeploymentProgressStateDownloadingDeploymentInformation;
-                        break;
-                }
-                _updateDialog.PbDownloadProgress.Value = args.ProgressPercentage;
-            };
+            _appDeploy.UpdateCompleted -= AppDeployOnUpdateCompleted;
+            _appDeploy.UpdateCompleted += AppDeployOnUpdateCompleted;
+            _appDeploy.UpdateProgressChanged -= AppDeployOnUpdateProgressChanged;
+            _appDeploy.UpdateProgressChanged += AppDeployOnUpdateProgressChanged;
             try
             {
                 _appDeploy.UpdateAsync();
@@ -1027,6 +996,44 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             }
         }
 
+        private void AppDeployOnUpdateProgressChanged(object sender, DeploymentProgressChangedEventArgs args)
+        {
+            switch (args.State)
+            {
+                case DeploymentProgressState.DownloadingApplicationFiles:
+                    _updateDialog.TbUpdateState.Text =
+                        Properties.Resources.DeploymentProgressStateDownloadingApplicationFiles;
+                    break;
+                case DeploymentProgressState.DownloadingApplicationInformation:
+                    _updateDialog.TbUpdateState.Text =
+                        Properties.Resources.DeploymentProgressStateDownloadingApplicationInformation;
+                    break;
+                default:
+                    _updateDialog.TbUpdateState.Text =
+                        Properties.Resources.DeploymentProgressStateDownloadingDeploymentInformation;
+                    break;
+            }
+            _updateDialog.PbDownloadProgress.Value = args.ProgressPercentage;
+        }
+
+        private void AppDeployOnUpdateCompleted(object sender, AsyncCompletedEventArgs args)
+        {
+            if (args.Error != null)
+            {
+                MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + args.Error.Message);
+                return;
+            }
+            if (args.Cancelled)
+            {
+                _updateDialog.Close();
+                return;
+            }
+
+            MessageBox.Show(Properties.Resources.MwAppUpdatedText, Properties.Resources.MwAppUpdatedHeader,
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            _updateDialog.Close();
+        }
+
         private void CheckForUpdates()
         {
             if (ApplicationDeployment.IsNetworkDeployed)
@@ -1039,63 +1046,10 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                     TbUpdateStage = {Text = Properties.Resources.UdUpdateStageCheck},
                     Title = Properties.Resources.UdUpdateStageUpdating
                 };
-                _appDeploy.CheckForUpdateProgressChanged += (sender, args) =>
-                {
-                    _updateDialog.PbDownloadProgress.Value = args.ProgressPercentage;
-
-                    switch (args.State)
-                    {
-                        case DeploymentProgressState.DownloadingApplicationFiles:
-                            _updateDialog.TbUpdateState.Text =
-                                Properties.Resources.DeploymentProgressStateDownloadingApplicationFiles;
-                            break;
-                        case DeploymentProgressState.DownloadingApplicationInformation:
-                            _updateDialog.TbUpdateState.Text =
-                                Properties.Resources.DeploymentProgressStateDownloadingApplicationInformation;
-                            break;
-                        default:
-                            _updateDialog.TbUpdateState.Text =
-                                Properties.Resources.DeploymentProgressStateDownloadingDeploymentInformation;
-                            break;
-                    }
-                };
-                _appDeploy.CheckForUpdateCompleted += (sender, args) =>
-                {
-                    if (args.Error != null)
-                    {
-                        MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + args.Error.Message);
-                        return;
-                    }
-                    if (args.Cancelled)
-                    {
-                        _updateDialog.Close();
-                        return;
-                    }
-
-                    if (args.UpdateAvailable)
-                    {
-                        var dialogResult = MessageBox.Show(Properties.Resources.MwUpdateDialogContentBeforeVersion +
-                                                           args.AvailableVersion +
-                                                           Properties.Resources.MwUpdateDialogContentAfterVersion,
-                            Properties.Resources.MwUpdateDialogHeader, MessageBoxButton.YesNo,
-                            MessageBoxImage.Information);
-                        if (dialogResult == MessageBoxResult.Yes)
-                        {
-                            _updateDialog.PbDownloadProgress.Value = 0;
-                            BeginUpdate();
-                        }
-                        else
-                        {
-                            _updateDialog.Close();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show(Properties.Resources.MwNoUpdatesText, Properties.Resources.MwNoUpdatesHeader,
-                                MessageBoxButton.OK, MessageBoxImage.Information);
-                        _updateDialog.Close();
-                    }
-                };
+                _appDeploy.CheckForUpdateProgressChanged -= AppDeployOnCheckForUpdateProgressChanged;
+                _appDeploy.CheckForUpdateProgressChanged += AppDeployOnCheckForUpdateProgressChanged;
+                _appDeploy.CheckForUpdateCompleted -= AppDeployOnCheckForUpdateCompleted;
+                _appDeploy.CheckForUpdateCompleted += AppDeployOnCheckForUpdateCompleted;
 
                 try
                 {
@@ -1121,6 +1075,66 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             else
             {
                 MessageBox.Show(Properties.Resources.MwWrongAppUpdate);
+            }
+        }
+
+        private void AppDeployOnCheckForUpdateCompleted(object sender, CheckForUpdateCompletedEventArgs args)
+        {
+            if (args.Error != null)
+            {
+                MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + args.Error.Message);
+                return;
+            }
+            if (args.Cancelled)
+            {
+                _updateDialog.Close();
+                return;
+            }
+
+            if (args.UpdateAvailable)
+            {
+                var dialogResult = MessageBox.Show(Properties.Resources.MwUpdateDialogContentBeforeVersion +
+                                                   args.AvailableVersion +
+                                                   Properties.Resources.MwUpdateDialogContentAfterVersion,
+                    Properties.Resources.MwUpdateDialogHeader, MessageBoxButton.YesNo,
+                    MessageBoxImage.Information);
+                if (dialogResult == MessageBoxResult.Yes)
+                {
+                    _updateDialog.PbDownloadProgress.Value = 0;
+                    BeginUpdate();
+                }
+                else
+                {
+                    _updateDialog.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show(Properties.Resources.MwNoUpdatesText, Properties.Resources.MwNoUpdatesHeader,
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                _updateDialog.Close();
+                return;
+            }
+        }
+
+        private void AppDeployOnCheckForUpdateProgressChanged(object sender, DeploymentProgressChangedEventArgs args)
+        {
+            _updateDialog.PbDownloadProgress.Value = args.ProgressPercentage;
+
+            switch (args.State)
+            {
+                case DeploymentProgressState.DownloadingApplicationFiles:
+                    _updateDialog.TbUpdateState.Text =
+                        Properties.Resources.DeploymentProgressStateDownloadingApplicationFiles;
+                    break;
+                case DeploymentProgressState.DownloadingApplicationInformation:
+                    _updateDialog.TbUpdateState.Text =
+                        Properties.Resources.DeploymentProgressStateDownloadingApplicationInformation;
+                    break;
+                default:
+                    _updateDialog.TbUpdateState.Text =
+                        Properties.Resources.DeploymentProgressStateDownloadingDeploymentInformation;
+                    break;
             }
         }
     }
