@@ -1,4 +1,4 @@
-﻿<Window x:Class="WoblaExplorer.AboutWindow"
+﻿<Window x:Class="WoblaExplorer.Windows.AboutWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,20 +13,20 @@
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Image Source="Resources/internet-explorer-icon.png" Name="AppImage"></Image>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome" FontSize="20" Text="WoblaExplorer - version ">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource FontAwesome}" FontSize="20" Text="WoblaExplorer - version ">
                 </TextBlock>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome" FontSize="20" Text="{Binding ElementName=AboutWindowX, Path=AssemblyVersion}"></TextBlock>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource FontAwesome}" FontSize="20" Text="{Binding ElementName=AboutWindowX, Path=AssemblyVersion}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome" Text="{DynamicResource AwFirstTextBlock}">
-                </TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome" Text="{DynamicResource AwSecondTextBlock}">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource FontAwesome}" Text="{DynamicResource AwFirstTextBlock}">
                 </TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="FontAwesome">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource FontAwesome}" Text="{DynamicResource AwSecondTextBlock}">
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource FontAwesome}">
                     <Run Text="{DynamicResource AwThirdTextBlock}"></Run>
                     <Hyperlink NavigateUri="https://github.com/5oundtech/WoblaExplorer" Click="Hyperlink_OnClick">GitHub page</Hyperlink>
                 </TextBlock>

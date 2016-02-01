@@ -1,12 +1,12 @@
-﻿<Window x:Class="WoblaExplorer.RenameDialog"
+﻿<Window x:Class="WoblaExplorer.Dialogs.CreateDirDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WoblaExplorer"
+        xmlns:local="clr-namespace:WoblaExplorer.Dialogs"
         mc:Ignorable="d"
-        Title="{DynamicResource RdTitle}" Height="150" Width="300" Name="RenameDialogX"
-        ContentRendered="RenameDialog_OnContentRendered">
+        Title="{DynamicResource CrdTitle}" Height="150" Width="300" ResizeMode="NoResize"
+        ContentRendered="CreateDirDialog_OnContentRendered">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -15,16 +15,16 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0, 10, 0, 0">
-            <TextBlock HorizontalAlignment="Center" Text="{DynamicResource RdTextBlock}">
+            <TextBlock HorizontalAlignment="Center" Text="{DynamicResource CrdTextBlock}">
             </TextBlock>
         </Grid>
         <Grid Grid.Row="1" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch">
-            <TextBox Name="TbFileName" KeyUp="TbFileName_OnKeyUp"></TextBox>
+            <TextBox Name="TbDirectoryName" Text="{DynamicResource CrdDefaultDirName}"></TextBox>
         </Grid>
         <Grid Grid.Row="2" Margin="0, 10, 0, 0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="BtnOk" IsDefault="True" Width="80" Height="30" Click="BtnOk_OnClick" Content="{DynamicResource RdBtnOk}"></Button>
-                <Button Name="BtnCancel" IsCancel="True" Width="80" Height="30" Margin="10, 0, 0, 0" Content="{DynamicResource RdBtnCancel}"></Button>
+                <Button Name="BtnOk" IsDefault="True" Width="80" Height="30" Content="{DynamicResource CrdBtnOk}" Click="BtnOk_OnClick"></Button>
+                <Button Name="BtnCancel" IsCancel="True" Width="80" Height="30" Margin="10, 0, 0, 0" Content="{DynamicResource CrdBtnCancel}"></Button>
             </StackPanel>
         </Grid>
     </Grid>

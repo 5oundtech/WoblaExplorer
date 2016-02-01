@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Documents;
 using WoblaExplorer.Util;
 
-namespace WoblaExplorer
+namespace WoblaExplorer.Windows
 {
     /// <summary>
     /// Interaction logic for AboutWindow.xaml

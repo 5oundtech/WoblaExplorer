@@ -18,6 +18,10 @@
     <v:String x:Key="MwMainLvContextMenuShowInExplorer">Show in explorer</v:String>
     <v:String x:Key="MwMainLvContextMenuRename">Rename</v:String>
     <v:String x:Key="MwMainLvContextMenuCopyTo">CopyTo</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateHeader">Create</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateDir">Directory</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateDirInside">Inside</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateDirHere">Here</v:String>
     <v:String x:Key="MwMainLvContextMenuRemove">Remove</v:String>
     <v:String x:Key="MwMainLvContextMenuProperties">Properties</v:String>
     <v:String x:Key="MwSearchPopupFirstTextBlock">A problem occured during the search &#xf071;</v:String>
@@ -47,4 +51,10 @@
     <v:String x:Key="PwFilesCountLabel">Files count: </v:String>
     <v:String x:Key="PwDirsCountLabel">Dirs count: </v:String>
     <v:String x:Key="PwContextMenuCopy">Copy</v:String>
+    <!-- CreateDirDialog -->
+    <v:String x:Key="CrdTitle">Create directory</v:String>
+    <v:String x:Key="CrdTextBlock">Enter directory name: </v:String>
+    <v:String x:Key="CrdDefaultDirName">New folder</v:String>
+    <v:String x:Key="CrdBtnOk">Confirm</v:String>
+    <v:String x:Key="CrdBtnCancel">Cancel</v:String>
 </ResourceDictionary>

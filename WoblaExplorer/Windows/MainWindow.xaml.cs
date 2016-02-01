@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -13,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using System.Windows.Input;
+using WoblaExplorer.Dialogs;
 using WoblaExplorer.FilesUtil;
 using WoblaExplorer.Util;
 using Application = System.Windows.Application;
@@ -26,7 +26,7 @@ using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 
-namespace WoblaExplorer
+namespace WoblaExplorer.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -37,7 +37,7 @@ namespace WoblaExplorer
         private SearchEngine _searchEngine;
         private CancellationTokenSource _tokenSource;
         private Task _searchTask;
-        private SearchWindow _searchWindow;
+        private Windows.SearchWindow _searchWindow;
 
         public MainWindow()
         {
@@ -79,11 +79,6 @@ namespace WoblaExplorer
             {
                 MessageBox.Show(unauthorizedAccessException.Message);
             }
-        }
-
-        private void OnExplorerDirChanged(object sender, EventArgs eventArgs)
-        {
-            throw new NotImplementedException();
         }
 
         private void ChangeLanguageClick(object sender, RoutedEventArgs routedEventArgs)
@@ -181,7 +176,7 @@ namespace WoblaExplorer
                     {
                         if (_searchWindow == null)
                         {
-                            _searchWindow = new SearchWindow(_tokenSource);
+                            _searchWindow = new Windows.SearchWindow(_tokenSource);
                             _searchWindow.LbSearchResults.Items.Add(args.FoundedItem);
                             _searchWindow.Closing += (sender1, eventArgs) =>
                             {
@@ -277,6 +272,18 @@ namespace WoblaExplorer
                 ChangeWindowTitle();
 
                 await PbVisualization.TogglePbVisibilityAsync();
+            }
+            else
+            {
+                try
+                {
+                    Process.Start(newPath);
+                }
+                catch (Exception)
+                {
+                    ErrorPopup.IsOpen = true;
+                    SystemSounds.Exclamation.Play();
+                }
             }
         }
 
@@ -475,7 +482,7 @@ namespace WoblaExplorer
             var fsEntry = listViewItem?.DataContext as FileSystemInfo;
             if (fsEntry != null)
             {
-                var renameDialog = new RenameDialog(fsEntry.Name)
+                var renameDialog = new Dialogs.RenameDialog(fsEntry.Name)
                 {
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     Owner = this
@@ -499,7 +506,7 @@ namespace WoblaExplorer
                 var selectedItem = ListViewExplorer.SelectedItem as FileSystemInfo;
                 if (selectedItem != null)
                 {
-                    var renameDialog = new RenameDialog(selectedItem.Name)
+                    var renameDialog = new Dialogs.RenameDialog(selectedItem.Name)
                     {
                         WindowStartupLocation = WindowStartupLocation.CenterOwner,
                         Owner = this
@@ -710,7 +717,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             var entries = ListViewExplorer.SelectedItems;
             if (entries.Count > 1)
             {
-                var properties = new PropertiesWindow()
+                var properties = new Windows.PropertiesWindow()
                 {
                     Owner = this,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -782,7 +789,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                     var dir = entry as DirectoryInfo;
                     if (dir != null)
                     {
-                        var properties = new PropertiesWindow()
+                        var properties = new Windows.PropertiesWindow()
                         {
                             Owner = this,
                             WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -841,7 +848,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 }
                 else
                 {
-                    var properties = new PropertiesWindow((FileInfo) entry)
+                    var properties = new Windows.PropertiesWindow((FileInfo) entry)
                     {
                         Owner = this,
                         WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -867,7 +874,85 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             }
             catch (Exception)
             {
+                ErrorPopup.IsOpen = true;
+                SystemSounds.Exclamation.Play();
             }
+        }
+
+        private void CreateDirectoryExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var dialog = new CreateDirDialog
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                Owner = this
+            };
+            if (e.Parameter != null)
+            {
+                if (e.Parameter.ToString() == "0")
+                {
+                    var curDirPath = _fileDiver.CurrentPath;
+                    if (dialog.ShowDialog() == true)
+                    {
+                        var newDir = curDirPath + dialog.DirName;
+                        try
+                        {
+                            Directory.CreateDirectory(newDir);
+                        }
+                        catch (Exception)
+                        {
+                            ErrorPopup.IsOpen = true;
+                            SystemSounds.Exclamation.Play();
+                        }
+                    }
+                }
+                if (e.Parameter.ToString() == "1")
+                {
+                    var selectedItem = ListViewExplorer.SelectedItem as FileSystemInfo;
+                    if (selectedItem.IsDirectory())
+                    {
+                        if (selectedItem != null)
+                        {
+                            if (dialog.ShowDialog() == true)
+                            {
+                                var newDir = selectedItem.FullName + "\\" + dialog.DirName;
+                                try
+                                {
+                                    Directory.CreateDirectory(newDir);
+                                }
+                                catch (Exception)
+                                {
+                                    ErrorPopup.IsOpen = true;
+                                    SystemSounds.Exclamation.Play();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        CustomErrorPopupTextBlock.Text = Properties.Resources.MwCreateDirInFileError;
+                        CustomErrorPopup.IsOpen = true;
+                        SystemSounds.Exclamation.Play();
+                    }
+                }
+            }
+            else
+            {
+                var curDirPath = _fileDiver.CurrentPath;
+                if (dialog.ShowDialog() == true)
+                {
+                    var newDir = curDirPath + dialog.DirName;
+                    try
+                    {
+                        Directory.CreateDirectory(newDir);
+                    }
+                    catch (Exception)
+                    {
+                        ErrorPopup.IsOpen = true;
+                        SystemSounds.Exclamation.Play();
+                    }
+                }
+            }
+            ListViewExplorer_Refresh();
         }
     }
 }

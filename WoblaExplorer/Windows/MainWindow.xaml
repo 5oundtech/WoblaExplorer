@@ -1,4 +1,4 @@
-﻿<Window x:Class="WoblaExplorer.MainWindow"
+﻿<Window x:Class="WoblaExplorer.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -16,6 +16,7 @@
         <CommandBinding Command="local:Commands.AboutDialog" Executed="AboutDialogExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.PropertiesDialog" Executed="PropertiesDialogExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.ReRunAsAdministrator" Executed="ReRunAsAdministratorExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.CreateDirectory" Executed="CreateDirectoryExecuted" CanExecute="DefaultCommands_CanExecute"></CommandBinding>
     </Window.CommandBindings>
 
     <Grid>
@@ -27,12 +28,12 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Menu>
-                <MenuItem Header="{DynamicResource MwFileConMehuHeader}" FontFamily="FontAwesome">
+                <MenuItem Header="{DynamicResource MwFileConMehuHeader}" FontFamily="{StaticResource FontAwesome}" >
                     <MenuItem Header="{DynamicResource MwFileConMenuRunAsAdmin}" Command="local:Commands.ReRunAsAdministrator"></MenuItem>
                     <MenuItem Header="{DynamicResource MwFileConMenuLanguage}" x:Name="LanguageMenu"></MenuItem>
                     <MenuItem Header="{DynamicResource MwFileConMenuExit}" Command="local:Commands.Exit"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="{DynamicResource MwHelpConMenuHeader}" FontFamily="FontAwesome">
+                <MenuItem Header="{DynamicResource MwHelpConMenuHeader}" FontFamily="{StaticResource FontAwesome}" >
                     <MenuItem Header="{DynamicResource MwHelpConMenuAbout}" Command="local:Commands.AboutDialog"></MenuItem>
                 </MenuItem>
             </Menu>
@@ -46,11 +47,11 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
                 <ComboBox DockPanel.Dock="Left" Name="CbDrives" Width="60" SelectionChanged="CbDrives_OnSelectionChanged" Height="25"></ComboBox>
-                <Button DockPanel.Dock="Right" Name="BtnDiveBack" Command="Backspace" Width="60" Margin="30, 0, 0, 0" Height="25" FontFamily="FontAwesome" Content="{DynamicResource MwBtnDiveBack}"></Button>
+                <Button DockPanel.Dock="Right" Name="BtnDiveBack" Command="Backspace" Width="60" Margin="30, 0, 0, 0" Height="25" FontFamily="{StaticResource FontAwesome}" Content="{DynamicResource MwBtnDiveBack}"></Button>
             </DockPanel>
             <TextBox Grid.Column="1" Grid.Row="0" Margin="20, 0, 0, 0" Name="TbSearchInput" Text="{DynamicResource MwTbSearchInputText}"
                      ToolTip="{DynamicResource MwTbSearchInputTooltip}" Width="Auto" AutoWordSelection="True" Height="25" KeyUp="TbSearchInput_OnKeyUp"></TextBox>
-            <Button Grid.Column="2" Grid.Row="0" Name="BtnSearch" Width="70" Margin="10, 0, 0, 0" Click="BtnSearch_OnClick" Height="25" FontFamily="FontAwesome" Content="{DynamicResource MwBtnSearch}"></Button>
+            <Button Grid.Column="2" Grid.Row="0" Name="BtnSearch" Width="70" Margin="10, 0, 0, 0" Click="BtnSearch_OnClick" Height="25" FontFamily="{StaticResource FontAwesome}" Content="{DynamicResource MwBtnSearch}"></Button>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -68,13 +69,23 @@
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuOpen}" Command="Open">
                         </MenuItem>
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuShowInExplorer}" Command="local:Commands.ShowInExplorer"/>
-                        <Separator></Separator>
+                        <Separator />
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuRename}" Command="local:Commands.Rename"></MenuItem>
-                        <Separator></Separator>
+                        <Separator />
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuCopyTo}" Command="local:Commands.CopyTo"></MenuItem>
-                        <Separator></Separator>
+                        <Separator />
+                        <MenuItem Header="{DynamicResource MwMainLvContextMenuCreateHeader}">
+                            <MenuItem Header="{DynamicResource MwMainLvContextMenuCreateDir}">
+                                <MenuItem x:Name="CreateDirHereMenuItem" Header="{DynamicResource MwMainLvContextMenuCreateDirHere}" Command="local:Commands.CreateDirectory"
+                                          CommandParameter="0"></MenuItem>
+                                <MenuItem x:Name="CreateDirInsideMenuItem" Header="{DynamicResource MwMainLvContextMenuCreateDirInside}" Command="local:Commands.CreateDirectory"
+                                          CommandParameter="1">
+                                </MenuItem>
+                            </MenuItem>
+                        </MenuItem>
+                        <Separator />
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuRemove}" Command="local:Commands.Remove"></MenuItem>
-                        <Separator></Separator>
+                        <Separator />
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuProperties}" Command="local:Commands.PropertiesDialog"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
@@ -83,8 +94,8 @@
                    MouseEnter="Popup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
                 <Border BorderBrush="DarkBlue" BorderThickness="2" Background="White">
                     <StackPanel Margin="5">
-                        <TextBlock Margin="5" FontFamily="FontAwesome" HorizontalAlignment="Center" Text="{DynamicResource MwSearchPopupFirstTextBlock}"></TextBlock>
-                        <TextBlock Margin="5" FontFamily="FontAwesome" HorizontalAlignment="Center">
+                        <TextBlock Margin="5" FontFamily="{StaticResource FontAwesome}"  HorizontalAlignment="Center" Text="{DynamicResource MwSearchPopupFirstTextBlock}"></TextBlock>
+                        <TextBlock Margin="5" FontFamily="{StaticResource FontAwesome}"  HorizontalAlignment="Center">
                             <Run Text="{DynamicResource MwSearchPopupSecondTextBlock}"></Run>
                             <Run FontWeight="Bold" Text="{DynamicResource MwSearchPopupSecondTextBlockBoldPart}"></Run>
                         </TextBlock>
@@ -95,7 +106,7 @@
                    MouseEnter="Popup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
                 <Border BorderBrush="DarkRed" BorderThickness="2" Background="White">
                     <StackPanel Margin="5">
-                        <TextBlock Margin="5" FontFamily="FontAwesome" HorizontalAlignment="Center" Text="{DynamicResource MwErrorPopupTextBlock}"></TextBlock>
+                        <TextBlock Margin="5" FontFamily="{StaticResource FontAwesome}"  HorizontalAlignment="Center" Text="{DynamicResource MwErrorPopupTextBlock}"></TextBlock>
                     </StackPanel>
                 </Border>
             </Popup>
@@ -103,8 +114,8 @@
                    MouseEnter="Popup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
                 <Border BorderBrush="Blue" BorderThickness="2" Background="White">
                     <StackPanel Margin="5">
-                        <TextBlock Margin="5" FontFamily="FontAwesome" HorizontalAlignment="Center" Text="{DynamicResource MwCustomErrorPopupFirstTextBlock}"></TextBlock>
-                        <TextBlock Name="CustomErrorPopupTextBlock" FontFamily="FontAwesome" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Margin="5" FontFamily="{StaticResource FontAwesome}"  HorizontalAlignment="Center" Text="{DynamicResource MwCustomErrorPopupFirstTextBlock}"></TextBlock>
+                        <TextBlock Name="CustomErrorPopupTextBlock" FontFamily="{StaticResource FontAwesome}"  HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Border>
             </Popup>

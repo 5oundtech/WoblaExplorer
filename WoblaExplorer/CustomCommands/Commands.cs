@@ -27,5 +27,8 @@ namespace WoblaExplorer.CustomCommands
 
         public static RoutedCommand ReRunAsAdministrator = new RoutedCommand(nameof(ReRunAsAdministrator),
             typeof (Commands), new InputGestureCollection {});
+
+        public static RoutedCommand CreateDirectory = new RoutedCommand(nameof(CreateDirectory), typeof (Commands),
+            new InputGestureCollection {new KeyGesture(Key.N, ModifierKeys.Control)});
     }
 }

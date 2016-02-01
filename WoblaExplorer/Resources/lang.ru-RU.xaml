@@ -18,6 +18,10 @@
     <v:String x:Key="MwMainLvContextMenuShowInExplorer">Показать в проводнике</v:String>
     <v:String x:Key="MwMainLvContextMenuRename">Переименовать</v:String>
     <v:String x:Key="MwMainLvContextMenuCopyTo">Скопировать в</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateHeader">Создать</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateDir">Папку</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateDirInside">Внутри</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateDirHere">Здесь</v:String>
     <v:String x:Key="MwMainLvContextMenuRemove">Удалить</v:String>
     <v:String x:Key="MwMainLvContextMenuProperties">Свойства</v:String>
     <v:String x:Key="MwSearchPopupFirstTextBlock">Возникла проблема во время поиска &#xf071;</v:String>
@@ -47,4 +51,10 @@
     <v:String x:Key="PwFilesCountLabel">Количество файлов: </v:String>
     <v:String x:Key="PwDirsCountLabel">Количество папок: </v:String>
     <v:String x:Key="PwContextMenuCopy">Копировать</v:String>
+    <!-- CreateDirDialog -->
+    <v:String x:Key="CrdTitle">Создать папку</v:String>
+    <v:String x:Key="CrdTextBlock">Введите название папки: </v:String>
+    <v:String x:Key="CrdDefaultDirName">Новая папка</v:String>
+    <v:String x:Key="CrdBtnOk">Подтвердить</v:String>
+    <v:String x:Key="CrdBtnCancel">Отмена</v:String>
 </ResourceDictionary>

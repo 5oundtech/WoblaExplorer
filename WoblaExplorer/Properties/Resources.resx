@@ -130,6 +130,9 @@
   <data name="MwCopyToDescription" xml:space="preserve">
     <value>Choose new place to item</value>
   </data>
+  <data name="MwCreateDirInFileError" xml:space="preserve">
+    <value>Can't create a directory inside file!</value>
+  </data>
   <data name="MwRemoveDialogText" xml:space="preserve">
     <value>Are you sure you want to delete this item(s)?</value>
   </data>

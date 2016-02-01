@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace WoblaExplorer
+namespace WoblaExplorer.Windows
 {
     /// <summary>
     /// Interaction logic for SearchWindow.xaml

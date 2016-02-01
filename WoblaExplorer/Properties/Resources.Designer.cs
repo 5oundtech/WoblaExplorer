@@ -100,6 +100,15 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t create a directory inside file!.
+        /// </summary>
+        internal static string MwCreateDirInFileError {
+            get {
+                return ResourceManager.GetString("MwCreateDirInFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete this item(s)?.
         /// </summary>
         internal static string MwRemoveDialogText {

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace WoblaExplorer
+namespace WoblaExplorer.Dialogs
 {
     /// <summary>
     /// Interaction logic for RenameDialog.xaml
