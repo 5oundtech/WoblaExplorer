@@ -1012,7 +1012,8 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                                         Properties.Resources.MwAppUpdatedHeader, MessageBoxButton.OK,
                                         MessageBoxImage.Exclamation);
                                 });
-                                Process.Start(Application.ResourceAssembly.Location);
+                                var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
+                                Process.Start(processInfo);
                                 Application.Current.Shutdown();
                             }
                             catch (DeploymentDownloadException dde)
