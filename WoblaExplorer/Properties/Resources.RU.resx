@@ -140,7 +140,7 @@
     <value>Нельзя создать папку внутри файла!</value>
   </data>
   <data name="MwDeploymentDownloadException" xml:space="preserve">
-    <value>В данный момент новая версия приложения не может быть загружена. \n\nПожалуйста проверьте своё интернет подключение или попробуйте позже. Ошибка: </value>
+    <value>В данный момент новая версия приложения не может быть загружена. Пожалуйста проверьте своё интернет подключение или попробуйте позже. Ошибка: </value>
   </data>
   <data name="MwInvalidDeploymentException" xml:space="preserve">
     <value>Не удалось проверить обновления для приложения. Пакет установки поврежден. Пожалуйста переустановите приложение и попробуйте еще раз. Ошибка: </value>
@@ -170,7 +170,7 @@
     <value> сейчас?</value>
   </data>
   <data name="MwUpdateDialogContentBeforeVersion" xml:space="preserve">
-    <value>Доступно обновленпие. \nХотите ли вы обновить приложение до версии </value>
+    <value>Доступно обновленпие. Хотите ли вы обновить приложение до версии </value>
   </data>
   <data name="MwUpdateDialogHeader" xml:space="preserve">
     <value>Доступно обновление</value>

@@ -127,7 +127,7 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The new version of the application cannot be downloaded at this time. \n\nPlease check your network connection, or try again later. Error: .
+        ///   Looks up a localized string similar to The new version of the application cannot be downloaded at this time. Please check your network connection, or try again later. Error: .
         /// </summary>
         internal static string MwDeploymentDownloadException {
             get {
@@ -217,7 +217,7 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An update is available. \nWould you like to update the application to version .
+        ///   Looks up a localized string similar to An update is available. Would you like to update the application to version .
         /// </summary>
         internal static string MwUpdateDialogContentBeforeVersion {
             get {

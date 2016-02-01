@@ -140,7 +140,7 @@
     <value>Can't create a directory inside file!</value>
   </data>
   <data name="MwDeploymentDownloadException" xml:space="preserve">
-    <value>The new version of the application cannot be downloaded at this time. \n\nPlease check your network connection, or try again later. Error: </value>
+    <value>The new version of the application cannot be downloaded at this time. Please check your network connection, or try again later. Error: </value>
   </data>
   <data name="MwInvalidDeploymentException" xml:space="preserve">
     <value>Cannot check for a new version of the application. The ClickOnce deployment is corrupt. Please redeploy the application and try again. Error: </value>
@@ -170,7 +170,7 @@
     <value> now?</value>
   </data>
   <data name="MwUpdateDialogContentBeforeVersion" xml:space="preserve">
-    <value>An update is available. \nWould you like to update the application to version </value>
+    <value>An update is available. Would you like to update the application to version </value>
   </data>
   <data name="MwUpdateDialogHeader" xml:space="preserve">
     <value>An update is available</value>
