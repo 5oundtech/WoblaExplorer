@@ -1039,7 +1039,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             if (ApplicationDeployment.IsNetworkDeployed)
             {
                 _appDeploy = ApplicationDeployment.CurrentDeployment;
-                _updateDialog = new UpdateDialog
+                _updateDialog = new UpdateDialog(ref _appDeploy)
                 {
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     Owner = this,
