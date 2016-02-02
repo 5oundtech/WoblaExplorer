@@ -620,32 +620,32 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 }
                 try
                 {
-                    foreach (FileSystemInfo entry in fsEntries)
+                    var delTask = Task.Factory.StartNew(() =>
                     {
-                        if (entry.IsDirectory())
+                        foreach (FileSystemInfo entry in fsEntries)
                         {
-                            var task = Task.Factory.StartNew(() =>
+                            try
                             {
-                                try
+                                if (entry.IsDirectory())
                                 {
                                     Directory.Delete(entry.FullName, true);
                                 }
-                                catch (Exception)
+                                else
                                 {
-                                    Dispatcher.InvokeAsync(() =>
-                                    {
-                                        ErrorPopup.IsOpen = true;
-                                        SystemSounds.Exclamation.Play();
-                                    });
+                                    entry.Delete();
                                 }
-                            });
-                            await task;
+                            }
+                            catch (Exception)
+                            {
+                                Dispatcher.InvokeAsync(() =>
+                                {
+                                    ErrorPopup.IsOpen = true;
+                                    SystemSounds.Exclamation.Play();
+                                });
+                            }
                         }
-                        else
-                        {
-                            entry.Delete();
-                        }
-                    }
+                    });
+                    await delTask;
                 }
                 catch (Exception)
                 {
