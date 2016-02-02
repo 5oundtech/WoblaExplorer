@@ -22,12 +22,15 @@ namespace WoblaExplorer.Dialogs
     {
 
         public ApplicationDeployment AppDeploy;
+
+        public bool CanceledCheck = false;
+        public bool CanceledUpdate = false;
         public UpdateDialog()
         {
             InitializeComponent();
         }
 
-        public UpdateDialog(ref ApplicationDeployment appDeploy)
+        public UpdateDialog(ApplicationDeployment appDeploy)
         {
             AppDeploy = appDeploy;
         }
@@ -39,10 +42,12 @@ namespace WoblaExplorer.Dialogs
                 if (TbUpdateStage.Text.Equals(Properties.Resources.UdUpdateStageCheck))
                 {
                     AppDeploy.CheckForUpdateAsyncCancel();
+                    CanceledCheck = true;
                 }
                 else
                 {
                     AppDeploy.UpdateAsyncCancel();
+                    CanceledUpdate = true;
                 }
             }
         }

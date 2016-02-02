@@ -998,6 +998,8 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
 
         private void AppDeployOnUpdateProgressChanged(object sender, DeploymentProgressChangedEventArgs args)
         {
+            if (_updateDialog.CanceledUpdate)
+                _appDeploy.UpdateAsyncCancel();
             switch (args.State)
             {
                 case DeploymentProgressState.DownloadingApplicationFiles:
@@ -1039,7 +1041,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             if (ApplicationDeployment.IsNetworkDeployed)
             {
                 _appDeploy = ApplicationDeployment.CurrentDeployment;
-                _updateDialog = new UpdateDialog(ref _appDeploy)
+                _updateDialog = new UpdateDialog(_appDeploy)
                 {
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     Owner = this,
@@ -1120,7 +1122,8 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
         private void AppDeployOnCheckForUpdateProgressChanged(object sender, DeploymentProgressChangedEventArgs args)
         {
             _updateDialog.PbDownloadProgress.Value = args.ProgressPercentage;
-
+            if (_updateDialog.CanceledCheck)
+                _appDeploy.CheckForUpdateAsyncCancel();
             switch (args.State)
             {
                 case DeploymentProgressState.DownloadingApplicationFiles:
