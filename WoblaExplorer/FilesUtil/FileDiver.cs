@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security;
 using WoblaExplorer.Util;
 
@@ -22,7 +24,7 @@ namespace WoblaExplorer.FilesUtil
         }
 
         /// <exception cref="AggregateException">Occurs when app have no right to access dir or smth else.</exception>
-        public FileSystemInfo[] DiveBack()
+        public IEnumerable<FileSystemInfo> DiveBack()
         {
             DirectoryInfo newPath = new DirectoryInfo(CurrentPath);
             if (newPath.Parent != null)
@@ -35,7 +37,7 @@ namespace WoblaExplorer.FilesUtil
 
         /// <exception cref="SecurityException">Occurs when app have propblems with access.</exception>
         /// <exception cref="DirectoryNotFoundException"><c>:)</c></exception>
-        public FileSystemInfo[] DiveInto(string path)
+        public IEnumerable<FileSystemInfo> DiveInto(string path)
         {
             if (!path.EndsWith("\\"))
             {
@@ -43,21 +45,9 @@ namespace WoblaExplorer.FilesUtil
             }
             try
             {
-                var fsInfo = new DirectoryInfo(path).GetFileSystemInfos();
+                var fsInfo = new DirectoryInfo(path).EnumerateFileSystemInfos().OrderBy(info => !info.IsDirectory());
 
                 CurrentPath = path.Clone().ToString();
-                Array.Sort(fsInfo, (left, right) =>
-                {
-                    if (left.IsDirectory() && !right.IsDirectory())
-                    {
-                        return -1;
-                    }
-                    if (!left.IsDirectory() && right.IsDirectory())
-                    {
-                        return 1;
-                    }
-                    return string.Compare(left.FullName, right.FullName, StringComparison.CurrentCulture);
-                });
 
                 return fsInfo;
             }
