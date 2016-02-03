@@ -12,6 +12,7 @@ Simple explorer-like application with some new features.
 - [x] Ability to rerun app as Administrator (Context Menu File->Run as Administrator)
 - [x] Create menu (only folders)
 - [x] Manual update check added
+- [x] Simple icons (dir and file now)
 
 I'm developing this app alone so i'll appreciate any help. (Criticism, pull requests etc)
 
