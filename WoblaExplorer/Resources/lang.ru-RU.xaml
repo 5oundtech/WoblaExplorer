@@ -57,4 +57,8 @@
     <v:String x:Key="CrdDefaultDirName">Новая папка</v:String>
     <v:String x:Key="CrdBtnOk">Подтвердить</v:String>
     <v:String x:Key="CrdBtnCancel">Отмена</v:String>
+    <!-- CopyDialog -->
+    <v:String x:Key="CdTitle">Копирование файлов</v:String>
+    <v:String x:Key="CdTbOperationName">Копирование файлов</v:String>
+    <v:String x:Key="CdBtnInterrup">Прервать</v:String>
 </ResourceDictionary>

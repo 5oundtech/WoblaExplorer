@@ -550,16 +550,36 @@ namespace WoblaExplorer.Windows
                 {
                     try
                     {
-                        foreach (FileSystemInfo entry in fsEntries)
+                        var copyDialog = new CopyDialog
                         {
-                            if (entry.IsDirectory())
+                            Owner = this,
+                            WindowStartupLocation = WindowStartupLocation.CenterOwner
+                        };
+                        var copyTask = Task.Factory.StartNew(() =>
+                        {
+                            Dispatcher.InvokeAsync(() =>
                             {
-                                var task = Task.Factory.StartNew(() =>
+                                copyDialog.PbCopyProgress.Maximum = fsEntries.Count;
+                                copyDialog.ShowDialog();
+                            });
+                            foreach (FileSystemInfo entry in fsEntries)
+                            {
+                                if (copyDialog.Canceled)
+                                {
+                                    copyDialog.Close();
+                                    return;
+                                }
+                                Dispatcher.InvokeAsync(() =>
+                                {
+                                    copyDialog.TbCopyObject.Text = entry.Name;
+                                });
+                                if (entry.IsDirectory())
                                 {
                                     try
                                     {
+                                        Directory.CreateDirectory(Path.Combine(destinationPath, entry.Name));
                                         _fileDiver.CopyAllInDir((DirectoryInfo) entry,
-                                            new DirectoryInfo(destinationPath));
+                                            new DirectoryInfo(Path.Combine(destinationPath, entry.Name)));
                                     }
                                     catch (Exception)
                                     {
@@ -569,12 +589,8 @@ namespace WoblaExplorer.Windows
                                             SystemSounds.Exclamation.Play();
                                         });
                                     }
-                                });
-                                await task;
-                            }
-                            else
-                            {
-                                var task = Task.Factory.StartNew(() =>
+                                }
+                                else
                                 {
                                     try
                                     {
@@ -589,9 +605,14 @@ namespace WoblaExplorer.Windows
                                             SystemSounds.Exclamation.Play();
                                         });
                                     }
-                                });
-                                await task;
+                                }
+                                Dispatcher.InvokeAsync(() => { copyDialog.PbCopyProgress.Value++; });
                             }
+                        });
+                        await copyTask;
+                        if (copyDialog.Visibility == Visibility.Visible)
+                        {
+                            copyDialog.Close();
                         }
                     }
                     catch (Exception)

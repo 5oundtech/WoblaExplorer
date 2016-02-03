@@ -57,4 +57,8 @@
     <v:String x:Key="CrdDefaultDirName">New folder</v:String>
     <v:String x:Key="CrdBtnOk">Confirm</v:String>
     <v:String x:Key="CrdBtnCancel">Cancel</v:String>
+    <!-- CopyDialog -->
+    <v:String x:Key="CdTitle">Copying files</v:String>
+    <v:String x:Key="CdTbOperationName">Copying files</v:String>
+    <v:String x:Key="CdBtnInterrup">Interrupt</v:String>
 </ResourceDictionary>

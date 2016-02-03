@@ -1,0 +1,32 @@
+﻿<Window x:Class="WoblaExplorer.Dialogs.CopyDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WoblaExplorer.Dialogs"
+        mc:Ignorable="d"
+        Title="{DynamicResource CdTitle}" Height="150" Width="300" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0, 10, 0, 0">
+            <TextBlock HorizontalAlignment="Center" Text="{DynamicResource CdTitle}" Name="TbOperationName">
+            </TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="10, 10, 10, 0">
+            <ProgressBar Name="PbCopyProgress" Maximum="5" Minimum="0" Height="33"></ProgressBar>
+            <TextBlock Name="TbCopyObject" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="0, 10, 0, 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="BtnCancel" Width="80" Height="30" Margin="10, 0, 0, 0" Content="{DynamicResource CdBtnInterrup}" Click="BtnCancel_OnClick"></Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
