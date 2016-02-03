@@ -62,7 +62,8 @@
                 <Button DockPanel.Dock="Right" Name="BtnDiveBack" Command="Backspace" Width="60" Margin="30, 0, 0, 0" Height="25" FontFamily="{StaticResource FontAwesome}" Content="{DynamicResource MwBtnDiveBack}"></Button>
             </DockPanel>
             <TextBox Grid.Column="1" Grid.Row="0" Margin="20, 0, 0, 0" Name="TbSearchInput" Text="{DynamicResource MwTbSearchInputText}"
-                     ToolTip="{DynamicResource MwTbSearchInputTooltip}" Width="Auto" AutoWordSelection="True" Height="25" KeyUp="TbSearchInput_OnKeyUp"></TextBox>
+                     ToolTip="{DynamicResource MwTbSearchInputTooltip}" Width="Auto" AutoWordSelection="True" Height="25" KeyUp="TbSearchInput_OnKeyUp">
+            </TextBox>
             <Button Grid.Column="2" Grid.Row="0" Name="BtnSearch" Width="70" Margin="10, 0, 0, 0" Click="BtnSearch_OnClick" Height="25" FontFamily="{StaticResource FontAwesome}" Content="{DynamicResource MwBtnSearch}"></Button>
         </Grid>
 
@@ -87,7 +88,7 @@
                                 <ControlTemplate TargetType="{x:Type ListViewItem}">
                                     <Border Name="Selection"  BorderBrush="Transparent" BorderThickness="1">
                                         <StackPanel Orientation="Horizontal" Visibility="Visible">
-                                            <TextBlock FontFamily="{StaticResource FontAwesome}" FontSize="20" Foreground="Gold" Margin="0, 0, 10, 0" 
+                                            <TextBlock FontFamily="{StaticResource FontAwesome}" FontSize="20" Foreground="Gray" Margin="0, 0, 10, 0" 
                                                         Text="{Binding Path=FullName, Converter={StaticResource FileNameToIconConverter}}" VerticalAlignment="Center"/>
                                             <ContentPresenter >
                                                 <ContentPresenter.ContentTemplate>

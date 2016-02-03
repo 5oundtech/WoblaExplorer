@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using WoblaExplorer.FilesUtil;
 
 namespace WoblaExplorer.Util
 {
@@ -22,8 +23,19 @@ namespace WoblaExplorer.Util
                 icon = "\uf07b";
                 return "\uf07b";
             }
-            icon = "\uf15b";
-            return icon;
+            string fileExt = Path.GetExtension(value.ToString());
+            if (fileExt.Length.Equals(0))
+            {
+                icon = "\uf15b";
+                return icon;
+            }
+            var item = FilesExtensions.FilesIcons.ContainsKey(fileExt) ? FilesExtensions.FilesIcons[fileExt] : "";
+            if (item.Length == 0)
+            {
+                icon = "\uf15b";
+                return icon;
+            }
+            return item;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
