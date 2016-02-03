@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         xmlns:local="clr-namespace:WoblaExplorer.CustomCommands"
+        xmlns:util="clr-namespace:WoblaExplorer.Util"
+        xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
         Title="WoblaExplorer" Height="350" Width="525" Name="MainWindowX">
     <Window.CommandBindings>
         <CommandBinding Command="Backspace" Executed="BackspaceExecuted" CanExecute="DefaultCommands_CanExecute"/>
@@ -19,7 +21,15 @@
         <CommandBinding Command="local:Commands.CreateDirectory" Executed="CreateDirectoryExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.CheckForUpdates" Executed="CheckForUpdatesExecuted" CanExecute="DefaultCommands_CanExecute"/>
     </Window.CommandBindings>
-
+    
+    <Window.Resources>
+        <LinearGradientBrush x:Key="ActiveBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="{StaticResource Fill_active_top}" Offset="0.31" />
+            <GradientStop Color="{StaticResource Fill_active_bottom}" Offset="1" />
+        </LinearGradientBrush>
+        <util:FileNameToIconConverter x:Key="FileNameToIconConverter"></util:FileNameToIconConverter>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="25"></RowDefinition>
@@ -58,8 +68,51 @@
 
         <Grid Grid.Row="2">
             <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="ListViewExplorer"
-                      MouseDoubleClick="ListViewExplorer_OnMouseDoubleClick" Focusable="True"
+                      MouseDoubleClick="ListViewExplorer_OnMouseDoubleClick" Focusable="True" DataContext="{x:Type io:FileSystemInfo}"
                       >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="Margin" Value="2"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment"
+                Value="Center"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <Border Name="Selection"  BorderBrush="Transparent" BorderThickness="1">
+                                        <StackPanel Orientation="Horizontal" Visibility="Visible">
+                                            <TextBlock FontFamily="{StaticResource FontAwesome}" FontSize="20" Foreground="Gold" Margin="0, 0, 10, 0" 
+                                                        Text="{Binding Path=FullName, Converter={StaticResource FileNameToIconConverter}}" VerticalAlignment="Center"/>
+                                            <ContentPresenter >
+                                                <ContentPresenter.ContentTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock FontSize="20" Text="{Binding}"></TextBlock>
+                                                    </DataTemplate>
+                                                </ContentPresenter.ContentTemplate>
+                                            </ContentPresenter>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Selection" Property="Background" Value="{StaticResource ActiveBrush}"></Setter>
+                                            <Setter TargetName="Selection" Property="Visibility" Value="Visible"></Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Selection" Property="Background" Value="{StaticResource ActiveBrush}"></Setter>
+                                            <Setter TargetName="Selection" Property="Visibility" Value="Visible"></Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.InputBindings>
                     <KeyBinding Command="Open" Key="Enter"></KeyBinding>
                     <KeyBinding Command="Backspace" Key="Left"></KeyBinding>

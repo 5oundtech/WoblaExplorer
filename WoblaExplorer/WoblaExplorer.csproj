@@ -101,6 +101,7 @@
     <Compile Include="Dialogs\UpdateDialog.xaml.cs">
       <DependentUpon>UpdateDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util\FileNameToIconConverter.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>

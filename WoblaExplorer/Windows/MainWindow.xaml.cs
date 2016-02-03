@@ -117,7 +117,6 @@ namespace WoblaExplorer.Windows
                 Properties.Settings.Default.WindowLocation = new Point((int)MainWindowX.Left, (int)MainWindowX.Top);
                 Properties.Settings.Default.Save();
             };
-
             var settings = Properties.Settings.Default;
             string path;
             if (string.IsNullOrWhiteSpace(settings.LastDirectory))
@@ -248,8 +247,9 @@ namespace WoblaExplorer.Windows
 
         private async void ListViewExplorer_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var selectedItem = ((ListView) sender).SelectedItem.ToString();
-            string newPath = _fileDiver.CurrentPath + selectedItem;
+            var selectedItem = ((ListView) sender).SelectedItem;
+            if (selectedItem == null) return;
+            string newPath = _fileDiver.CurrentPath + selectedItem.ToString();
             if (Directory.Exists(newPath))
             {
                 await PbVisualization.TogglePbVisibilityAsync();
