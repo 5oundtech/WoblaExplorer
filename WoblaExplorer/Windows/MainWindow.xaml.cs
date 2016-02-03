@@ -17,6 +17,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Microsoft.Win32;
+using WoblaExplorer.CustomCommands;
 using WoblaExplorer.Dialogs;
 using WoblaExplorer.FilesUtil;
 using WoblaExplorer.Util;
@@ -913,22 +914,23 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 if (e.Parameter.ToString() == "1")
                 {
                     var selectedItem = ListViewExplorer.SelectedItem as FileSystemInfo;
+                    if (selectedItem == null)
+                    {
+                        return;
+                    }
                     if (selectedItem.IsDirectory())
                     {
-                        if (selectedItem != null)
+                        if (dialog.ShowDialog() == true)
                         {
-                            if (dialog.ShowDialog() == true)
+                            var newDir = selectedItem.FullName + "\\" + dialog.DirName;
+                            try
                             {
-                                var newDir = selectedItem.FullName + "\\" + dialog.DirName;
-                                try
-                                {
-                                    Directory.CreateDirectory(newDir);
-                                }
-                                catch (Exception)
-                                {
-                                    ErrorPopup.IsOpen = true;
-                                    SystemSounds.Exclamation.Play();
-                                }
+                                Directory.CreateDirectory(newDir);
+                            }
+                            catch (Exception)
+                            {
+                                ErrorPopup.IsOpen = true;
+                                SystemSounds.Exclamation.Play();
                             }
                         }
                     }
