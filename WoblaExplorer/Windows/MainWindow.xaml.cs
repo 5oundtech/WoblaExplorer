@@ -205,7 +205,7 @@ namespace WoblaExplorer.Windows
                 {
                     try
                     {
-                        _searchEngine.RecursiveSearch(_fileDiver.CurrentPath, pattern, _tokenSource.Token);
+                        _searchEngine.SearchUsingEnumeration(_fileDiver.CurrentPath, pattern, _tokenSource.Token);
                     }
                     catch(Exception)
                     {

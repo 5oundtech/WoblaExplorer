@@ -106,6 +106,42 @@ namespace WoblaExplorer.FilesUtil
             {
                 //
             }
+            catch (AggregateException aggregateException)
+            {
+                // TODO: Handle the AggregateException 
+            }
+        }
+
+        /// <exception cref="OperationCanceledException">The token has had cancellation requested.</exception>
+        public void SearchUsingEnumeration(string path, string find, CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested();
+            try
+            {
+                new DirectoryInfo(path).EnumerateFileSystemInfos("*", SearchOption.AllDirectories).AsParallel().ForAll(info =>
+                {
+                    token.ThrowIfCancellationRequested();
+                    if (info.Name.ToLower(CultureInfo.CurrentCulture).Contains(find.ToLower(CultureInfo.CurrentCulture)))
+                    {
+                        SearchList.Add(info);
+                        if (OnItemFound != null)
+                        {
+                            OnItemFound.Invoke(this, new SearchEventArgs(info, ""));
+                        }
+                    }
+                });
+            }
+            catch (DirectoryNotFoundException directoryNotFoundException)
+            {
+            }
+            catch (SecurityException securityException)
+            {
+                // TODO: Handle the SecurityException 
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                // TODO: Handle the ArgumentNullException 
+            }
         }
     }
 

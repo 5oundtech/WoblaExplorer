@@ -9,7 +9,7 @@
     </Window.CommandBindings>
     
     <Grid>
-        <ListBox Name="LbSearchResults">
+        <ListBox Name="LbSearchResults" MouseDoubleClick="LbSearchResults_OnMouseDoubleClick">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{DynamicResource MwMainLvContextMenuOpen}" Command="Open"/>

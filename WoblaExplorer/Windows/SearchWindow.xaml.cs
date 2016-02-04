@@ -69,5 +69,14 @@ namespace WoblaExplorer.Windows
                 }
             }
         }
+
+        private void LbSearchResults_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selectedItem = LbSearchResults.SelectedItem as FileSystemInfo;
+            if (selectedItem != null)
+            {
+                Process.Start(selectedItem.FullName);
+            }
+        }
     }
 }
