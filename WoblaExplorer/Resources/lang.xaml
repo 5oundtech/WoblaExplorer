@@ -7,6 +7,9 @@
     <v:String x:Key="MwFileConMenuRunAsAdmin">Run as Administrator &#xf023;</v:String>
     <v:String x:Key="MwFileConMenuLanguage">Language</v:String>
     <v:String x:Key="MwFileConMenuExit">Exit</v:String>
+    <v:String x:Key="MwFileConMenuEdit">Edit</v:String>
+    <v:String x:Key="MwFileConMenuEditSelectAll">Select all</v:String>
+    <v:String x:Key="MwFileConMenuEditInvertSelection">Invert selection</v:String>
     <v:String x:Key="MwHelpConMenuHeader">Help</v:String>
     <v:String x:Key="MwHelpConMenuUpdates">Check for updates</v:String>
     <v:String x:Key="MwHelpConMenuAbout">About</v:String>

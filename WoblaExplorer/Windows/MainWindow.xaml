@@ -20,6 +20,7 @@
         <CommandBinding Command="local:Commands.ReRunAsAdministrator" Executed="ReRunAsAdministratorExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.CreateDirectory" Executed="CreateDirectoryExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.CheckForUpdates" Executed="CheckForUpdatesExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.ModifySelection" Executed="ModifySelectionExecuted" CanExecute="DefaultCommands_CanExecute"/>
     </Window.CommandBindings>
     
     <Window.Resources>
@@ -43,6 +44,10 @@
                     <MenuItem Header="{DynamicResource MwFileConMenuRunAsAdmin}" Command="local:Commands.ReRunAsAdministrator"></MenuItem>
                     <MenuItem Header="{DynamicResource MwFileConMenuLanguage}" x:Name="LanguageMenu"></MenuItem>
                     <MenuItem Header="{DynamicResource MwFileConMenuExit}" Command="local:Commands.Exit"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="{DynamicResource MwFileConMenuEdit}" FontFamily="{StaticResource FontAwesome}">
+                    <MenuItem Header="{DynamicResource MwFileConMenuEditSelectAll}" Command="local:Commands.ModifySelection" CommandParameter="SelectAll"/>
+                    <MenuItem Header="{DynamicResource MwFileConMenuEditInvertSelection}" Command="local:Commands.ModifySelection" CommandParameter="Invert"/>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MwHelpConMenuHeader}" FontFamily="{StaticResource FontAwesome}" >
                     <MenuItem Header="{DynamicResource MwHelpConMenuUpdates}" Command="local:Commands.CheckForUpdates"></MenuItem>

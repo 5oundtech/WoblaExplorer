@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Deployment.Application;
 using System.Diagnostics;
@@ -56,10 +57,12 @@ namespace WoblaExplorer.Windows
             CultureInfo currentLanguage = App.Language;
             foreach (var language in App.Languages)
             {
-                var menuItem = new MenuItem();
-                menuItem.Header = language.DisplayName;
-                menuItem.Tag = language;
-                menuItem.IsChecked = Equals(currentLanguage);
+                var menuItem = new MenuItem
+                {
+                    Header = language.DisplayName,
+                    Tag = language,
+                    IsChecked = Equals(currentLanguage)
+                };
                 menuItem.Click += ChangeLanguageClick;
                 LanguageMenu.Items.Add(menuItem);
             }
@@ -252,7 +255,7 @@ namespace WoblaExplorer.Windows
         {
             var selectedItem = ((ListView) sender).SelectedItem;
             if (selectedItem == null) return;
-            string newPath = _fileDiver.CurrentPath + selectedItem.ToString();
+            string newPath = _fileDiver.CurrentPath + selectedItem;
             if (Directory.Exists(newPath))
             {
                 await PbVisualization.TogglePbVisibilityAsync();
@@ -1164,6 +1167,36 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                     _updateDialog.TbUpdateState.Text =
                         Properties.Resources.DeploymentProgressStateDownloadingDeploymentInformation;
                     break;
+            }
+        }
+
+        private void ModifySelectionExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter == null) return;
+            if (e.Parameter.ToString().ToLowerInvariant().Equals("selectall"))
+            {
+                ListViewExplorer.SelectedItems.Clear();
+                ListViewExplorer.Items.Cast<FileSystemInfo>()
+                    .AsParallel()
+                    .ForAll(info => { Dispatcher.InvokeAsync(()=> { ListViewExplorer.SelectedItems.Add(info); }); });
+            }
+            else
+            {
+                var fs = new FileSystemInfo[ListViewExplorer.SelectedItems.Count];
+                ListViewExplorer.SelectedItems.CopyTo(fs, 0);
+                if (fs.Length > 0)
+                {
+                    ListViewExplorer.SelectedItems.Clear();
+                    ListViewExplorer.Items.Cast<FileSystemInfo>()
+                        .AsParallel()
+                        .ForAll(info =>
+                        {
+                            if (!fs.Contains(info))
+                            {
+                                Dispatcher.InvokeAsync(() => { ListViewExplorer.SelectedItems.Add(info); });
+                            }
+                        });
+                }
             }
         }
     }

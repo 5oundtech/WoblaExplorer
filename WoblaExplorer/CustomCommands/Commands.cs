@@ -33,5 +33,7 @@ namespace WoblaExplorer.CustomCommands
 
         public static RoutedCommand CheckForUpdates = new RoutedCommand(nameof(CheckForUpdates), typeof (Commands),
             new InputGestureCollection());
+
+        public static RoutedCommand ModifySelection = new RoutedCommand(nameof(ModifySelection), typeof (Commands));
     }
 }
