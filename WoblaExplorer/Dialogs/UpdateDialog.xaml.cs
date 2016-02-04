@@ -21,18 +21,13 @@ namespace WoblaExplorer.Dialogs
     public partial class UpdateDialog : Window
     {
 
-        public ApplicationDeployment AppDeploy;
+        public ApplicationDeployment AppDeploy { get; set; }
 
         public bool CanceledCheck = false;
         public bool CanceledUpdate = false;
         public UpdateDialog()
         {
             InitializeComponent();
-        }
-
-        public UpdateDialog(ApplicationDeployment appDeploy)
-        {
-            AppDeploy = appDeploy;
         }
 
         private void BtnCancel_OnClick(object sender, RoutedEventArgs e)

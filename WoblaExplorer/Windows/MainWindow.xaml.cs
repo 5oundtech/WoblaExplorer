@@ -1041,12 +1041,13 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             if (ApplicationDeployment.IsNetworkDeployed)
             {
                 _appDeploy = ApplicationDeployment.CurrentDeployment;
-                _updateDialog = new UpdateDialog(_appDeploy)
+                _updateDialog = new UpdateDialog
                 {
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     Owner = this,
                     TbUpdateStage = {Text = Properties.Resources.UdUpdateStageCheck},
-                    Title = Properties.Resources.UdUpdateStageUpdating
+                    Title = Properties.Resources.UdUpdateStageUpdating,
+                    AppDeploy = _appDeploy
                 };
                 _appDeploy.CheckForUpdateProgressChanged -= AppDeployOnCheckForUpdateProgressChanged;
                 _appDeploy.CheckForUpdateProgressChanged += AppDeployOnCheckForUpdateProgressChanged;
