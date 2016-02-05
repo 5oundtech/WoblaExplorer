@@ -65,7 +65,7 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
-                <ComboBox DockPanel.Dock="Left" Name="CbDrives" Width="60" SelectionChanged="CbDrives_OnSelectionChanged" Height="25"></ComboBox>
+                <ComboBox DockPanel.Dock="Left" Name="CbDrives" Width="60" SelectionChanged="CbDrives_OnSelectionChanged" Height="25" DropDownOpened="CbDrives_OnDropDownOpened"></ComboBox>
                 <Button DockPanel.Dock="Right" Name="BtnDiveBack" Command="Backspace" Width="60" Margin="30, 0, 0, 0" Height="25" FontFamily="{StaticResource FontAwesome}" Content="{DynamicResource MwBtnDiveBack}"></Button>
             </DockPanel>
             <TextBox Grid.Column="1" Grid.Row="0" Margin="20, 0, 0, 0" Name="TbSearchInput" Text="{DynamicResource MwTbSearchInputText}"
@@ -135,7 +135,7 @@
                                                 </TextBlock>
                                                 <TextBlock>
                                             <Run Text="{DynamicResource MwMainLvtooltipChangeDate}"/>
-                                            <Run Text="{Binding Path=LastWriteTime, Mode=OneWay}"/>
+                                            <Run Text="{Binding Path=LastWriteTime, Mode=OneWay, StringFormat={x:Static util:Constants.DateTimeFormat}}"/>
                                                 </TextBlock>
                                             </StackPanel>
                                         </ToolTip>

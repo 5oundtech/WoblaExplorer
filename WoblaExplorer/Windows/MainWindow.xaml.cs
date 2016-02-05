@@ -1188,5 +1188,21 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 }
             }
         }
+
+        private void CbDrives_OnDropDownOpened(object sender, EventArgs e)
+        {
+            var curDrive = CbDrives.SelectedValue;
+            try
+            {
+                var context = Directory.GetLogicalDrives();
+                if (context.Length == 0) return;
+                CbDrives.ItemsSource = context;
+                CbDrives.SelectedItem = curDrive;
+            }
+            catch (Exception)
+            {
+                
+            }
+        }
     }
 }
