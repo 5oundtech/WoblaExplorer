@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Security.Principal;
+using System.Threading;
 using System.Windows;
+using System.Windows.Navigation;
+using WoblaExplorer.Properties;
 
 namespace WoblaExplorer
 {
@@ -24,14 +24,14 @@ namespace WoblaExplorer
         public static event EventHandler LanguageChanged;
         public static CultureInfo Language
         {
-            get { return System.Threading.Thread.CurrentThread.CurrentUICulture; }
+            get { return Thread.CurrentThread.CurrentUICulture; }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException("value");
-                if (value == System.Threading.Thread.CurrentThread.CurrentUICulture) return;
+                if (value == Thread.CurrentThread.CurrentUICulture) return;
 
-                System.Threading.Thread.CurrentThread.CurrentUICulture = value;
+                Thread.CurrentThread.CurrentUICulture = value;
 
                 ResourceDictionary dict = new ResourceDictionary();
                 switch (value.Name)
@@ -73,15 +73,15 @@ namespace WoblaExplorer
 
         }
 
-        private void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        private void Application_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            Language = WoblaExplorer.Properties.Settings.Default.DefaultLanguage;
+            Language = Settings.Default.DefaultLanguage;
         }
 
         private void App_LanguageChanged(object sender, EventArgs e)
         {
-            WoblaExplorer.Properties.Settings.Default.DefaultLanguage = Language;
-            WoblaExplorer.Properties.Settings.Default.Save();
+            Settings.Default.DefaultLanguage = Language;
+            Settings.Default.Save();
         }
     }
 }

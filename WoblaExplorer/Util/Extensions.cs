@@ -32,6 +32,25 @@ namespace WoblaExplorer.Util
         {
             return ((bytes/1024.0)/1024.0)/1024.0;
         }
+
+        public static string BytesToBestSize(this long bytes)
+        {
+            string[] sizes = 
+            {
+                Properties.Resources.Bytes, Properties.Resources.KiloBytes, Properties.Resources.MegaBytes,
+                Properties.Resources.GigaBytes
+            };
+            double len = bytes;
+            int order = 0;
+            while (len >= 1024 && order + 1 < sizes.Length)
+            {
+                order++;
+                len /= 1024;
+            }
+
+
+            return string.Format("{0:0.##} {1}", len, sizes[order]);
+        }
 #endregion
         #region UI
         public static void TogglePbVisibility(this ProgressBar self)

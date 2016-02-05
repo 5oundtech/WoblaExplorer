@@ -17,6 +17,9 @@
     <v:String x:Key="MwTbSearchInputText">Item name</v:String>
     <v:String x:Key="MwTbSearchInputTooltip">Input item name in textbox</v:String>
     <v:String x:Key="MwBtnSearch">Search &#xf002;</v:String>
+    <v:String x:Key="MwMainLvTooltipType">Extension: </v:String>
+    <v:String x:Key="MwMainLvTooltipSize">Size: </v:String>
+    <v:String x:Key="MwMainLvtooltipChangeDate">Date of change: </v:String>
     <v:String x:Key="MwMainLvContextMenuOpen">Open</v:String>
     <v:String x:Key="MwMainLvContextMenuShowInExplorer">Show in explorer</v:String>
     <v:String x:Key="MwMainLvContextMenuRename">Rename</v:String>

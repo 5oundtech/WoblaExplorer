@@ -61,6 +61,15 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to B.
+        /// </summary>
+        internal static string Bytes {
+            get {
+                return ResourceManager.GetString("Bytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Downloading application files.
         /// </summary>
         internal static string DeploymentProgressStateDownloadingApplicationFiles {
@@ -114,6 +123,33 @@ namespace WoblaExplorer.Properties {
             get {
                 object obj = ResourceManager.GetObject("FontAwesome", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GB.
+        /// </summary>
+        internal static string GigaBytes {
+            get {
+                return ResourceManager.GetString("GigaBytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KB.
+        /// </summary>
+        internal static string KiloBytes {
+            get {
+                return ResourceManager.GetString("KiloBytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MB.
+        /// </summary>
+        internal static string MegaBytes {
+            get {
+                return ResourceManager.GetString("MegaBytes", resourceCulture);
             }
         }
         

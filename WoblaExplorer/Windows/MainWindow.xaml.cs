@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Deployment.Application;
 using System.Diagnostics;
@@ -7,9 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Net.Mime;
 using System.Reflection;
-using System.Runtime.Remoting.Channels;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,10 +14,9 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using System.Windows.Input;
-using Microsoft.Win32;
-using WoblaExplorer.CustomCommands;
 using WoblaExplorer.Dialogs;
 using WoblaExplorer.FilesUtil;
+using WoblaExplorer.Properties;
 using WoblaExplorer.Util;
 using Application = System.Windows.Application;
 using ComboBox = System.Windows.Controls.ComboBox;
@@ -68,7 +64,7 @@ namespace WoblaExplorer.Windows
             }
             try
             {
-                App.Language = Properties.Settings.Default.DefaultLanguage;
+                App.Language = Settings.Default.DefaultLanguage;
 
                 MainWindowX.WindowStartupLocation = WindowStartupLocation.Manual;
 
@@ -118,12 +114,12 @@ namespace WoblaExplorer.Windows
         {
             Closing += (sender, args) =>
             {
-                Properties.Settings.Default.LastDirectory = _fileDiver.CurrentPath;
-                Properties.Settings.Default.WindowSize = new Size((int)MainWindowX.Width, (int)MainWindowX.Height);
-                Properties.Settings.Default.WindowLocation = new Point((int)MainWindowX.Left, (int)MainWindowX.Top);
-                Properties.Settings.Default.Save();
+                Settings.Default.LastDirectory = _fileDiver.CurrentPath;
+                Settings.Default.WindowSize = new Size((int)MainWindowX.Width, (int)MainWindowX.Height);
+                Settings.Default.WindowLocation = new Point((int)MainWindowX.Left, (int)MainWindowX.Top);
+                Settings.Default.Save();
             };
-            var settings = Properties.Settings.Default;
+            var settings = Settings.Default;
             string path;
             if (string.IsNullOrWhiteSpace(settings.LastDirectory))
             {
@@ -747,7 +743,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             var entries = ListViewExplorer.SelectedItems;
             if (entries.Count > 1)
             {
-                var properties = new PropertiesWindow()
+                var properties = new PropertiesWindow
                 {
                     Owner = this,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -819,7 +815,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                     var dir = entry as DirectoryInfo;
                     if (dir != null)
                     {
-                        var properties = new PropertiesWindow()
+                        var properties = new PropertiesWindow
                         {
                             Owner = this,
                             WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -1010,17 +1006,14 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             catch (DeploymentDownloadException dde)
             {
                 MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + dde.Message);
-                return;
             }
             catch (InvalidDeploymentException ide)
             {
                 MessageBox.Show(Properties.Resources.MwInvalidDeploymentException + ide.Message);
-                return;
             }
             catch (InvalidOperationException ioe)
             {
                 MessageBox.Show(Properties.Resources.MwInvalidOperationException + ioe.Message);
-                return;
             }
         }
 
@@ -1090,17 +1083,14 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 catch (DeploymentDownloadException dde)
                 {
                     MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + dde.Message);
-                    return;
                 }
                 catch (InvalidDeploymentException ide)
                 {
                     MessageBox.Show(Properties.Resources.MwInvalidDeploymentException + ide.Message);
-                    return;
                 }
                 catch (InvalidOperationException ioe)
                 {
                     MessageBox.Show(Properties.Resources.MwInvalidOperationException + ioe.Message);
-                    return;
                 }
             }
             else
@@ -1144,7 +1134,6 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 MessageBox.Show(Properties.Resources.MwNoUpdatesText, Properties.Resources.MwNoUpdatesHeader,
                         MessageBoxButton.OK, MessageBoxImage.Information);
                 _updateDialog.Close();
-                return;
             }
         }
 

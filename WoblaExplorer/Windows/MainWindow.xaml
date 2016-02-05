@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         xmlns:local="clr-namespace:WoblaExplorer.CustomCommands"
         xmlns:util="clr-namespace:WoblaExplorer.Util"
+        xmlns:converters="clr-namespace:WoblaExplorer.Converters"
         xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
         Title="WoblaExplorer" Height="350" Width="525" Name="MainWindowX">
     <Window.CommandBindings>
@@ -29,6 +30,7 @@
             <GradientStop Color="{StaticResource Fill_active_bottom}" Offset="1" />
         </LinearGradientBrush>
         <util:FileNameToIconConverter x:Key="FileNameToIconConverter"></util:FileNameToIconConverter>
+        <converters:FileLengthToNormalConverter x:Key="FileLengthConverter"></converters:FileLengthToNormalConverter>
     </Window.Resources>
     
     <Grid>
@@ -117,6 +119,30 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="ToolTip">
+                                    <Setter.Value>
+                                        <ToolTip>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock >
+                                            <Run Text="{DynamicResource MwMainLvTooltipType}"></Run>
+                                            <Run Text="{Binding Path=Extension, Mode=OneWay}"></Run>
+                                                </TextBlock>
+                                                <TextBlock>
+                                            <Run Text="{DynamicResource MwMainLvTooltipSize}"/>
+                                            <Run Text="{Binding Path=Length, Mode=OneWay, Converter={StaticResource FileLengthConverter}}"/>
+                                                </TextBlock>
+                                                <TextBlock>
+                                            <Run Text="{DynamicResource MwMainLvtooltipChangeDate}"/>
+                                            <Run Text="{Binding Path=LastWriteTime, Mode=OneWay}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.InputBindings>

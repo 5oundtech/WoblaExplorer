@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Bytes" xml:space="preserve">
+    <value>Б</value>
+  </data>
   <data name="DeploymentProgressStateDownloadingApplicationFiles" xml:space="preserve">
     <value>Загрузка файлов приложения</value>
   </data>
@@ -135,6 +138,15 @@
   </data>
   <data name="FontAwesome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fontawesome-webfont.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GigaBytes" xml:space="preserve">
+    <value>ГБ</value>
+  </data>
+  <data name="KiloBytes" xml:space="preserve">
+    <value>КБ</value>
+  </data>
+  <data name="MegaBytes" xml:space="preserve">
+    <value>МБ</value>
   </data>
   <data name="MwAppUpdatedHeader" xml:space="preserve">
     <value>Обновление завершено</value>

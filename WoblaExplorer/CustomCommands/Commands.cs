@@ -26,7 +26,7 @@ namespace WoblaExplorer.CustomCommands
             new InputGestureCollection {new KeyGesture(Key.F12)});
 
         public static RoutedCommand ReRunAsAdministrator = new RoutedCommand(nameof(ReRunAsAdministrator),
-            typeof (Commands), new InputGestureCollection {});
+            typeof (Commands), new InputGestureCollection());
 
         public static RoutedCommand CreateDirectory = new RoutedCommand(nameof(CreateDirectory), typeof (Commands),
             new InputGestureCollection {new KeyGesture(Key.N, ModifierKeys.Control)});
