@@ -78,73 +78,6 @@
             <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="ListViewExplorer"
                       MouseDoubleClick="ListViewExplorer_OnMouseDoubleClick" Focusable="True" DataContext="{x:Type io:FileSystemInfo}"
                       >
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="BorderBrush" Value="Transparent"/>
-                        <Setter Property="BorderThickness" Value="1"/>
-                        <Setter Property="Margin" Value="2"/>
-                        <Setter Property="Padding" Value="5"/>
-                        <Setter Property="HorizontalContentAlignment"
-                Value="Stretch"/>
-                        <Setter Property="VerticalContentAlignment"
-                Value="Center"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                    <Border Name="Selection"  BorderBrush="Transparent" BorderThickness="1">
-                                        <StackPanel Orientation="Horizontal" Visibility="Visible">
-                                            <TextBlock FontFamily="{StaticResource FontAwesome}" FontSize="20" Foreground="Gray" Margin="0, 0, 10, 0" 
-                                                        Text="{Binding Path=FullName, Converter={StaticResource FileNameToIconConverter}}" VerticalAlignment="Center"/>
-                                            <ContentPresenter >
-                                                <ContentPresenter.ContentTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock FontSize="20" Text="{Binding}"></TextBlock>
-                                                    </DataTemplate>
-                                                </ContentPresenter.ContentTemplate>
-                                            </ContentPresenter>
-                                        </StackPanel>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="Selection" Property="Background" Value="{StaticResource ActiveBrush}"></Setter>
-                                            <Setter TargetName="Selection" Property="Visibility" Value="Visible"></Setter>
-                                        </Trigger>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter TargetName="Selection" Property="Background" Value="{StaticResource ActiveBrush}"></Setter>
-                                            <Setter TargetName="Selection" Property="Visibility" Value="Visible"></Setter>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="ToolTip">
-                                    <Setter.Value>
-                                        <ToolTip>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock >
-                                            <Run Text="{DynamicResource MwMainLvTooltipType}"></Run>
-                                            <Run Text="{Binding Path=Extension, Mode=OneWay}"></Run>
-                                                </TextBlock>
-                                                <TextBlock>
-                                            <Run Text="{DynamicResource MwMainLvTooltipSize}"/>
-                                            <Run Text="{Binding Path=Length, Mode=OneWay, Converter={StaticResource FileLengthConverter}}"/>
-                                                </TextBlock>
-                                                <TextBlock>
-                                            <Run Text="{DynamicResource MwMainLvtooltipChangeDate}"/>
-                                            <Run Text="{Binding Path=LastWriteTime, Mode=OneWay, StringFormat={x:Static util:Constants.DateTimeFormat}}"/>
-                                                </TextBlock>
-                                            </StackPanel>
-                                        </ToolTip>
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.ItemContainerStyle>
                 <ListView.InputBindings>
                     <KeyBinding Command="Open" Key="Enter"></KeyBinding>
                     <KeyBinding Command="Backspace" Key="Left"></KeyBinding>
@@ -176,6 +109,67 @@
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuProperties}" Command="local:Commands.PropertiesDialog"></MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="ToolTip">
+                                    <Setter.Value>
+                                        <ToolTip>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock >
+                                            <Run Text="{DynamicResource MwMainLvTooltipType}"></Run>
+                                            <Run Text=": "></Run>
+                                            <Run Text="{Binding Path=Extension, Mode=OneWay}"></Run>
+                                                </TextBlock>
+                                                <TextBlock>
+                                            <Run Text="{DynamicResource MwMainLvTooltipSize}"/>
+                                            <Run Text=": "/>
+                                            <Run Text="{Binding Path=Length, Mode=OneWay, Converter={StaticResource FileLengthConverter}}"/>
+                                                </TextBlock>
+                                                <TextBlock>
+                                            <Run Text="{DynamicResource MwMainLvtooltipChangeDate}"/>
+                                            <Run Text=": "/>
+                                            <Run Text="{Binding Path=LastWriteTime, Mode=OneWay, StringFormat={x:Static util:Constants.DateTimeFormat}}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader DataContext="{x:Type io:FileSystemInfo}" Content="{DynamicResource MwMainLvTooltipName}"/>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="{StaticResource FontAwesome}" FontSize="20" Foreground="Gray" Margin="0, 0, 10, 0" 
+                                                        Text="{Binding Path=FullName, Converter={StaticResource FileNameToIconConverter}}" VerticalAlignment="Center"/>
+                                        <TextBlock FontSize="16" Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=LastWriteTime, Mode=OneWay,
+                            StringFormat={x:Static util:Constants.DateTimeFormat}}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Content="{DynamicResource MwMainLvtooltipChangeDate}"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Length, Mode=OneWay,
+                            Converter={StaticResource FileLengthConverter}}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Content="{DynamicResource MwMainLvTooltipSize}"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
             </ListView>
             <Popup Name="SearchPopup" StaysOpen="False" PopupAnimation="Slide" Placement="Center" AllowsTransparency="True"
                    MouseEnter="Popup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">

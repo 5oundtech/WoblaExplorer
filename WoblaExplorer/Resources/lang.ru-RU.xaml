@@ -17,9 +17,10 @@
     <v:String x:Key="MwTbSearchInputText">Название объета</v:String>
     <v:String x:Key="MwTbSearchInputTooltip">Введите название объекта для поиска в текстовое поле</v:String>
     <v:String x:Key="MwBtnSearch">Поиск &#xf002;</v:String>
-    <v:String x:Key="MwMainLvTooltipType">Тип: </v:String>
-    <v:String x:Key="MwMainLvTooltipSize">Размер: </v:String>
-    <v:String x:Key="MwMainLvtooltipChangeDate">Дата изменения: </v:String>
+    <v:String x:Key="MwMainLvTooltipName">Имя</v:String>
+    <v:String x:Key="MwMainLvTooltipType">Тип</v:String>
+    <v:String x:Key="MwMainLvTooltipSize">Размер</v:String>
+    <v:String x:Key="MwMainLvtooltipChangeDate">Дата изменения</v:String>
     <v:String x:Key="MwMainLvContextMenuOpen">Открыть</v:String>
     <v:String x:Key="MwMainLvContextMenuShowInExplorer">Показать в проводнике</v:String>
     <v:String x:Key="MwMainLvContextMenuRename">Переименовать</v:String>
