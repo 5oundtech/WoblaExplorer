@@ -7,7 +7,7 @@ Simple explorer-like application with some new features.
 - [x] Basic features of windows explorer (open, copy, paste, remove, rename etc)
 - [x] Make app localizable at runtime (now its half russian half english)
 - [x] Make properties window
-- [ ] Make tooltip on current app or file with short info
+- [x] Make tooltip on current app or file with short info
 - [x] Autoupdater -> [Codeplex ClickOnce installer](https://woblaexplorer.codeplex.com/)
 - [x] Ability to rerun app as Administrator (Context Menu File->Run as Administrator)
 - [x] Create menu (only folders)
