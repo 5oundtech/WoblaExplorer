@@ -537,6 +537,7 @@ namespace WoblaExplorer.Windows
 
         private async void CopyToExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            if (ListViewExplorer.SelectedItems.Count <= 0) return;
             await PbVisualization.TogglePbVisibilityAsync();
             var folder = new FolderBrowserDialog
             {
@@ -632,6 +633,7 @@ namespace WoblaExplorer.Windows
 
         private async void RemoveExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            if (ListViewExplorer.SelectedItems.Count <= 0) return;
             await PbVisualization.TogglePbVisibilityAsync();
             var fsEntries = ListViewExplorer.SelectedItems;
             if (fsEntries != null)
@@ -809,7 +811,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 await task;
                 await properties.MainProgressBar.TogglePbVisibilityAsync();
             }
-            else
+            else if (entries.Count == 1)
             {
                 var entry = entries[0] as FileSystemInfo;
                 if (entry.IsDirectory())
