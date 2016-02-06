@@ -68,7 +68,6 @@ namespace WoblaExplorer.Windows
             try
             {
                 App.Language = Settings.Default.DefaultLanguage;
-
                 MainWindowX.WindowStartupLocation = WindowStartupLocation.Manual;
 
                 _tokenSource = new CancellationTokenSource();
@@ -124,7 +123,7 @@ namespace WoblaExplorer.Windows
             };
             var settings = Settings.Default;
             string path;
-            if (string.IsNullOrWhiteSpace(settings.LastDirectory))
+            if (String.IsNullOrWhiteSpace(settings.LastDirectory))
             {
                 path = CbDrives.SelectedValue.ToString();
             }

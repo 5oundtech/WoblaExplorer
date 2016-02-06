@@ -70,7 +70,6 @@ namespace WoblaExplorer
             m_Languages.Clear();
             m_Languages.Add(new CultureInfo("en-GB"));
             m_Languages.Add(new CultureInfo("ru-RU"));
-
         }
 
         private void Application_LoadCompleted(object sender, NavigationEventArgs e)
