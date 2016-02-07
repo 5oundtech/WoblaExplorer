@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Reflection;
+using System.Security;
+using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,6 +46,25 @@ namespace WoblaExplorer.Windows
         private CancellationTokenSource _tokenSource;
         private Task _searchTask;
         private SearchWindow _searchWindow;
+
+        public bool IsRunningWithAdminRights
+        {
+            get
+            {
+                try
+                {
+                    var identity = WindowsIdentity.GetCurrent();
+                    if (identity == null) return false;
+                    var principal = new WindowsPrincipal(identity);
+
+                    return principal.IsInRole(WindowsBuiltInRole.Administrator);
+                }
+                catch (SecurityException securityException)
+                {
+                }
+                return false;
+            }
+        }
 
         public MainWindow()
         {
@@ -1207,6 +1228,39 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             {
                 
             }
+        }
+
+        private async void BrowseForwardExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            await PbVisualization.TogglePbVisibilityAsync();
+
+            var diveTask = Task.Factory.StartNew(async () =>
+            {
+                string path = _fileDiver.PathHistory.Count > 0 ? _fileDiver.PathHistory.Pop() : string.Empty;
+                if (!string.IsNullOrEmpty(path))
+                {
+                    try
+                    {
+                        var source = _fileDiver.DiveInto(path);
+                        await Dispatcher.InvokeAsync(() =>
+                        {
+                            ListViewExplorer.ItemsSource = source;
+                        });
+                    }
+                    catch (Exception)
+                    {
+                        Dispatcher.InvokeAsync(() =>
+                        {
+                            ErrorPopup.IsOpen = true;
+                            SystemSounds.Exclamation.Play();
+                        });
+                    }
+                }
+            });
+            await diveTask;
+            ChangeWindowTitle();
+
+            await PbVisualization.TogglePbVisibilityAsync();
         }
     }
 }

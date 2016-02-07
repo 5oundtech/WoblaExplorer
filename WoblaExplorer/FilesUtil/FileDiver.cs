@@ -10,7 +10,7 @@ namespace WoblaExplorer.FilesUtil
     public class FileDiver
     {
         public string CurrentPath { get; set; }
-
+        public Stack<string> PathHistory = new Stack<string>(10);
         public FileDiver()
         {}
 
@@ -23,12 +23,23 @@ namespace WoblaExplorer.FilesUtil
             }
         }
 
+        private void AddToPathStack(string item)
+        {
+            if (PathHistory.Count + 1 >= 10)
+            {
+                PathHistory.Pop();
+            }
+            PathHistory.Push(item);
+        }
+
+        
         /// <exception cref="AggregateException">Occurs when app have no right to access dir or smth else.</exception>
         public IEnumerable<FileSystemInfo> DiveBack()
         {
             DirectoryInfo newPath = new DirectoryInfo(CurrentPath);
             if (newPath.Parent != null)
             {
+                AddToPathStack(CurrentPath);
                 return DiveInto(newPath.Parent.FullName);
             }
 
@@ -47,7 +58,7 @@ namespace WoblaExplorer.FilesUtil
             {
                 var fsInfo = new DirectoryInfo(path).EnumerateFileSystemInfos().OrderBy(info => !info.IsDirectory());
 
-                CurrentPath = path.Clone().ToString();
+                CurrentPath = path;
 
                 return fsInfo;
             }

@@ -11,6 +11,7 @@
     <Window.CommandBindings>
         <CommandBinding Command="Backspace" Executed="BackspaceExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="Open" Executed="OpenCommandExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="BrowseForward" Executed="BrowseForwardExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.ShowInExplorer" Executed="ShowInExplorerExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.Rename" Executed="RenameExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.CopyTo" Executed="CopyToExecuted" CanExecute="DefaultCommands_CanExecute"/>
@@ -43,7 +44,18 @@
         <Grid Grid.Row="0">
             <Menu>
                 <MenuItem Header="{DynamicResource MwFileConMehuHeader}" FontFamily="{StaticResource FontAwesome}" >
-                    <MenuItem Header="{DynamicResource MwFileConMenuRunAsAdmin}" Command="local:Commands.ReRunAsAdministrator"></MenuItem>
+                    <MenuItem Header="{DynamicResource MwFileConMenuRunAsAdmin}" Command="local:Commands.ReRunAsAdministrator">
+                        <MenuItem.Style>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="IsEnabled" Value="True"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsRunningWithAdminRights, ElementName=MainWindowX}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                    </MenuItem>
                     <MenuItem Header="{DynamicResource MwFileConMenuLanguage}" x:Name="LanguageMenu"></MenuItem>
                     <MenuItem Header="{DynamicResource MwFileConMenuExit}" Command="local:Commands.Exit"></MenuItem>
                 </MenuItem>
@@ -64,11 +76,38 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <DockPanel Grid.Column="0">
-                <ComboBox DockPanel.Dock="Left" Name="CbDrives" Width="60" SelectionChanged="CbDrives_OnSelectionChanged" Height="25" DropDownOpened="CbDrives_OnDropDownOpened"></ComboBox>
-                <Button DockPanel.Dock="Right" Name="BtnDiveBack" Command="Backspace" Width="60" Margin="30, 0, 0, 0" Height="25" FontFamily="{StaticResource FontAwesome}" Content="{DynamicResource MwBtnDiveBack}"></Button>
-            </DockPanel>
-            <TextBox Grid.Column="1" Grid.Row="0" Margin="20, 0, 0, 0" Name="TbSearchInput" Text="{DynamicResource MwTbSearchInputText}"
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Name="CbDrives" Width="60" SelectionChanged="CbDrives_OnSelectionChanged" Height="25" DropDownOpened="CbDrives_OnDropDownOpened"></ComboBox>
+                    <Button Name="BtnDiveBack" Command="Backspace" Width="60" Margin="10, 0, 0, 0" Height="25"
+                            FontFamily="{StaticResource FontAwesome}" Content="{DynamicResource MwBtnDiveBack}">
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <TextBlock>
+                                    <Run FontFamily="{StaticResource FontAwesome}" Text="{DynamicResource MwBtnDiveBack}"></Run>
+                                    <Run Text=" ("></Run>
+                                    <Run Text="{DynamicResource MwBtnDiveBackKeys}"></Run>
+                                    <Run Text=")"></Run>
+                                </TextBlock>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Name="BtnDiveForward" Command="BrowseForward" Width="60" Height="25" Margin="10, 0, 0, 0" 
+                            FontFamily="{StaticResource FontAwesome}" Content="{DynamicResource MwBtnDiveForward}">
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <TextBlock>
+                                    <Run FontFamily="{StaticResource FontAwesome}" Text="{DynamicResource MwBtnDiveForward}"></Run>
+                                    <Run Text=" ("></Run>
+                                    <Run Text="{DynamicResource MwBtnDiveForwardKeys}"></Run>
+                                    <Run Text=")"></Run>
+                                </TextBlock>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <TextBox Grid.Column="1" Grid.Row="0" Margin="10, 0, 0, 0" Name="TbSearchInput" Text="{DynamicResource MwTbSearchInputText}"
                      ToolTip="{DynamicResource MwTbSearchInputTooltip}" Width="Auto" AutoWordSelection="True" Height="25" KeyUp="TbSearchInput_OnKeyUp">
             </TextBox>
             <Button Grid.Column="2" Grid.Row="0" Name="BtnSearch" Width="70" Margin="10, 0, 0, 0" Click="BtnSearch_OnClick" Height="25" FontFamily="{StaticResource FontAwesome}" Content="{DynamicResource MwBtnSearch}"></Button>
@@ -83,6 +122,8 @@
                     <KeyBinding Command="Backspace" Key="Left"></KeyBinding>
                     <KeyBinding Command="Open" Key="Right"></KeyBinding>
                     <KeyBinding Command="Backspace" Key="Back"></KeyBinding>
+                    <KeyBinding Command="BrowseForward" Key="Right" Modifiers="Alt"></KeyBinding>
+                    <KeyBinding x:Name="KeyBind" Command="Backspace" Key="Left" Modifiers="Alt"></KeyBinding>
                 </ListView.InputBindings>
                 <ListView.ContextMenu>
                     <ContextMenu x:Name="MainLvContextMenu">

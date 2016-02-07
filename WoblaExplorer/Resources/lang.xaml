@@ -14,6 +14,9 @@
     <v:String x:Key="MwHelpConMenuUpdates">Check for updates</v:String>
     <v:String x:Key="MwHelpConMenuAbout">About</v:String>
     <v:String x:Key="MwBtnDiveBack">&#xf060; Back</v:String>
+    <v:String x:Key="MwBtnDiveBackKeys">ALT + LEFT ARROW</v:String>
+    <v:String x:Key="MwBtnDiveForward">Forward &#xf061;</v:String>
+    <v:String x:Key="MwBtnDiveForwardKeys">ALT + RIGHT ARROW</v:String>
     <v:String x:Key="MwTbSearchInputText">Item name</v:String>
     <v:String x:Key="MwTbSearchInputTooltip">Input item name in textbox</v:String>
     <v:String x:Key="MwBtnSearch">Search &#xf002;</v:String>

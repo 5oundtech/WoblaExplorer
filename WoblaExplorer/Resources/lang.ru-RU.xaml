@@ -14,6 +14,9 @@
     <v:String x:Key="MwHelpConMenuUpdates">Проверить обновления</v:String>
     <v:String x:Key="MwHelpConMenuAbout">О программе</v:String>
     <v:String x:Key="MwBtnDiveBack">&#xf060; Назад</v:String>
+    <v:String x:Key="MwBtnDiveBackKeys">ALT + СТРЕЛКА ВЛЕВО</v:String>
+    <v:String x:Key="MwBtnDiveForward">Вперед &#xf061;</v:String>
+    <v:String x:Key="MwBtnDiveForwardKeys">ALT + СТРЕЛКА ВПРАВО</v:String>
     <v:String x:Key="MwTbSearchInputText">Название объета</v:String>
     <v:String x:Key="MwTbSearchInputTooltip">Введите название объекта для поиска в текстовое поле</v:String>
     <v:String x:Key="MwBtnSearch">Поиск &#xf002;</v:String>
