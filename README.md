@@ -14,7 +14,8 @@ Simple explorer-like application with some new features.
 - [x] Manual update check added
 - [x] Simple icons (dir and file now)
 - [x] Selection feautures: select all, invert selection
-- [ ] Forward button
+- [x] Forward button
+- [ ] Attractive UI
 
 I'm developing this app alone so i'll appreciate any help. (Criticism, pull requests etc)
 
