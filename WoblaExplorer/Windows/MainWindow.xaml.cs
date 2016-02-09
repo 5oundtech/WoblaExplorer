@@ -14,11 +14,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using WoblaExplorer.Annotations;
 using WoblaExplorer.Dialogs;
 using WoblaExplorer.FilesUtil;
 using WoblaExplorer.Properties;
@@ -39,7 +36,7 @@ namespace WoblaExplorer.Windows
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private readonly FileDiver _fileDiver;
         private SearchEngine _searchEngine;
