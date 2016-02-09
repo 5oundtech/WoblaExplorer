@@ -5,7 +5,7 @@ namespace WoblaExplorer.Dialogs
     /// <summary>
     /// Interaction logic for CopyDialog.xaml
     /// </summary>
-    public partial class CopyDialog : Window
+    public partial class CopyDialog
     {
         public bool Canceled;
 

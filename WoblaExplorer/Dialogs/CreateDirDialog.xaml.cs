@@ -6,7 +6,7 @@ namespace WoblaExplorer.Dialogs
     /// <summary>
     /// Interaction logic for CreateDirDialog.xaml
     /// </summary>
-    public partial class CreateDirDialog : Window
+    public partial class CreateDirDialog
     {
         public string DirName { get; set; }
         public CreateDirDialog()

@@ -7,7 +7,7 @@ namespace WoblaExplorer.Dialogs
     /// <summary>
     /// Interaction logic for RenameDialog.xaml
     /// </summary>
-    public partial class RenameDialog : Window
+    public partial class RenameDialog
     {
         public string Filename { get; set; }
 

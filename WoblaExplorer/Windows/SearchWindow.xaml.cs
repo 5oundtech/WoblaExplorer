@@ -10,7 +10,7 @@ namespace WoblaExplorer.Windows
     /// <summary>
     /// Interaction logic for SearchWindow.xaml
     /// </summary>
-    public partial class SearchWindow : Window
+    public partial class SearchWindow
     {
         private CancellationTokenSource _cancellationTokenSource;
         public SearchWindow()

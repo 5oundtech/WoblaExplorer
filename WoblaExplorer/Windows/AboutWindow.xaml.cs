@@ -9,7 +9,7 @@ namespace WoblaExplorer.Windows
     /// <summary>
     /// Interaction logic for AboutWindow.xaml
     /// </summary>
-    public partial class AboutWindow : Window
+    public partial class AboutWindow
     {
         public static DependencyProperty AssemblyVersionDependencyProperty =
             DependencyProperty.Register("AssemblyVersion", typeof (string), typeof (AboutWindow));

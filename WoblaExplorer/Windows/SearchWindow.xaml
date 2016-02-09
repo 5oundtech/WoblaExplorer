@@ -1,7 +1,9 @@
-﻿<Window x:Class="WoblaExplorer.Windows.SearchWindow"
+﻿<metro:Window x:Class="WoblaExplorer.Windows.SearchWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WoblaExplorer.CustomCommands"
+        xmlns:metro="http://schemas.codeplex.com/elysium"
+        xmlns:params="http://schemas.codeplex.com/elysium/params"
         Title="{DynamicResource SwTitle}" Height="400" Width="600" x:Name="SWindow">
     <Window.CommandBindings>
         <CommandBinding Command="Open" CanExecute="DefaultCommand_CanExecute" Executed="OpenExecuted"></CommandBinding>
@@ -18,4 +20,4 @@
             </ListBox.ContextMenu>
         </ListBox>
     </Grid>
-</Window>
+</metro:Window>

@@ -10,7 +10,7 @@ namespace WoblaExplorer.Windows
     /// <summary>
     /// Interaction logic for PropertiesWindow.xaml
     /// </summary>
-    public partial class PropertiesWindow : Window
+    public partial class PropertiesWindow
     {
         public PropertiesWindow(FileInfo info)
         {

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Navigation;
 using WoblaExplorer.Properties;
 
@@ -81,6 +82,12 @@ namespace WoblaExplorer
         {
             Settings.Default.DefaultLanguage = Language;
             Settings.Default.Save();
+        }
+
+        private void App_OnStartup(object sender, StartupEventArgs e)
+        {
+            Elysium.Manager.Apply(this, Elysium.Theme.Light, Elysium.AccentBrushes.Blue,
+                new SolidColorBrush(Colors.White));
         }
     }
 }

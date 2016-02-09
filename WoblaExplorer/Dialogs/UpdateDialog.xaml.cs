@@ -6,7 +6,7 @@ namespace WoblaExplorer.Dialogs
     /// <summary>
     /// Interaction logic for UpdateDialog.xaml
     /// </summary>
-    public partial class UpdateDialog : Window
+    public partial class UpdateDialog
     {
 
         public ApplicationDeployment AppDeploy { get; set; }
