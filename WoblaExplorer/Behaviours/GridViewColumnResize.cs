@@ -179,6 +179,10 @@ namespace WoblaExplorer.Behaviours
                 else
                 {
                     double width = allowedSpace*(Percentage/totalPercentage);
+                    if (width < 0)
+                    {
+                        width = 100;
+                    }
                     _element.Width = width;
                 }
             }

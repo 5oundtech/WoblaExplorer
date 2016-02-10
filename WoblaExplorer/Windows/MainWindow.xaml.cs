@@ -586,7 +586,10 @@ namespace WoblaExplorer.Windows
                             {
                                 if (copyDialog.Canceled)
                                 {
-                                    copyDialog.Close();
+                                    Dispatcher.InvokeAsync(() =>
+                                    {
+                                        copyDialog.Close();
+                                    }); 
                                     return;
                                 }
                                 Dispatcher.InvokeAsync(() =>

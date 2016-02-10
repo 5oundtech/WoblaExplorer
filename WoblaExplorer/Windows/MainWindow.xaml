@@ -43,7 +43,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Border BorderBrush="LightGray" BorderThickness="1">
-                                <TextBlock Padding="5, 5, 5, 5" HorizontalAlignment="Center"
+                                <TextBlock Padding="5, 5, 5, 5" HorizontalAlignment="Stretch"
                                                                                VerticalAlignment="Center" TextAlignment="Center" Text="{TemplateBinding Content}"></TextBlock>
                             </Border>
 
@@ -66,7 +66,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <Border BorderBrush="Black" BorderThickness="1">
-                                        <TextBlock Padding="5, 5, 5, 5" HorizontalAlignment="Center"
+                                        <TextBlock Padding="5, 5, 5, 5" HorizontalAlignment="Stretch"
                                                                                VerticalAlignment="Center" TextAlignment="Center" Text="{TemplateBinding Content}"></TextBlock>
                                     </Border>
 
@@ -202,8 +202,34 @@
                 </ListView.ContextMenu>
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <Border CornerRadius="2" SnapsToDevicePixels="True"
+                                                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                                                    Background="{TemplateBinding Background}">
+                                        <Grid>
+                                            <GridViewRowPresenter/>
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <Border CornerRadius="2" SnapsToDevicePixels="True"
+                                                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                                                    Background="{TemplateBinding Background}">
+                                                <Grid>
+                                                    <GridViewRowPresenter/>
+                                                </Grid>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="ToolTip">
                                     <Setter.Value>
                                         <ToolTip>
@@ -227,11 +253,11 @@
                                         </ToolTip>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="Background" Value="{x:Static metro:AccentBrushes.Sky}"></Setter>
+                                <Setter Property="Background" Value="{x:Static metro:AccentBrushes.Blue}"></Setter>
                                 <Setter Property="Foreground" Value="{x:Static Brushes.White}"></Setter>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{x:Static metro:AccentBrushes.Sky}"></Setter>
+                                <Setter Property="Background" Value="{x:Static metro:AccentBrushes.Blue}"></Setter>
                                 <Setter Property="Foreground" Value="{x:Static Brushes.White}"></Setter>
                             </Trigger>
                         </Style.Triggers>
