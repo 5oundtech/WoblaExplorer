@@ -552,6 +552,7 @@ namespace WoblaExplorer.Windows
                 }
             }
         }
+
         private async void MoveFilesExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (ListViewExplorer.SelectedItems.Count < 1)
@@ -559,29 +560,31 @@ namespace WoblaExplorer.Windows
 
             await PbVisualization.TogglePbVisibilityAsync();
 
-            var moveTask = Task.Factory.StartNew(async () =>
-            {
-                bool doMove = false;
-                string destinationPath = string.Empty;
-                await Dispatcher.InvokeAsync(() =>
-                {
-                    var folder = new FolderBrowserDialog
-                    {
-                        ShowNewFolderButton = true,
-                        SelectedPath = _fileDiver.CurrentPath,
-                        Description = Properties.Resources.MwCopyToDescription
-                    };
-                    if (folder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        doMove = true;
-                        destinationPath = folder.SelectedPath;
-                    }
-                });
 
-                if (doMove)
+            bool doMove = false;
+            string destinationPath = string.Empty;
+            await Dispatcher.InvokeAsync(() =>
+            {
+                var folder = new FolderBrowserDialog
                 {
-                    var fsEntries = await Dispatcher.InvokeAsync(() => ListViewExplorer.SelectedItems);
-                    if (fsEntries != null)
+                    ShowNewFolderButton = true,
+                    SelectedPath = _fileDiver.CurrentPath,
+                    Description = Properties.Resources.MwCopyToDescription
+                };
+                if (folder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    doMove = true;
+                    destinationPath = folder.SelectedPath;
+                }
+            });
+
+            if (doMove)
+            {
+                
+                var fsEntries = ListViewExplorer.SelectedItems;
+                if (fsEntries != null)
+                {
+                    var moveTask = Task.Factory.StartNew(() =>
                     {
                         foreach (FileSystemInfo entry in fsEntries)
                         {
@@ -599,14 +602,15 @@ namespace WoblaExplorer.Windows
                                 });
                             }
                         }
-                    }
+                    });
+                    await moveTask;
                 }
-            });
-            await moveTask;
+            }
 
             ListViewExplorer_Refresh();
             await PbVisualization.TogglePbVisibilityAsync();
         }
+
         private async void CopyToExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (ListViewExplorer.SelectedItems.Count <= 0) return;
