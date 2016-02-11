@@ -26,6 +26,7 @@
         <CommandBinding Command="local:Commands.CreateDirectory" Executed="CreateDirectoryExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.CheckForUpdates" Executed="CheckForUpdatesExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.ModifySelection" Executed="ModifySelectionExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.MoveFiles" Executed="MoveFilesExecuted" CanExecute="DefaultCommands_CanExecute"/>
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -181,9 +182,10 @@
                         </MenuItem>
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuShowInExplorer}" Command="local:Commands.ShowInExplorer"/>
                         <Separator />
-                        <MenuItem Header="{DynamicResource MwMainLvContextMenuRename}" Command="local:Commands.Rename"></MenuItem>
+                        <MenuItem Header="{DynamicResource MwMainLvContextMenuRename}" Command="local:Commands.Rename"/>
                         <Separator />
-                        <MenuItem Header="{DynamicResource MwMainLvContextMenuCopyTo}" Command="local:Commands.CopyTo"></MenuItem>
+                        <MenuItem Header="{DynamicResource MwMainLvContextMenuMove}" Command="local:Commands.MoveFiles"/>
+                        <MenuItem Header="{DynamicResource MwMainLvContextMenuCopyTo}" Command="local:Commands.CopyTo"/>
                         <Separator />
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuCreateHeader}">
                             <MenuItem Header="{DynamicResource MwMainLvContextMenuCreateDir}">

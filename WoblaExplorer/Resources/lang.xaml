@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:WoblaExplorer.Resources"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <!-- MainWindow -->
     <v:String x:Key="MwFileConMehuHeader">File</v:String>
@@ -27,7 +26,8 @@
     <v:String x:Key="MwMainLvContextMenuOpen">Open</v:String>
     <v:String x:Key="MwMainLvContextMenuShowInExplorer">Show in explorer</v:String>
     <v:String x:Key="MwMainLvContextMenuRename">Rename</v:String>
-    <v:String x:Key="MwMainLvContextMenuCopyTo">CopyTo</v:String>
+    <v:String x:Key="MwMainLvContextMenuMove">Move To</v:String>
+    <v:String x:Key="MwMainLvContextMenuCopyTo">Copy To</v:String>
     <v:String x:Key="MwMainLvContextMenuCreateHeader">Create</v:String>
     <v:String x:Key="MwMainLvContextMenuCreateDir">Directory</v:String>
     <v:String x:Key="MwMainLvContextMenuCreateDirInside">Inside</v:String>

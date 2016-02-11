@@ -35,5 +35,7 @@ namespace WoblaExplorer.CustomCommands
             new InputGestureCollection());
 
         public static RoutedCommand ModifySelection = new RoutedCommand(nameof(ModifySelection), typeof (Commands));
+
+        public static RoutedCommand MoveFiles = new RoutedCommand(nameof(MoveFiles), typeof (Commands));
     }
 }

@@ -552,7 +552,61 @@ namespace WoblaExplorer.Windows
                 }
             }
         }
+        private async void MoveFilesExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (ListViewExplorer.SelectedItems.Count < 1)
+                return;
 
+            await PbVisualization.TogglePbVisibilityAsync();
+
+            var moveTask = Task.Factory.StartNew(async () =>
+            {
+                bool doMove = false;
+                string destinationPath = string.Empty;
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    var folder = new FolderBrowserDialog
+                    {
+                        ShowNewFolderButton = true,
+                        SelectedPath = _fileDiver.CurrentPath,
+                        Description = Properties.Resources.MwCopyToDescription
+                    };
+                    if (folder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        doMove = true;
+                        destinationPath = folder.SelectedPath;
+                    }
+                });
+
+                if (doMove)
+                {
+                    var fsEntries = await Dispatcher.InvokeAsync(() => ListViewExplorer.SelectedItems);
+                    if (fsEntries != null)
+                    {
+                        foreach (FileSystemInfo entry in fsEntries)
+                        {
+                            try
+                            {
+                                string watch = Path.Combine(destinationPath, entry.Name);
+                                Directory.Move(entry.FullName, watch);
+                            }
+                            catch (Exception)
+                            {
+                                Dispatcher.InvokeAsync(() =>
+                                {
+                                    ErrorPopup.IsOpen = true;
+                                    SystemSounds.Exclamation.Play();
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+            await moveTask;
+
+            ListViewExplorer_Refresh();
+            await PbVisualization.TogglePbVisibilityAsync();
+        }
         private async void CopyToExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (ListViewExplorer.SelectedItems.Count <= 0) return;
@@ -560,6 +614,7 @@ namespace WoblaExplorer.Windows
             var folder = new FolderBrowserDialog
             {
                 ShowNewFolderButton = true,
+                SelectedPath = _fileDiver.CurrentPath,
                 Description = Properties.Resources.MwCopyToDescription
             };
             if (folder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
