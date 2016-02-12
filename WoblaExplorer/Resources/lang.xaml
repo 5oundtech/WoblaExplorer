@@ -29,9 +29,10 @@
     <v:String x:Key="MwMainLvContextMenuMove">Move To</v:String>
     <v:String x:Key="MwMainLvContextMenuCopyTo">Copy To</v:String>
     <v:String x:Key="MwMainLvContextMenuCreateHeader">Create</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateFile">File</v:String>
     <v:String x:Key="MwMainLvContextMenuCreateDir">Directory</v:String>
-    <v:String x:Key="MwMainLvContextMenuCreateDirInside">Inside</v:String>
-    <v:String x:Key="MwMainLvContextMenuCreateDirHere">Here</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateInside">Inside</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateHere">Here</v:String>
     <v:String x:Key="MwMainLvContextMenuRemove">Remove</v:String>
     <v:String x:Key="MwMainLvContextMenuProperties">Properties</v:String>
     <v:String x:Key="MwSearchPopupFirstTextBlock">A problem occured during the search &#xf071;</v:String>
@@ -65,10 +66,17 @@
     <v:String x:Key="CrdTitle">Create directory</v:String>
     <v:String x:Key="CrdTextBlock">Enter directory name: </v:String>
     <v:String x:Key="CrdDefaultDirName">New folder</v:String>
-    <v:String x:Key="CrdBtnOk">Confirm</v:String>
+    <v:String x:Key="CrdBtnOk">Create</v:String>
     <v:String x:Key="CrdBtnCancel">Cancel</v:String>
     <!-- CopyDialog -->
     <v:String x:Key="CdTitle">Copying files</v:String>
     <v:String x:Key="CdTbOperationName">Copying files</v:String>
     <v:String x:Key="CdBtnInterrup">Interrupt</v:String>
+    <!-- CreateFileDialog -->
+    <v:String x:Key="CrfTitle">Create file</v:String>
+    <v:String x:Key="CrfTextBlock">Enter file name (with extension):</v:String>
+    <v:String x:Key="CrfDefaultFileName">New file.txt</v:String>
+    <v:String x:Key="CrfCbFileTypes">File type:</v:String>
+    <v:String x:Key="CrfBtnOk">Create</v:String>
+    <v:String x:Key="CrfBtnCancel">Cancel</v:String>
 </ResourceDictionary>

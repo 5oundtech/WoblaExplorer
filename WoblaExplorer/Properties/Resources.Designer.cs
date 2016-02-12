@@ -117,6 +117,33 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File name shouldn&apos;t contains following symbols: \ / : * ? &quot; &lt; &gt; |.
+        /// </summary>
+        internal static string FileValidationBadFileName {
+            get {
+                return ResourceManager.GetString("FileValidationBadFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum file name length is 3 symbols.
+        /// </summary>
+        internal static string FileValidationFileNameLength {
+            get {
+                return ResourceManager.GetString("FileValidationFileNameLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected validation error!.
+        /// </summary>
+        internal static string FileValidationUnexcpectedError {
+            get {
+                return ResourceManager.GetString("FileValidationUnexcpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] FontAwesome {
@@ -186,6 +213,15 @@ namespace WoblaExplorer.Properties {
         internal static string MwCreateDirInFileError {
             get {
                 return ResourceManager.GetString("MwCreateDirInFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t create a file inside another file!.
+        /// </summary>
+        internal static string MwCreateFileInFileError {
+            get {
+                return ResourceManager.GetString("MwCreateFileInFileError", resourceCulture);
             }
         }
         

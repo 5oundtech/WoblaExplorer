@@ -27,6 +27,7 @@
         <CommandBinding Command="local:Commands.CheckForUpdates" Executed="CheckForUpdatesExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.ModifySelection" Executed="ModifySelectionExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.MoveFiles" Executed="MoveFilesExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.CreateFile" Executed="CreateFileExecuted"/>
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -189,11 +190,17 @@
                         <Separator />
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuCreateHeader}">
                             <MenuItem Header="{DynamicResource MwMainLvContextMenuCreateDir}">
-                                <MenuItem x:Name="CreateDirHereMenuItem" Header="{DynamicResource MwMainLvContextMenuCreateDirHere}" Command="local:Commands.CreateDirectory"
+                                <MenuItem x:Name="CreateDirHereMenuItem" Header="{DynamicResource MwMainLvContextMenuCreateHere}" Command="local:Commands.CreateDirectory"
                                           CommandParameter="0"></MenuItem>
-                                <MenuItem x:Name="CreateDirInsideMenuItem" Header="{DynamicResource MwMainLvContextMenuCreateDirInside}" Command="local:Commands.CreateDirectory"
+                                <MenuItem x:Name="CreateDirInsideMenuItem" Header="{DynamicResource MwMainLvContextMenuCreateInside}" Command="local:Commands.CreateDirectory"
                                           CommandParameter="1">
                                 </MenuItem>
+                            </MenuItem>
+                            <MenuItem Header="{DynamicResource MwMainLvContextMenuCreateFile}">
+                                <MenuItem x:Name="CreateFileHereMenuItem" Command="local:Commands.CreateFile" 
+                                              Header="{DynamicResource MwMainLvContextMenuCreateHere}" CommandParameter="0"/>
+                                <MenuItem x:Name="CreateFileInsideMenuItem" Command="local:Commands.CreateFile" 
+                                              Header="{DynamicResource MwMainLvContextMenuCreateInside}" CommandParameter="1"/>
                             </MenuItem>
                         </MenuItem>
                         <Separator />

@@ -29,9 +29,10 @@
     <v:String x:Key="MwMainLvContextMenuMove">Переместить в</v:String>
     <v:String x:Key="MwMainLvContextMenuCopyTo">Скопировать в</v:String>
     <v:String x:Key="MwMainLvContextMenuCreateHeader">Создать</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateFile">Файл</v:String>
     <v:String x:Key="MwMainLvContextMenuCreateDir">Папку</v:String>
-    <v:String x:Key="MwMainLvContextMenuCreateDirInside">Внутри</v:String>
-    <v:String x:Key="MwMainLvContextMenuCreateDirHere">Здесь</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateInside">Внутри</v:String>
+    <v:String x:Key="MwMainLvContextMenuCreateHere">Здесь</v:String>
     <v:String x:Key="MwMainLvContextMenuRemove">Удалить</v:String>
     <v:String x:Key="MwMainLvContextMenuProperties">Свойства</v:String>
     <v:String x:Key="MwSearchPopupFirstTextBlock">Возникла проблема во время поиска &#xf071;</v:String>
@@ -65,10 +66,17 @@
     <v:String x:Key="CrdTitle">Создать папку</v:String>
     <v:String x:Key="CrdTextBlock">Введите название папки: </v:String>
     <v:String x:Key="CrdDefaultDirName">Новая папка</v:String>
-    <v:String x:Key="CrdBtnOk">Подтвердить</v:String>
+    <v:String x:Key="CrdBtnOk">Создать</v:String>
     <v:String x:Key="CrdBtnCancel">Отмена</v:String>
     <!-- CopyDialog -->
     <v:String x:Key="CdTitle">Копирование файлов</v:String>
     <v:String x:Key="CdTbOperationName">Копирование файлов</v:String>
     <v:String x:Key="CdBtnInterrup">Прервать</v:String>
+    <!-- CreateFileDialog -->
+    <v:String x:Key="CrfTitle">Создать файл</v:String>
+    <v:String x:Key="CrfTextBlock">Введите название файла (с расширением):</v:String>
+    <v:String x:Key="CrfDefaultFileName">Новый файл.txt</v:String>
+    <v:String x:Key="CrfCbFileTypes">Тип файла:</v:String>
+    <v:String x:Key="CrfBtnOk">Создать</v:String>
+    <v:String x:Key="CrfBtnCancel">Отмена</v:String>
 </ResourceDictionary>

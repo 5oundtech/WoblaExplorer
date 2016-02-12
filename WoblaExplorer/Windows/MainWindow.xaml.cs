@@ -109,13 +109,10 @@ namespace WoblaExplorer.Windows
         private void ChangeLanguageClick(object sender, RoutedEventArgs routedEventArgs)
         {
             var menuItem = sender as MenuItem;
-            if (menuItem != null)
+            CultureInfo language = menuItem?.Tag as CultureInfo;
+            if (language != null)
             {
-                CultureInfo language = menuItem.Tag as CultureInfo;
-                if (language != null)
-                {
-                    App.Language = language;
-                }
+                App.Language = language;
             }
         }
 
@@ -1065,6 +1062,81 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             }
             ListViewExplorer_Refresh();
         }
+        private async void CreateFileExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter == null) return;
+
+            await PbVisualization.TogglePbVisibilityAsync();
+            var dialog = new CreateFileDialog
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            var curDirPath = _fileDiver.CurrentPath;
+            switch (e.Parameter.ToString())
+            {
+                case "0":
+                    if (dialog.ShowDialog() == true)
+                    {
+                        var file = Path.Combine(curDirPath, dialog.FileName);
+                        File.Create(file);
+                        if (!File.Exists(file))
+                        {
+                            ErrorPopup.IsOpen = true;
+                            await PbVisualization.TogglePbVisibilityAsync();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(dialog.ErrorString))
+                        {
+                            CustomErrorPopupTextBlock.Text = dialog.ErrorString;
+                            CustomErrorPopup.IsOpen = true;
+                            await PbVisualization.TogglePbVisibilityAsync();
+                            return;
+                        }
+                    }
+                    break;
+                case "1":
+                    var selectedItem = ListViewExplorer.SelectedItem as FileSystemInfo;
+                    if (selectedItem == null)
+                        return;
+                    if (!selectedItem.IsDirectory())
+                    {
+                        CustomErrorPopupTextBlock.Text = Properties.Resources.MwCreateFileInFileError;
+                        CustomErrorPopup.IsOpen = true;
+                        await PbVisualization.TogglePbVisibilityAsync();
+                        return;
+                    }
+                    if (dialog.ShowDialog() == true)
+                    {
+
+                        var file = Path.Combine(selectedItem.FullName, dialog.FileName);
+                        File.Create(file);
+                        if (!File.Exists(file))
+                        {
+                            ErrorPopup.IsOpen = true;
+                            await PbVisualization.TogglePbVisibilityAsync();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(dialog.ErrorString))
+                        {
+                            CustomErrorPopupTextBlock.Text = dialog.ErrorString;
+                            CustomErrorPopup.IsOpen = true;
+                            await PbVisualization.TogglePbVisibilityAsync();
+                            return;
+                        }
+                    }
+                    break;
+            }
+
+            ListViewExplorer_Refresh();
+            await PbVisualization.TogglePbVisibilityAsync();
+        }
 
         private void CheckForUpdatesExecuted(object sender, ExecutedRoutedEventArgs e)
         {
@@ -1285,7 +1357,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             }
             catch (Exception)
             {
-                
+                // ignored
             }
         }
 
@@ -1321,5 +1393,7 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
 
             await PbVisualization.TogglePbVisibilityAsync();
         }
+
+
     }
 }
