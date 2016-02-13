@@ -32,8 +32,8 @@
     <SuiteName>Woblavobla</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>9</ApplicationRevision>
-    <ApplicationVersion>0.9.9.9</ApplicationVersion>
+    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationVersion>0.9.9.10</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -220,7 +220,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Graphics-Vibe-Retro-Social-Internet-explorer.ico" />
+    <Resource Include="Resources\Graphics-Vibe-Retro-Social-Internet-explorer.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\internet-explorer-icon.png" />

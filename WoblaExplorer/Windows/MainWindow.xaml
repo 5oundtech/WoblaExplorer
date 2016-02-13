@@ -9,7 +9,7 @@
         xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
         xmlns:metro="http://schemas.codeplex.com/elysium"
         xmlns:params="http://schemas.codeplex.com/elysium/params"
-              xmlns:Behaviours="clr-namespace:WoblaExplorer.Behaviours"
+        xmlns:Behaviours="clr-namespace:WoblaExplorer.Behaviours"
         Title="WoblaExplorer" Height="350" MinHeight="350" Width="525" MinWidth="525" Name="MainWindowX">
     <Window.CommandBindings>
         <CommandBinding Command="Backspace" Executed="BackspaceExecuted" CanExecute="DefaultCommands_CanExecute"/>

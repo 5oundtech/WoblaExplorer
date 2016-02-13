@@ -4,20 +4,72 @@
         xmlns:local="clr-namespace:WoblaExplorer.CustomCommands"
         xmlns:metro="http://schemas.codeplex.com/elysium"
         xmlns:params="http://schemas.codeplex.com/elysium/params"
+        xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
+        xmlns:util="clr-namespace:WoblaExplorer.Util"
         Title="{DynamicResource SwTitle}" Height="400" Width="600" x:Name="SWindow">
+    <metro:Window.Resources>
+        <util:FileNameToIconConverter x:Key="FileNameToIconConverter" />
+    </metro:Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Open" CanExecute="DefaultCommand_CanExecute" Executed="OpenExecuted"></CommandBinding>
         <CommandBinding Command="local:Commands.ShowInExplorer" CanExecute="DefaultCommand_CanExecute" Executed="ShowInExplorerExecuted"></CommandBinding>
     </Window.CommandBindings>
     
     <Grid>
-        <ListBox Name="LbSearchResults" MouseDoubleClick="LbSearchResults_OnMouseDoubleClick">
+        <ListBox Name="LbSearchResults" DataContext="{x:Type io:FileSystemInfo}" MouseDoubleClick="LbSearchResults_OnMouseDoubleClick">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{DynamicResource MwMainLvContextMenuOpen}" Command="Open"/>
                     <MenuItem Header="{DynamicResource MwMainLvContextMenuShowInExplorer}" Command="local:Commands.ShowInExplorer"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Border CornerRadius="2" SnapsToDevicePixels="True"
+                                                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                                                    Background="{TemplateBinding Background}">
+                                    <Grid>
+                                        <ContentPresenter/>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <ToolTip>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock>
+                                                <Run Text="{DynamicResource PwFilePathLabel}"/>
+                                                <Run Text=" "></Run>
+                                                <Run Text="{Binding FullName, Mode=OneWay}"></Run>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="2">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="{StaticResource FontAwesome}" FontSize="20" Foreground="Gray" Margin="0, 0, 10, 0" 
+                                                        Text="{Binding Path=FullName, Converter={StaticResource FileNameToIconConverter}}" VerticalAlignment="Center"/>
+                                <TextBlock FontSize="16" Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
 </metro:Window>
