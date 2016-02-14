@@ -15,6 +15,7 @@ Simple explorer-like application with some new features.
 - [x] Simple icons (dir and file now)
 - [x] Selection feautures: select all, invert selection
 - [x] Attractive UI
+- [x] Checksums (md5, sha1, 256, 512)
 
 I'm developing this app alone so i'll appreciate any help. (Criticism, pull requests etc)
 
