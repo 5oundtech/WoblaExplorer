@@ -32,8 +32,8 @@
     <SuiteName>Woblavobla</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>10</ApplicationRevision>
-    <ApplicationVersion>0.9.9.10</ApplicationVersion>
+    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationVersion>0.9.9.11</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -101,6 +101,9 @@
     </ApplicationDefinition>
     <Compile Include="Behaviours\GridViewColumnResize.cs" />
     <Compile Include="Converters\FileLengthToNormalConverter.cs" />
+    <Compile Include="Dialogs\ChecksumDialog.xaml.cs">
+      <DependentUpon>ChecksumDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\CopyDialog.xaml.cs">
       <DependentUpon>CopyDialog.xaml</DependentUpon>
     </Compile>
@@ -114,8 +117,10 @@
       <DependentUpon>UpdateDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="FilesUtil\FilesExtensions.cs" />
+    <Compile Include="Util\ChecksumCalculators.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\FileNameToIconConverter.cs" />
+    <Compile Include="Util\ProgressEventArgs.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
@@ -131,6 +136,10 @@
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\Extensions.cs" />
+    <Page Include="Dialogs\ChecksumDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\CopyDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

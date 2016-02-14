@@ -27,7 +27,8 @@
         <CommandBinding Command="local:Commands.CheckForUpdates" Executed="CheckForUpdatesExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.ModifySelection" Executed="ModifySelectionExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.MoveFiles" Executed="MoveFilesExecuted" CanExecute="DefaultCommands_CanExecute"/>
-        <CommandBinding Command="local:Commands.CreateFile" Executed="CreateFileExecuted"/>
+        <CommandBinding Command="local:Commands.CreateFile" Executed="CreateFileExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.GetChecksums" Executed="GetCheckSumExecuted" CanExecute="DefaultCommands_CanExecute"/>
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -182,6 +183,12 @@
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuOpen}" Command="Open">
                         </MenuItem>
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuShowInExplorer}" Command="local:Commands.ShowInExplorer"/>
+                        <MenuItem Header="{DynamicResource MwMainLvContextMenuChecksumHeader}">
+                            <MenuItem Header="{DynamicResource MwMainLvContextMenuChecksumMd5}" Command="local:Commands.GetChecksums" CommandParameter="md5"/>
+                            <MenuItem Header="{DynamicResource MwMainLvContextMenuChecksumSha1}" Command="local:Commands.GetChecksums" CommandParameter="sha1"/>
+                            <MenuItem Header="{DynamicResource MwMainLvContextMenuChecksumSha256}" Command="local:Commands.GetChecksums" CommandParameter="sha256"/>
+                            <MenuItem Header="{DynamicResource MwMainLvContextMenuChecksumSha512}" Command="local:Commands.GetChecksums" CommandParameter="sha512"/>
+                        </MenuItem>
                         <Separator />
                         <MenuItem Header="{DynamicResource MwMainLvContextMenuRename}" Command="local:Commands.Rename"/>
                         <Separator />

@@ -151,6 +151,18 @@
   <data name="GigaBytes" xml:space="preserve">
     <value>ГБ</value>
   </data>
+  <data name="HashMd5" xml:space="preserve">
+    <value>MD5</value>
+  </data>
+  <data name="HashSha1" xml:space="preserve">
+    <value>SHA-1</value>
+  </data>
+  <data name="HashSha256" xml:space="preserve">
+    <value>SHA-256</value>
+  </data>
+  <data name="HashSha512" xml:space="preserve">
+    <value>SHA-512</value>
+  </data>
   <data name="KiloBytes" xml:space="preserve">
     <value>КБ</value>
   </data>

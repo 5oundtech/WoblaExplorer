@@ -163,6 +163,42 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MD5.
+        /// </summary>
+        internal static string HashMd5 {
+            get {
+                return ResourceManager.GetString("HashMd5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SHA-1.
+        /// </summary>
+        internal static string HashSha1 {
+            get {
+                return ResourceManager.GetString("HashSha1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SHA-256.
+        /// </summary>
+        internal static string HashSha256 {
+            get {
+                return ResourceManager.GetString("HashSha256", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SHA-512.
+        /// </summary>
+        internal static string HashSha512 {
+            get {
+                return ResourceManager.GetString("HashSha512", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to KB.
         /// </summary>
         internal static string KiloBytes {

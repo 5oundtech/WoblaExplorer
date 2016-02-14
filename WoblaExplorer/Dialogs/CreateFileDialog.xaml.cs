@@ -18,7 +18,7 @@ namespace WoblaExplorer.Dialogs
     /// <summary>
     /// Interaction logic for CreateFileDialog.xaml
     /// </summary>
-    public partial class CreateFileDialog : Window
+    public partial class CreateFileDialog
     {
         public string FileName { get; set; }
         public string ErrorString { get; set; }

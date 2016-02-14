@@ -25,6 +25,11 @@
     <v:String x:Key="MwMainLvtooltipChangeDate">Date of change</v:String>
     <v:String x:Key="MwMainLvContextMenuOpen">Open</v:String>
     <v:String x:Key="MwMainLvContextMenuShowInExplorer">Show in explorer</v:String>
+    <v:String x:Key="MwMainLvContextMenuChecksumHeader">Checksum</v:String>
+    <v:String x:Key="MwMainLvContextMenuChecksumSha1">SHA-1</v:String>
+    <v:String x:Key="MwMainLvContextMenuChecksumSha256">SHA-256</v:String>
+    <v:String x:Key="MwMainLvContextMenuChecksumSha512">SHA-512</v:String>
+    <v:String x:Key="MwMainLvContextMenuChecksumMd5">MD5</v:String>
     <v:String x:Key="MwMainLvContextMenuRename">Rename</v:String>
     <v:String x:Key="MwMainLvContextMenuMove">Move To</v:String>
     <v:String x:Key="MwMainLvContextMenuCopyTo">Copy To</v:String>
@@ -79,4 +84,8 @@
     <v:String x:Key="CrfCbFileTypes">File type:</v:String>
     <v:String x:Key="CrfBtnOk">Create</v:String>
     <v:String x:Key="CrfBtnCancel">Cancel</v:String>
+    <!-- ChecksumDialog -->
+    <v:String x:Key="CsdTitle">Checksum</v:String>
+    <v:String x:Key="CsdTextBlock">Calculation progress:</v:String>
+    <v:String x:Key="CsdBtnCancel">Cancel</v:String>
 </ResourceDictionary>

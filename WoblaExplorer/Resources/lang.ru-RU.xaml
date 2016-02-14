@@ -25,6 +25,11 @@
     <v:String x:Key="MwMainLvtooltipChangeDate">Дата изменения</v:String>
     <v:String x:Key="MwMainLvContextMenuOpen">Открыть</v:String>
     <v:String x:Key="MwMainLvContextMenuShowInExplorer">Показать в проводнике</v:String>
+    <v:String x:Key="MwMainLvContextMenuChecksumHeader">Контрольная сумма</v:String>
+    <v:String x:Key="MwMainLvContextMenuChecksumSha1">SHA-1</v:String>
+    <v:String x:Key="MwMainLvContextMenuChecksumSha256">SHA-256</v:String>
+    <v:String x:Key="MwMainLvContextMenuChecksumSha512">SHA-512</v:String>
+    <v:String x:Key="MwMainLvContextMenuChecksumMd5">MD5</v:String>
     <v:String x:Key="MwMainLvContextMenuRename">Переименовать</v:String>
     <v:String x:Key="MwMainLvContextMenuMove">Переместить в</v:String>
     <v:String x:Key="MwMainLvContextMenuCopyTo">Скопировать в</v:String>
@@ -79,4 +84,8 @@
     <v:String x:Key="CrfCbFileTypes">Тип файла:</v:String>
     <v:String x:Key="CrfBtnOk">Создать</v:String>
     <v:String x:Key="CrfBtnCancel">Отмена</v:String>
+    <!-- ChecksumDialog -->
+    <v:String x:Key="CsdTitle">Контрольная сумма</v:String>
+    <v:String x:Key="CsdTextBlock">Ход вычисления:</v:String>
+    <v:String x:Key="CsdBtnCancel">Отмена</v:String>
 </ResourceDictionary>

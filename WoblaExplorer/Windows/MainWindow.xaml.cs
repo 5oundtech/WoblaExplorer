@@ -8,6 +8,7 @@ using System.Linq;
 using System.Media;
 using System.Reflection;
 using System.Security;
+using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1395,5 +1396,89 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
         }
 
 
+        private async void GetCheckSumExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter == null)
+            {
+                return;
+            }
+            if (ListViewExplorer.SelectedItems.Count != 1)
+            {
+                return;
+            }
+            var file = ListViewExplorer.SelectedItem as FileSystemInfo;
+            if (file == null)
+            {
+                return;
+            }
+            if (file.IsDirectory())
+            {
+                return;
+            }
+
+            var checksumsCalculator = new ChecksumCalculators();
+            HashAlgorithm hashAlgorithm = null;
+            var hashDialog = new ChecksumDialog
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            switch (e.Parameter.ToString())
+            {
+                case "md5":
+                    hashAlgorithm = new MD5CryptoServiceProvider();
+                    hashDialog.TbAlgorithmName.Text = Properties.Resources.HashMd5;
+                    break;
+                case "sha1":
+                    hashAlgorithm = new SHA1Managed();
+                    hashDialog.TbAlgorithmName.Text = Properties.Resources.HashSha1;
+                    break;
+                case "sha256":
+                    hashAlgorithm = new SHA256Managed();
+                    hashDialog.TbAlgorithmName.Text = Properties.Resources.HashSha256;
+                    break;
+                case "sha512":
+                    hashAlgorithm = new SHA512Managed();
+                    hashDialog.TbAlgorithmName.Text = Properties.Resources.HashSha512;
+                    break;
+            }
+            checksumsCalculator.HashProgressUpdate += async (o, args) =>
+            {
+                var progress = args as ProgressEventArgs;
+                if (progress == null)
+                    return;
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    if (hashDialog.Visibility == Visibility.Visible)
+                    {
+                        hashDialog.PbCalculationProgress.Value = progress.Percent;
+                        hashDialog.TbCheckSum.Text = progress.Message;
+                    }
+                });
+            };
+            var tokenSource = new CancellationTokenSource();
+            hashDialog.CancellationToken = tokenSource;
+            var task = Task.Factory.StartNew(() =>
+            {
+                Dispatcher.InvokeAsync(() =>
+                {
+                    hashDialog.ShowDialog();
+                });
+                try
+                {
+                    return checksumsCalculator.CalculateHash(file.FullName, hashAlgorithm,
+                        hashDialog.CancellationToken.Token);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }, tokenSource.Token);
+            var result = await task;
+            if (hashDialog.Visibility == Visibility.Visible)
+            {
+                hashDialog.TbCheckSum.Text = result;
+            }
+        }
     }
 }
