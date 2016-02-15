@@ -24,7 +24,7 @@ namespace WoblaExplorer.Util
 
         public static string DbPath => DbFolder + DbFileName;
 
-        public static string ConnectionString => $"Data Source={DbPath}";
+        public static string ConnectionString => $"Data Source={DbPath};";
 
         public static void CreateDb()
         {
@@ -45,31 +45,28 @@ namespace WoblaExplorer.Util
             SQLiteConnection.CreateFile(DbPath);
         }
 
-        public static async Task<bool> CreateReadedFilesTable()
+        public static bool CreateReadedFilesTable()
         {
-            return await Task.Factory.StartNew(async () =>
+            using (var connection = new SQLiteConnection(ConnectionString))
             {
-                using (var connection = new SQLiteConnection(ConnectionString))
+                connection.Open();
+                string sqlCommand = "DROP TABLE IF EXISTS readed_files;" +
+                                    "CREATE TABLE readed_files(" +
+                                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                    "path TEXT);";
+                try
                 {
-                    await connection.OpenAsync();
-                    string sqlCommand = "DROP TABLE IF EXISTS readed_files;" +
-                                        "CREATE TABLE readed_files(" +
-                                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                                        "path TEXT);";
-                    try
-                    {
-                        var command = connection.CreateCommand();
-                        command.CommandText = sqlCommand;
-                        command.ExecuteNonQuery();
+                    var command = connection.CreateCommand();
+                    command.CommandText = sqlCommand;
+                    command.ExecuteNonQuery();
 
-                        return true;
-                    }
-                    catch (SQLiteException)
-                    {
-                        return false;
-                    }
+                    return true;
                 }
-            }).Result;
+                catch (SQLiteException)
+                {
+                    return false;
+                }
+            }
         }
 
         public static async Task<bool> InsertReadedFile(string path)
@@ -114,7 +111,6 @@ namespace WoblaExplorer.Util
                     return false;
                 }
             }
-
         }
 
         public static async Task<bool> ClearDb()
