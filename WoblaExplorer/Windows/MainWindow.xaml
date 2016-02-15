@@ -29,11 +29,13 @@
         <CommandBinding Command="local:Commands.MoveFiles" Executed="MoveFilesExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.CreateFile" Executed="CreateFileExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.GetChecksums" Executed="GetCheckSumExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.ClearDb" Executed="ClearDbExecuted" CanExecute="DefaultCommands_CanExecute"/>
     </Window.CommandBindings>
 
     <Window.Resources>
         <util:FileNameToIconConverter x:Key="FileNameToIconConverter"/>
         <converters:FileLengthToNormalConverter x:Key="FileLengthConverter"/>
+        <converters:ReadedFilesToColorConverter x:Key="FilesToColorConverter"/>
         <Style x:Key="GridViewColumnHeaderMetroStyle" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}" TargetType="GridViewColumnHeader">
             <Setter Property="Background" Value="{DynamicResource TransparentBrush}"></Setter>
             <Setter Property="Padding" Value="5"></Setter>
@@ -115,6 +117,9 @@
                 <MenuItem Header="{DynamicResource MwFileConMenuEdit}" FontFamily="{StaticResource FontAwesome}">
                     <MenuItem Header="{DynamicResource MwFileConMenuEditSelectAll}" Command="local:Commands.ModifySelection" CommandParameter="SelectAll"/>
                     <MenuItem Header="{DynamicResource MwFileConMenuEditInvertSelection}" Command="local:Commands.ModifySelection" CommandParameter="Invert"/>
+                </MenuItem>
+                <MenuItem Header="{DynamicResource MwSettingsConMenuHeader}" FontFamily="{StaticResource FontAwesome}">
+                    <MenuItem Header="{DynamicResource MwSettingsConMenuClearDb}" Command="local:Commands.ClearDb"/>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MwHelpConMenuHeader}" FontFamily="{StaticResource FontAwesome}" >
                     <MenuItem Header="{DynamicResource MwHelpConMenuUpdates}" Command="local:Commands.CheckForUpdates"></MenuItem>
@@ -290,7 +295,9 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock FontFamily="{StaticResource FontAwesome}" FontSize="20" Foreground="Gray" Margin="0, 0, 10, 0" 
                                                         Text="{Binding Path=FullName, Converter={StaticResource FileNameToIconConverter}}" VerticalAlignment="Center"/>
-                                        <TextBlock FontSize="16" Text="{Binding Name}"></TextBlock>
+                                        <TextBlock FontSize="16" Foreground="{Binding Path=FullName, Converter={StaticResource FilesToColorConverter}}" 
+                                                   Text="{Binding Name}">
+                                        </TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

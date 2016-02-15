@@ -9,6 +9,8 @@
     <v:String x:Key="MwFileConMenuEdit">Правка</v:String>
     <v:String x:Key="MwFileConMenuEditSelectAll">Выделить все</v:String>
     <v:String x:Key="MwFileConMenuEditInvertSelection">Инвертировать выделенное</v:String>
+    <v:String x:Key="MwSettingsConMenuHeader">Настройки</v:String>
+    <v:String x:Key="MwSettingsConMenuClearDb">Очистить список прочитанных файлов</v:String>
     <v:String x:Key="MwHelpConMenuHeader">Помощь</v:String>
     <v:String x:Key="MwHelpConMenuUpdates">Проверить обновления</v:String>
     <v:String x:Key="MwHelpConMenuAbout">О программе</v:String>
@@ -16,7 +18,7 @@
     <v:String x:Key="MwBtnDiveBackKeys">ALT + СТРЕЛКА ВЛЕВО</v:String>
     <v:String x:Key="MwBtnDiveForward">Вперед &#xf061;</v:String>
     <v:String x:Key="MwBtnDiveForwardKeys">ALT + СТРЕЛКА ВПРАВО</v:String>
-    <v:String x:Key="MwTbSearchInputText">Название объета</v:String>
+    <v:String x:Key="MwTbSearchInputText">Название объекта</v:String>
     <v:String x:Key="MwTbSearchInputTooltip">Введите название объекта для поиска в текстовое поле</v:String>
     <v:String x:Key="MwBtnSearch">Поиск &#xf002;</v:String>
     <v:String x:Key="MwMainLvTooltipName">Имя</v:String>

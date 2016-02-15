@@ -175,6 +175,9 @@
   <data name="MwAppUpdatedText" xml:space="preserve">
     <value>Приложение было обновлено и для применения изменений его нужно перезапустить.</value>
   </data>
+  <data name="MwCantClearDb" xml:space="preserve">
+    <value>Не удалось очистить базу данных! Пожалуйста повторите попытку позже.</value>
+  </data>
   <data name="MwCopyToDescription" xml:space="preserve">
     <value>Выберите новое расположение для объекта</value>
   </data>

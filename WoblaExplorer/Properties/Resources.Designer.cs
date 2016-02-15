@@ -235,6 +235,15 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t clear db! Please try again later..
+        /// </summary>
+        internal static string MwCantClearDb {
+            get {
+                return ResourceManager.GetString("MwCantClearDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose new place to item.
         /// </summary>
         internal static string MwCopyToDescription {

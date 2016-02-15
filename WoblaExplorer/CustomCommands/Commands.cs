@@ -42,5 +42,7 @@ namespace WoblaExplorer.CustomCommands
         public static RoutedCommand MoveFiles = new RoutedCommand(nameof(MoveFiles), typeof (Commands));
 
         public static RoutedCommand GetChecksums = new RoutedCommand(nameof(GetChecksums), typeof (Commands));
+
+        public static RoutedCommand ClearDb = new RoutedCommand(nameof(ClearDb), typeof (Commands));
     }
 }

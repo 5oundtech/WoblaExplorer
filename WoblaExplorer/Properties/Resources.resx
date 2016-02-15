@@ -175,6 +175,9 @@
   <data name="MwAppUpdatedText" xml:space="preserve">
     <value>Application has been updated you need to restart it.</value>
   </data>
+  <data name="MwCantClearDb" xml:space="preserve">
+    <value>Can't clear db! Please try again later.</value>
+  </data>
   <data name="MwCopyToDescription" xml:space="preserve">
     <value>Choose new place to item</value>
   </data>

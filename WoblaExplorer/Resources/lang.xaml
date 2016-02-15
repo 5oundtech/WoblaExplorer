@@ -9,6 +9,8 @@
     <v:String x:Key="MwFileConMenuEdit">Edit</v:String>
     <v:String x:Key="MwFileConMenuEditSelectAll">Select all</v:String>
     <v:String x:Key="MwFileConMenuEditInvertSelection">Invert selection</v:String>
+    <v:String x:Key="MwSettingsConMenuHeader">Settings</v:String>
+    <v:String x:Key="MwSettingsConMenuClearDb">Clear readed files</v:String>
     <v:String x:Key="MwHelpConMenuHeader">Help</v:String>
     <v:String x:Key="MwHelpConMenuUpdates">Check for updates</v:String>
     <v:String x:Key="MwHelpConMenuAbout">About</v:String>

@@ -84,6 +84,13 @@ namespace WoblaExplorer.Windows
                 menuItem.Click += ChangeLanguageClick;
                 LanguageMenu.Items.Add(menuItem);
             }
+
+            if (!File.Exists(DbHelper.DbPath))
+            {
+                DbHelper.CreateDb();
+                DbHelper.CreateReadedFilesTable();
+            }
+
             try
             {
                 App.Language = Settings.Default.DefaultLanguage;
@@ -294,6 +301,8 @@ namespace WoblaExplorer.Windows
 
                 ChangeWindowTitle();
 
+                DbHelper.InsertReadedFile(newPath);
+
                 await PbVisualization.TogglePbVisibilityAsync();
             }
             else
@@ -301,6 +310,8 @@ namespace WoblaExplorer.Windows
                 try
                 {
                     Process.Start(newPath);
+
+                    DbHelper.InsertReadedFile(newPath);
                 }
                 catch (Exception)
                 {
@@ -428,11 +439,14 @@ namespace WoblaExplorer.Windows
 
                     ChangeWindowTitle();
 
+                    DbHelper.InsertReadedFile(fsEntry.FullName);
+
                     await PbVisualization.TogglePbVisibilityAsync();
                 }
                 else
                 {
                     Process.Start(fsEntry.FullName);
+                    DbHelper.InsertReadedFile(fsEntry.FullName);
                 }
             }
             else
@@ -464,11 +478,14 @@ namespace WoblaExplorer.Windows
 
                         ChangeWindowTitle();
 
+                        DbHelper.InsertReadedFile(selectedItem.FullName);
+
                         await PbVisualization.TogglePbVisibilityAsync();
                     }
                     else
                     {
                         Process.Start(selectedItem.FullName);
+                        DbHelper.InsertReadedFile(selectedItem.FullName);
                     }
                 }
             }
@@ -1395,7 +1412,6 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             await PbVisualization.TogglePbVisibilityAsync();
         }
 
-
         private async void GetCheckSumExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Parameter == null)
@@ -1479,6 +1495,20 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             {
                 hashDialog.TbCheckSum.Text = result;
             }
+        }
+
+        private async void ClearDbExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            await PbVisualization.TogglePbVisibilityAsync();
+
+            var result = await DbHelper.ClearDb();
+            if (!result)
+            {
+                CustomErrorPopupTextBlock.Text = Properties.Resources.MwCantClearDb;
+                CustomErrorPopup.IsOpen = true;
+            }
+
+            await PbVisualization.TogglePbVisibilityAsync();
         }
     }
 }
