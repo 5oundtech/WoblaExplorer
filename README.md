@@ -3,7 +3,7 @@ Simple explorer-like application with some new features.
 
 ## Features list:
 - [x] Recursive search (not like windows explorer search, this one is using contains)
-- [x] Simple error handler not message box
+- [x] Simple error handler not message box (All messagebox now replaced with self made MessageDialog)
 - [x] Basic features of windows explorer (open, copy, move, remove, rename etc)
 - [x] Localizable at runtime (now its half russian half english)
 - [x] Properties window
