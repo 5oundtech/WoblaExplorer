@@ -9,7 +9,7 @@
         xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
         xmlns:metro="http://schemas.codeplex.com/elysium"
         xmlns:params="http://schemas.codeplex.com/elysium/params"
-        xmlns:Behaviours="clr-namespace:WoblaExplorer.Behaviours"
+        xmlns:behaviours="clr-namespace:WoblaExplorer.Behaviours"
         Title="WoblaExplorer" Height="350" MinHeight="350" Width="525" MinWidth="525" Name="MainWindowX">
     <Window.CommandBindings>
         <CommandBinding Command="Backspace" Executed="BackspaceExecuted" CanExecute="DefaultCommands_CanExecute"/>
@@ -174,11 +174,9 @@
         <Grid Grid.Row="2">
             <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="ListViewExplorer"
                       MouseDoubleClick="ListViewExplorer_OnMouseDoubleClick" Focusable="True" DataContext="{x:Type io:FileSystemInfo}"
-                      Behaviours:GridViewColumnResize.Enabled="True">
+                      behaviours:GridViewColumnResize.Enabled="True">
                 <ListView.InputBindings>
                     <KeyBinding Command="Open" Key="Enter"></KeyBinding>
-                    <KeyBinding Command="Backspace" Key="Left"></KeyBinding>
-                    <KeyBinding Command="Open" Key="Right"></KeyBinding>
                     <KeyBinding Command="Backspace" Key="Back"></KeyBinding>
                     <KeyBinding Command="BrowseForward" Key="Right" Modifiers="Alt"></KeyBinding>
                     <KeyBinding x:Name="KeyBind" Command="Backspace" Key="Left" Modifiers="Alt"></KeyBinding>
@@ -286,7 +284,7 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderMetroStyle}">
-                        <GridViewColumn Behaviours:GridViewColumnResize.Width="*">
+                        <GridViewColumn behaviours:GridViewColumnResize.Width="*">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader DataContext="{x:Type io:FileSystemInfo}" Content="{DynamicResource MwMainLvTooltipName}"></GridViewColumnHeader>
                             </GridViewColumn.Header>

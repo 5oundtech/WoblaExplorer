@@ -27,7 +27,6 @@ using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ListView = System.Windows.Controls.ListView;
 using ListViewItem = System.Windows.Controls.ListViewItem;
 using MenuItem = System.Windows.Controls.MenuItem;
-using MessageBox = System.Windows.MessageBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
@@ -106,11 +105,21 @@ namespace WoblaExplorer.Windows
             }
             catch (IOException ioException)
             {
-                MessageBox.Show(ioException.Message);
+                var messageDialog = new MessageDialog(ioException.Message)
+                {
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    Owner = this
+                };
+                messageDialog.ShowDialog();
             }
             catch (UnauthorizedAccessException unauthorizedAccessException)
             {
-                MessageBox.Show(unauthorizedAccessException.Message);
+                var messageDialog = new MessageDialog(unauthorizedAccessException.Message)
+                {
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    Owner = this
+                };
+                messageDialog.ShowDialog();
             }
         }
 
@@ -733,9 +742,15 @@ namespace WoblaExplorer.Windows
             var fsEntries = ListViewExplorer.SelectedItems;
             if (fsEntries != null)
             {
-                var dialogResult = MessageBox.Show(Properties.Resources.MwRemoveDialogText, Properties.Resources.MwRemoveDialogTitle,
-MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
-                if (dialogResult != MessageBoxResult.Yes)
+                var messageDialog = new MessageDialog(Properties.Resources.MwRemoveDialogText,
+                    Properties.Resources.MwRemoveDialogTitle,
+                    MessageDialogButtons.YesNo)
+                {
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    Owner = this
+                };
+                messageDialog.ShowDialog();
+                if (messageDialog.MessageDialogResult != MessageDialogResult.Yes)
                 {
                     await PbVisualization.TogglePbVisibilityAsync();
                     return;
@@ -1179,15 +1194,30 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             }
             catch (DeploymentDownloadException dde)
             {
-                MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + dde.Message);
+                var messageDialog = new MessageDialog(Properties.Resources.MwDeploymentDownloadException + dde.Message)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                messageDialog.ShowDialog();
             }
             catch (InvalidDeploymentException ide)
             {
-                MessageBox.Show(Properties.Resources.MwInvalidDeploymentException + ide.Message);
+                var messageDialog = new MessageDialog(Properties.Resources.MwInvalidDeploymentException + ide.Message)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                messageDialog.ShowDialog();
             }
             catch (InvalidOperationException ioe)
             {
-                MessageBox.Show(Properties.Resources.MwInvalidOperationException + ioe.Message);
+                var messageDialog = new MessageDialog(Properties.Resources.MwInvalidOperationException + ioe.Message)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                messageDialog.ShowDialog();
             }
         }
 
@@ -1217,7 +1247,12 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
         {
             if (args.Error != null)
             {
-                MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + args.Error.Message);
+                var messageDialog = new MessageDialog(Properties.Resources.MwDeploymentDownloadException + args.Error.Message)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                messageDialog.ShowDialog();
                 return;
             }
             if (args.Cancelled)
@@ -1226,8 +1261,13 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 return;
             }
 
-            MessageBox.Show(Properties.Resources.MwAppUpdatedText, Properties.Resources.MwAppUpdatedHeader,
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            var mDialog = new MessageDialog(Properties.Resources.MwAppUpdatedText,
+                Properties.Resources.MwAppUpdatedHeader, MessageDialogButtons.Ok)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            mDialog.ShowDialog();
             _updateDialog.Close();
         }
 
@@ -1256,20 +1296,40 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
                 }
                 catch (DeploymentDownloadException dde)
                 {
-                    MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + dde.Message);
+                    var messageDialog = new MessageDialog(Properties.Resources.MwDeploymentDownloadException + dde.Message)
+                    {
+                        Owner = this,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
+                    messageDialog.ShowDialog();
                 }
                 catch (InvalidDeploymentException ide)
                 {
-                    MessageBox.Show(Properties.Resources.MwInvalidDeploymentException + ide.Message);
+                    var messageDialog = new MessageDialog(Properties.Resources.MwInvalidDeploymentException + ide.Message)
+                    {
+                        Owner = this,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
+                    messageDialog.ShowDialog();
                 }
                 catch (InvalidOperationException ioe)
                 {
-                    MessageBox.Show(Properties.Resources.MwInvalidOperationException + ioe.Message);
+                    var messageDialog = new MessageDialog(Properties.Resources.MwInvalidOperationException + ioe.Message)
+                    {
+                        Owner = this,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
+                    messageDialog.ShowDialog();
                 }
             }
             else
             {
-                MessageBox.Show(Properties.Resources.MwWrongAppUpdate);
+                var messageDialog = new MessageDialog(Properties.Resources.MwWrongAppUpdate)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                messageDialog.ShowDialog();
             }
         }
 
@@ -1277,7 +1337,12 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
         {
             if (args.Error != null)
             {
-                MessageBox.Show(Properties.Resources.MwDeploymentDownloadException + args.Error.Message);
+                var messageDialog = new MessageDialog(Properties.Resources.MwDeploymentDownloadException + args.Error.Message)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                messageDialog.ShowDialog();
                 return;
             }
             if (args.Cancelled)
@@ -1288,12 +1353,17 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
 
             if (args.UpdateAvailable)
             {
-                var dialogResult = MessageBox.Show(Properties.Resources.MwUpdateDialogContentBeforeVersion +
+                var messageDialog = new MessageDialog(Properties.Resources.MwUpdateDialogContentBeforeVersion +
                                                    args.AvailableVersion +
                                                    Properties.Resources.MwUpdateDialogContentAfterVersion,
-                    Properties.Resources.MwUpdateDialogHeader, MessageBoxButton.YesNo,
-                    MessageBoxImage.Information);
-                if (dialogResult == MessageBoxResult.Yes)
+                    Properties.Resources.MwUpdateDialogHeader, MessageDialogButtons.YesNo)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                messageDialog.ShowDialog();
+
+                if (messageDialog.MessageDialogResult == MessageDialogResult.Yes)
                 {
                     _updateDialog.PbDownloadProgress.Value = 0;
                     BeginUpdate();
@@ -1305,8 +1375,13 @@ MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
             }
             else
             {
-                MessageBox.Show(Properties.Resources.MwNoUpdatesText, Properties.Resources.MwNoUpdatesHeader,
-                        MessageBoxButton.OK, MessageBoxImage.Information);
+                var messageDialog = new MessageDialog(Properties.Resources.MwNoUpdatesText,
+                    Properties.Resources.MwNoUpdatesHeader, MessageDialogButtons.Ok)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                messageDialog.ShowDialog();
                 _updateDialog.Close();
             }
         }

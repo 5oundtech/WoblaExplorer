@@ -90,4 +90,10 @@
     <v:String x:Key="CsdTitle">Контрольная сумма</v:String>
     <v:String x:Key="CsdTextBlock">Ход вычисления:</v:String>
     <v:String x:Key="CsdBtnCancel">Отмена</v:String>
+    <!-- MessageDialog -->
+    <v:String x:Key="MdDefaultTitle">Информация</v:String>
+    <v:String x:Key="MdBtnOk">ОК</v:String>
+    <v:String x:Key="MdBtnYes">Да</v:String>
+    <v:String x:Key="MdBtnNo">Нет</v:String>
+    <v:String x:Key="MdBtnCancel">Отмена</v:String>
 </ResourceDictionary>

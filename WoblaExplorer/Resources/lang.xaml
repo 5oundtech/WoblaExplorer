@@ -90,4 +90,10 @@
     <v:String x:Key="CsdTitle">Checksum</v:String>
     <v:String x:Key="CsdTextBlock">Calculation progress:</v:String>
     <v:String x:Key="CsdBtnCancel">Cancel</v:String>
+    <!-- MessageDialog -->
+    <v:String x:Key="MdDefaultTitle">Information</v:String>
+    <v:String x:Key="MdBtnOk">ОК</v:String>
+    <v:String x:Key="MdBtnYes">Yes</v:String>
+    <v:String x:Key="MdBtnNo">No</v:String>
+    <v:String x:Key="MdBtnCancel">Cancel</v:String>
 </ResourceDictionary>

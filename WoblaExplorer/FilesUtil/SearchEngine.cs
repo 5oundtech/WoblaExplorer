@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Security;
 using System.Threading;
-using System.Windows;
 using WoblaExplorer.Util;
 
 namespace WoblaExplorer.FilesUtil
@@ -46,7 +45,8 @@ namespace WoblaExplorer.FilesUtil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                
+
             }
         }
 
