@@ -92,7 +92,6 @@ namespace WoblaExplorer.Windows
 
             try
             {
-                App.Language = Settings.Default.DefaultLanguage;
                 MainWindowX.WindowStartupLocation = WindowStartupLocation.Manual;
 
                 _tokenSource = new CancellationTokenSource();

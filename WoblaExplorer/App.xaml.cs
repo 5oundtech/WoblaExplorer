@@ -88,6 +88,7 @@ namespace WoblaExplorer
         {
             Elysium.Manager.Apply(this, Elysium.Theme.Light, Elysium.AccentBrushes.Blue,
                 new SolidColorBrush(Colors.White));
+            App.Language = Settings.Default.DefaultLanguage;
         }
     }
 }
