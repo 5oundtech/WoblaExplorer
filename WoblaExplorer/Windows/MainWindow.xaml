@@ -92,8 +92,9 @@
                                                                 Background="{TemplateBinding Background}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0" Name="Check" Width="13" Height="13" Visibility="Hidden"
                                                     Margin="6,0,6,0" BorderThickness="1" BorderBrush="AntiqueWhite">

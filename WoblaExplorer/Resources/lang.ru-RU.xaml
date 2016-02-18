@@ -21,9 +21,9 @@
     <v:String x:Key="MwSettingsConMenuColorPink">Розовый</v:String>
     <v:String x:Key="MwSettingsConMenuColorPurple">Фиолетовый</v:String>
     <v:String x:Key="MwSettingsConMenuColorRed">Красный</v:String>
-    <v:String x:Key="MwSettingsConMenuColorRose">Розовый</v:String>
-    <v:String x:Key="MwSettingsConMenuColorViolet">Фиолетовый</v:String>
-    <v:String x:Key="MwSettingsConMenuColorViridian">Зеленоватый</v:String>
+    <v:String x:Key="MwSettingsConMenuColorRose">Роза</v:String>
+    <v:String x:Key="MwSettingsConMenuColorViolet">Фиалковый</v:String>
+    <v:String x:Key="MwSettingsConMenuColorViridian">Салатовый</v:String>
     <v:String x:Key="MwSettingsConMenuColorSky">Небесно голубой</v:String>
     <v:String x:Key="MwSettingsConMenuClearDb">Очистить список прочитанных файлов</v:String>
     <v:String x:Key="MwHelpConMenuHeader">Помощь</v:String>
