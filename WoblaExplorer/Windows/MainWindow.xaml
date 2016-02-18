@@ -30,6 +30,7 @@
         <CommandBinding Command="local:Commands.CreateFile" Executed="CreateFileExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.GetChecksums" Executed="GetCheckSumExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.ClearDb" Executed="ClearDbExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.ChangeAccentColor" Executed="ChangeAccentColorExecuted" CanExecute="DefaultCommands_CanExecute"/>
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -86,6 +87,36 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <ControlTemplate x:Key="AccentColorsMenuItem" TargetType="{x:Type MenuItem}">
+            <Border BorderThickness="1" Name="MenuItemBorder"  BorderBrush="Black"
+                                                                Background="{TemplateBinding Background}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Name="Check" Width="13" Height="13" Visibility="Hidden"
+                                                    Margin="6,0,6,0" BorderThickness="1" BorderBrush="AntiqueWhite">
+                        <Path Name="CheckMark" Width="7" Height="7" Visibility="Hidden" SnapsToDevicePixels="False"
+                                                      StrokeThickness="2" Stroke="{TemplateBinding Foreground}" Data="M 0 0 L 7 7 M 0 7 L 7 0"/>
+                    </Border>
+                    <ContentPresenter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" ContentSource="Header">
+                        <TextBlock.Foreground>
+                            <TemplateBinding Property="Foreground" ></TemplateBinding>
+                        </TextBlock.Foreground>
+                    </ContentPresenter>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="MenuItemBorder" Property="BorderBrush" Value="{x:Static metro:Manager.DefaultContrastBrush}"></Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
     
     <Grid>
@@ -119,6 +150,52 @@
                     <MenuItem Header="{DynamicResource MwFileConMenuEditInvertSelection}" Command="local:Commands.ModifySelection" CommandParameter="Invert"/>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MwSettingsConMenuHeader}" FontFamily="{StaticResource FontAwesome}">
+                    <MenuItem Name="ColorsMenu" Header="{DynamicResource MwSettingsConMenuAccentColors}" SubmenuOpened="ColorsMenu_OnSubmenuOpened">
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorBlue}" Background="{x:Static metro:AccentBrushes.Blue}"
+                                  Foreground="{x:Static metro:Manager.DefaultContrastBrush}" 
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Blue"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorBrown}" Background="{x:Static metro:AccentBrushes.Brown}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Brown"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorGreen}" Background="{x:Static metro:AccentBrushes.Green}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Green"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorLime}" Background="{x:Static metro:AccentBrushes.Lime}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Lime"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorMagenta}" Background="{x:Static metro:AccentBrushes.Magenta}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Magenta"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorMango}" Background="{x:Static metro:AccentBrushes.Mango}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Mango"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorOrange}" Background="{x:Static metro:AccentBrushes.Orange}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Orange"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorPink}" Background="{x:Static metro:AccentBrushes.Pink}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Pink"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorPurple}" Background="{x:Static metro:AccentBrushes.Purple}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Purple"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorRed}" Background="{x:Static metro:AccentBrushes.Red}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Red"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorRose}" Background="{x:Static metro:AccentBrushes.Rose}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Rose"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorViolet}" Background="{x:Static metro:AccentBrushes.Violet}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Violet"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorViridian}" Background="{x:Static metro:AccentBrushes.Viridian}" Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Viridian"
+                                  />
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuColorSky}" Background="{x:Static metro:AccentBrushes.Sky}"
+                                  Foreground="{x:Static metro:Manager.DefaultContrastBrush}"
+                                  Template="{StaticResource AccentColorsMenuItem}" Command="local:Commands.ChangeAccentColor" CommandParameter="Sky"
+                                  />
+                    </MenuItem>
                     <MenuItem Header="{DynamicResource MwSettingsConMenuClearDb}" Command="local:Commands.ClearDb"/>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MwHelpConMenuHeader}" FontFamily="{StaticResource FontAwesome}" >
@@ -272,12 +349,12 @@
                                         </ToolTip>
                                     </Setter.Value>
                                 </Setter>
-                                <Setter Property="Background" Value="{x:Static metro:AccentBrushes.Blue}"></Setter>
-                                <Setter Property="Foreground" Value="{x:Static Brushes.White}"></Setter>
+                                <Setter Property="Background" Value="{Binding ElementName=MainWindowX, Path=GetCurrentAccentBrush}"></Setter>
+                                <Setter Property="Foreground" Value="{x:Static metro:Manager.DefaultContrastBrush}"></Setter>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{x:Static metro:AccentBrushes.Blue}"></Setter>
-                                <Setter Property="Foreground" Value="{x:Static Brushes.White}"></Setter>
+                                <Setter Property="Background" Value="{Binding ElementName=MainWindowX, Path=GetCurrentAccentBrush}"></Setter>
+                                <Setter Property="Foreground" Value="{x:Static metro:Manager.DefaultContrastBrush}"></Setter>
                             </Trigger>
                         </Style.Triggers>
                     </Style>

@@ -8,21 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Configuration;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-
 namespace WoblaExplorer.Properties {
     
     
-    [CompilerGenerated()]
-    [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
-    internal sealed partial class Settings : ApplicationSettingsBase {
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(Synchronized(new Settings())));
+        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
         public static Settings Default {
             get {
@@ -30,33 +23,33 @@ namespace WoblaExplorer.Properties {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("525, 350")]
-        public Size WindowSize {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("525, 350")]
+        public global::System.Drawing.Size WindowSize {
             get {
-                return ((Size)(this["WindowSize"]));
+                return ((global::System.Drawing.Size)(this["WindowSize"]));
             }
             set {
                 this["WindowSize"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("0, 0")]
-        public Point WindowLocation {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point WindowLocation {
             get {
-                return ((Point)(this["WindowLocation"]));
+                return ((global::System.Drawing.Point)(this["WindowLocation"]));
             }
             set {
                 this["WindowLocation"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LastDirectory {
             get {
                 return ((string)(this["LastDirectory"]));
@@ -66,15 +59,27 @@ namespace WoblaExplorer.Properties {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("ru-RU")]
-        public CultureInfo DefaultLanguage {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ru-RU")]
+        public global::System.Globalization.CultureInfo DefaultLanguage {
             get {
-                return ((CultureInfo)(this["DefaultLanguage"]));
+                return ((global::System.Globalization.CultureInfo)(this["DefaultLanguage"]));
             }
             set {
                 this["DefaultLanguage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF017BCD")]
+        public global::System.Windows.Media.SolidColorBrush DefaultAccentColor {
+            get {
+                return ((global::System.Windows.Media.SolidColorBrush)(this["DefaultAccentColor"]));
+            }
+            set {
+                this["DefaultAccentColor"] = value;
             }
         }
     }

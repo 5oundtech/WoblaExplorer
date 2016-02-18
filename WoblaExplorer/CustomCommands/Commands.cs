@@ -44,5 +44,7 @@ namespace WoblaExplorer.CustomCommands
         public static RoutedCommand GetChecksums = new RoutedCommand(nameof(GetChecksums), typeof (Commands));
 
         public static RoutedCommand ClearDb = new RoutedCommand(nameof(ClearDb), typeof (Commands));
+
+        public static RoutedCommand ChangeAccentColor = new RoutedCommand(nameof(ChangeAccentColor), typeof (Commands));
     }
 }

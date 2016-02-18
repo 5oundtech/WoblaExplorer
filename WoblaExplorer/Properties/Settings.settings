@@ -14,5 +14,8 @@
     <Setting Name="DefaultLanguage" Type="System.Globalization.CultureInfo" Scope="User">
       <Value Profile="(Default)">ru-RU</Value>
     </Setting>
+    <Setting Name="DefaultAccentColor" Type="System.Windows.Media.SolidColorBrush" Scope="User">
+      <Value Profile="(Default)">#FF017BCD</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

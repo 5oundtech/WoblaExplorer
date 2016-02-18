@@ -17,6 +17,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
+using Elysium;
 using WoblaExplorer.Dialogs;
 using WoblaExplorer.FilesUtil;
 using WoblaExplorer.Properties;
@@ -43,6 +45,11 @@ namespace WoblaExplorer.Windows
         private CancellationTokenSource _tokenSource;
         private Task _searchTask;
         private SearchWindow _searchWindow;
+
+        public SolidColorBrush GetCurrentAccentBrush
+        {
+            get { return this.GetAccentBrush(); }
+        }
 
         public bool IsRunningWithAdminRights
         {
@@ -150,10 +157,12 @@ namespace WoblaExplorer.Windows
                 Settings.Default.LastDirectory = _fileDiver.CurrentPath;
                 Settings.Default.WindowSize = new Size((int)MainWindowX.Width, (int)MainWindowX.Height);
                 Settings.Default.WindowLocation = new Point((int)MainWindowX.Left, (int)MainWindowX.Top);
+                Settings.Default.DefaultAccentColor = GetCurrentAccentBrush;
                 Settings.Default.Save();
             };
             var settings = Settings.Default;
             string path;
+            Application.Current.Apply(settings.DefaultAccentColor, Elysium.Manager.DefaultContrastBrush);
             if (String.IsNullOrWhiteSpace(settings.LastDirectory))
             {
                 path = CbDrives.SelectedValue.ToString();
@@ -1583,6 +1592,73 @@ namespace WoblaExplorer.Windows
             }
 
             await PbVisualization.TogglePbVisibilityAsync();
+        }
+
+        private void ChangeAccentColorExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter == null)
+                return;
+
+            var param = e.Parameter.ToString();
+            SolidColorBrush color;
+            switch (param)
+            {
+                case "Brown":
+                    color = AccentBrushes.Brown;
+                    break;
+                case "Green":
+                    color = AccentBrushes.Green;
+                    break;
+                case "Lime":
+                    color = AccentBrushes.Lime;
+                    break;
+                case "Magenta":
+                    color = AccentBrushes.Magenta;
+                    break;
+                case "Mango":
+                    color = AccentBrushes.Mango;
+                    break;
+                case "Orange":
+                    color = AccentBrushes.Orange;
+                    break;
+                case "Pink":
+                    color = AccentBrushes.Pink;
+                    break;
+                case "Purple":
+                    color = AccentBrushes.Purple;
+                    break;
+                case "Red":
+                    color = AccentBrushes.Red;
+                    break;
+                case "Rose":
+                    color = AccentBrushes.Rose;
+                    break;
+                case "Violet":
+                    color = AccentBrushes.Violet;
+                    break;
+                case "Viridian":
+                    color = AccentBrushes.Viridian;
+                    break;
+                case "Sky":
+                    color = AccentBrushes.Sky;
+                    break;
+                case "Blue":
+                default:
+                    color = AccentBrushes.Blue;
+                    break;
+            }
+            Settings.Default.DefaultAccentColor = color;
+            Elysium.Manager.Apply(App.Current, Theme.Light, color, Elysium.Manager.DefaultContrastBrush);
+        }
+
+        private void ColorsMenu_OnSubmenuOpened(object sender, RoutedEventArgs e)
+        {
+            foreach (MenuItem item in ColorsMenu.Items)
+            {
+
+                var left = item.Background as SolidColorBrush;
+                item.IsChecked = Equals(left.Color, Settings.Default.DefaultAccentColor.Color);
+            }
         }
     }
 }
