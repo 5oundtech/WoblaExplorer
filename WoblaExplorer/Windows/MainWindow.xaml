@@ -96,11 +96,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" Name="Check" Width="13" Height="13" Visibility="Hidden"
-                                                    Margin="6,0,6,0" BorderThickness="1" BorderBrush="AntiqueWhite">
-                        <Path Name="CheckMark" Width="7" Height="7" Visibility="Hidden" SnapsToDevicePixels="False"
-                                                      StrokeThickness="2" Stroke="{TemplateBinding Foreground}" Data="M 0 0 L 7 7 M 0 7 L 7 0"/>
-                    </Border>
+                    <TextBlock Grid.Column="0" Name="CheckMark" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Foreground="{TemplateBinding Foreground}"
+                               FontFamily="{StaticResource FontAwesome}" Text="&#xf00c;" Visibility="Hidden"/>
                     <ContentPresenter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" ContentSource="Header">
                         <TextBlock.Foreground>
                             <TemplateBinding Property="Foreground" ></TemplateBinding>
@@ -110,7 +108,6 @@
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsChecked" Value="True">
-                    <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
                     <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">

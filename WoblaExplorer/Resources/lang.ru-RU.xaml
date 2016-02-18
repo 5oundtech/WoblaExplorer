@@ -18,12 +18,12 @@
     <v:String x:Key="MwSettingsConMenuColorMagenta">Пурпурный</v:String>
     <v:String x:Key="MwSettingsConMenuColorMango">Манго</v:String>
     <v:String x:Key="MwSettingsConMenuColorOrange">Оранжевый</v:String>
-    <v:String x:Key="MwSettingsConMenuColorPink">Розовый</v:String>
+    <v:String x:Key="MwSettingsConMenuColorPink">Светло-розовый</v:String>
     <v:String x:Key="MwSettingsConMenuColorPurple">Фиолетовый</v:String>
     <v:String x:Key="MwSettingsConMenuColorRed">Красный</v:String>
-    <v:String x:Key="MwSettingsConMenuColorRose">Роза</v:String>
+    <v:String x:Key="MwSettingsConMenuColorRose">Темно-розовый</v:String>
     <v:String x:Key="MwSettingsConMenuColorViolet">Фиалковый</v:String>
-    <v:String x:Key="MwSettingsConMenuColorViridian">Салатовый</v:String>
+    <v:String x:Key="MwSettingsConMenuColorViridian">Бирюзовый</v:String>
     <v:String x:Key="MwSettingsConMenuColorSky">Небесно голубой</v:String>
     <v:String x:Key="MwSettingsConMenuClearDb">Очистить список прочитанных файлов</v:String>
     <v:String x:Key="MwHelpConMenuHeader">Помощь</v:String>
