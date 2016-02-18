@@ -82,5 +82,17 @@ namespace WoblaExplorer.Properties {
                 this["DefaultAccentColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int DefaultTheme {
+            get {
+                return ((int)(this["DefaultTheme"]));
+            }
+            set {
+                this["DefaultTheme"] = value;
+            }
+        }
     }
 }

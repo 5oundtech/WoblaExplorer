@@ -46,5 +46,7 @@ namespace WoblaExplorer.CustomCommands
         public static RoutedCommand ClearDb = new RoutedCommand(nameof(ClearDb), typeof (Commands));
 
         public static RoutedCommand ChangeAccentColor = new RoutedCommand(nameof(ChangeAccentColor), typeof (Commands));
+
+        public static RoutedCommand ChangeTheme = new RoutedCommand(nameof(ChangeTheme), typeof (Commands));
     }
 }

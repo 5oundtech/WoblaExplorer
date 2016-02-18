@@ -17,5 +17,8 @@
     <Setting Name="DefaultAccentColor" Type="System.Windows.Media.SolidColorBrush" Scope="User">
       <Value Profile="(Default)">#FF017BCD</Value>
     </Setting>
+    <Setting Name="DefaultTheme" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

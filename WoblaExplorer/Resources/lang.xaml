@@ -10,6 +10,9 @@
     <v:String x:Key="MwFileConMenuEditSelectAll">Select all</v:String>
     <v:String x:Key="MwFileConMenuEditInvertSelection">Invert selection</v:String>
     <v:String x:Key="MwSettingsConMenuHeader">Settings</v:String>
+    <v:String x:Key="MwSettingsConMenuTheme">Theme</v:String>
+    <v:String x:Key="MwSettingsConMenuThemeLight">Light</v:String>
+    <v:String x:Key="MwSettingsConMenuThemeDark">Dark</v:String>
     <v:String x:Key="MwSettingsConMenuAccentColors">Accent color</v:String>
     <v:String x:Key="MwSettingsConMenuColorBlue">Blue</v:String>
     <v:String x:Key="MwSettingsConMenuColorBrown">Brown</v:String>

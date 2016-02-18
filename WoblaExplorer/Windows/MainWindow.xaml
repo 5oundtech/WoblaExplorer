@@ -31,6 +31,7 @@
         <CommandBinding Command="local:Commands.GetChecksums" Executed="GetCheckSumExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.ClearDb" Executed="ClearDbExecuted" CanExecute="DefaultCommands_CanExecute"/>
         <CommandBinding Command="local:Commands.ChangeAccentColor" Executed="ChangeAccentColorExecuted" CanExecute="DefaultCommands_CanExecute"/>
+        <CommandBinding Command="local:Commands.ChangeTheme" Executed="ChangeThemeExecuted" CanExecute="DefaultCommands_CanExecute"/>
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -92,9 +93,9 @@
                                                                 Background="{TemplateBinding Background}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="35"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="35"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Name="CheckMark" HorizontalAlignment="Center" VerticalAlignment="Center"
                                Foreground="{TemplateBinding Foreground}"
@@ -148,6 +149,10 @@
                     <MenuItem Header="{DynamicResource MwFileConMenuEditInvertSelection}" Command="local:Commands.ModifySelection" CommandParameter="Invert"/>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource MwSettingsConMenuHeader}" FontFamily="{StaticResource FontAwesome}">
+                    <MenuItem Name="ThemesMenu" Header="{DynamicResource MwSettingsConMenuTheme}" SubmenuOpened="MenuItem_OnSubmenuOpened">
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuThemeLight}" Tag="Light" Command="local:Commands.ChangeTheme" CommandParameter="light"/>
+                        <MenuItem Header="{DynamicResource MwSettingsConMenuThemeDark}" Tag="Dark" Command="local:Commands.ChangeTheme" CommandParameter="dark"/>
+                    </MenuItem>
                     <MenuItem Name="ColorsMenu" Header="{DynamicResource MwSettingsConMenuAccentColors}" SubmenuOpened="ColorsMenu_OnSubmenuOpened">
                         <MenuItem Header="{DynamicResource MwSettingsConMenuColorBlue}" Background="{x:Static metro:AccentBrushes.Blue}"
                                   Foreground="{x:Static metro:Manager.DefaultContrastBrush}" 
@@ -361,7 +366,9 @@
                     <GridView AllowsColumnReorder="False" ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderMetroStyle}">
                         <GridViewColumn behaviours:GridViewColumnResize.Width="*">
                             <GridViewColumn.Header>
-                                <GridViewColumnHeader DataContext="{x:Type io:FileSystemInfo}" Content="{DynamicResource MwMainLvTooltipName}"></GridViewColumnHeader>
+                                <GridViewColumnHeader Name="NameColumn" DataContext="{x:Type io:FileSystemInfo}" 
+                                                      Foreground="{Binding ElementName=MainWindowX, Path=GetCurrentContrastBrush, UpdateSourceTrigger=Explicit}"
+                                                      Content="{DynamicResource MwMainLvTooltipName}"></GridViewColumnHeader>
                             </GridViewColumn.Header>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -378,13 +385,13 @@
                         <GridViewColumn  DisplayMemberBinding="{Binding Path=LastWriteTime, Mode=OneWay,
                             StringFormat={x:Static util:Constants.DateTimeFormat}}">
                             <GridViewColumn.Header>
-                                <GridViewColumnHeader Content="{DynamicResource MwMainLvtooltipChangeDate}"/>
+                                <GridViewColumnHeader Name="DateColumn" Content="{DynamicResource MwMainLvtooltipChangeDate}" Foreground="{Binding ElementName=MainWindowX, Path=GetCurrentContrastBrush, UpdateSourceTrigger=Explicit}"/>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Length, Mode=OneWay,
                             Converter={StaticResource FileLengthConverter}}" Width="70">
                             <GridViewColumn.Header>
-                                <GridViewColumnHeader Content="{DynamicResource MwMainLvTooltipSize}"/>
+                                <GridViewColumnHeader Name="SizeColumn" Content="{DynamicResource MwMainLvTooltipSize}" Foreground="{Binding ElementName=MainWindowX, Path=GetCurrentContrastBrush, UpdateSourceTrigger=Explicit}"/>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                     </GridView>

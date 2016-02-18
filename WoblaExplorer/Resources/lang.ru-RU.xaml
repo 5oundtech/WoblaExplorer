@@ -10,6 +10,9 @@
     <v:String x:Key="MwFileConMenuEditSelectAll">Выделить все</v:String>
     <v:String x:Key="MwFileConMenuEditInvertSelection">Инвертировать выделенное</v:String>
     <v:String x:Key="MwSettingsConMenuHeader">Настройки</v:String>
+    <v:String x:Key="MwSettingsConMenuTheme">Тема</v:String>
+    <v:String x:Key="MwSettingsConMenuThemeLight">Светлая</v:String>
+    <v:String x:Key="MwSettingsConMenuThemeDark">Тёмная</v:String>
     <v:String x:Key="MwSettingsConMenuAccentColors">Цветовой акцент</v:String>
     <v:String x:Key="MwSettingsConMenuColorBlue">Синий</v:String>
     <v:String x:Key="MwSettingsConMenuColorBrown">Коричневый</v:String>

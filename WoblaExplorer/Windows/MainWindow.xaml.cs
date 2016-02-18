@@ -51,6 +51,23 @@ namespace WoblaExplorer.Windows
             get { return this.GetAccentBrush(); }
         }
 
+        public SolidColorBrush GetCurrentContrastBrush
+        {
+            get
+            {
+                if (Elysium.Manager.GetTheme(Application.Current) == Theme.Dark)
+                {
+                    return Elysium.Manager.DefaultContrastBrush;
+                }
+                return new SolidColorBrush(Colors.Black);
+            }
+        }
+
+        public Theme GetCurrenTheme
+        {
+            get { return Application.Current.GetTheme(); }
+        }
+
         public bool IsRunningWithAdminRights
         {
             get
@@ -158,11 +175,13 @@ namespace WoblaExplorer.Windows
                 Settings.Default.WindowSize = new Size((int)MainWindowX.Width, (int)MainWindowX.Height);
                 Settings.Default.WindowLocation = new Point((int)MainWindowX.Left, (int)MainWindowX.Top);
                 Settings.Default.DefaultAccentColor = GetCurrentAccentBrush;
+                Settings.Default.DefaultTheme = GetCurrenTheme == Theme.Light ? 0 : 1;
                 Settings.Default.Save();
             };
             var settings = Settings.Default;
             string path;
-            Application.Current.Apply(settings.DefaultAccentColor, Elysium.Manager.DefaultContrastBrush);
+            var theme = settings.DefaultTheme == 0 ? Theme.Light : Theme.Dark;
+            Application.Current.Apply(theme, settings.DefaultAccentColor, Elysium.Manager.DefaultContrastBrush);
             if (String.IsNullOrWhiteSpace(settings.LastDirectory))
             {
                 path = CbDrives.SelectedValue.ToString();
@@ -1648,17 +1667,64 @@ namespace WoblaExplorer.Windows
                     break;
             }
             Settings.Default.DefaultAccentColor = color;
-            Elysium.Manager.Apply(App.Current, Theme.Light, color, Elysium.Manager.DefaultContrastBrush);
+            Elysium.Manager.Apply(Application.Current, color, Elysium.Manager.DefaultContrastBrush);
         }
 
         private void ColorsMenu_OnSubmenuOpened(object sender, RoutedEventArgs e)
         {
             foreach (MenuItem item in ColorsMenu.Items)
             {
-
                 var left = item.Background as SolidColorBrush;
                 item.IsChecked = Equals(left.Color, Settings.Default.DefaultAccentColor.Color);
             }
+        }
+
+        private void MenuItem_OnSubmenuOpened(object sender, RoutedEventArgs e)
+        {
+            var theme = GetCurrenTheme;
+            foreach (MenuItem item in ThemesMenu.Items)
+            {
+                if (item.Tag.ToString() == "Dark")
+                {
+                    item.IsChecked = theme == Theme.Dark;
+                }
+                if (item.Tag.ToString() == "Light")
+                {
+                    item.IsChecked = theme == Theme.Light;
+                }
+            }
+        }
+
+        private void ChangeThemeExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter == null)
+                return;
+
+            Elysium.Theme theme = Theme.Light;
+
+            switch (e.Parameter.ToString())
+            {
+                case "dark":
+                    theme = Theme.Dark;
+                    break;
+                case "light":
+                default:
+                    theme = Theme.Light;
+                    break;
+            }
+
+            Settings.Default.DefaultTheme = theme == Theme.Light ? 0 : 1;
+            Elysium.Manager.Apply(Application.Current, theme);
+
+            var nameBinding = NameColumn.GetBindingExpression(GridViewColumnHeader.ForegroundProperty);
+            nameBinding?.UpdateSource();
+            nameBinding?.UpdateTarget();
+            var dateBinding = DateColumn.GetBindingExpression(GridViewColumnHeader.ForegroundProperty);
+            dateBinding?.UpdateSource();
+            dateBinding?.UpdateTarget();
+            var sizeBinding = SizeColumn.GetBindingExpression(GridViewColumnHeader.ForegroundProperty);
+            sizeBinding?.UpdateSource();
+            sizeBinding?.UpdateTarget();
         }
     }
 }
