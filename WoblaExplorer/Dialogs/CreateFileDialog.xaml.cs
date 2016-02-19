@@ -1,6 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using Elysium;
 
 namespace WoblaExplorer.Dialogs
 {
@@ -11,6 +13,18 @@ namespace WoblaExplorer.Dialogs
     {
         public string FileName { get; set; }
         public string ErrorString { get; set; }
+
+        public SolidColorBrush GetCurrentContrastBrush
+        {
+            get
+            {
+                if (Elysium.Manager.GetTheme(Application.Current) == Theme.Dark)
+                {
+                    return Elysium.Manager.DefaultContrastBrush;
+                }
+                return new SolidColorBrush(Colors.Black);
+            }
+        }
 
         public CreateFileDialog()
         {

@@ -3,6 +3,8 @@ using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using Elysium;
 using WoblaExplorer.Util;
 
 namespace WoblaExplorer.Windows
@@ -12,6 +14,17 @@ namespace WoblaExplorer.Windows
     /// </summary>
     public partial class PropertiesWindow
     {
+        public SolidColorBrush GetCurrentContrastBrush
+        {
+            get
+            {
+                if (Elysium.Manager.GetTheme(Application.Current) == Theme.Dark)
+                {
+                    return Elysium.Manager.DefaultContrastBrush;
+                }
+                return new SolidColorBrush(Colors.Black);
+            }
+        }
         public PropertiesWindow(FileInfo info)
         {
             InitializeComponent();

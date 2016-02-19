@@ -35,7 +35,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.4.0</ApplicationVersion>
+    <ApplicationVersion>1.0.5.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -112,6 +112,7 @@
     </ApplicationDefinition>
     <Compile Include="Behaviours\GridViewColumnResize.cs" />
     <Compile Include="Converters\FileLengthToNormalConverter.cs" />
+    <Compile Include="Converters\FileNameToIconConverter.cs" />
     <Compile Include="Converters\ReadedFilesToColorConverter.cs" />
     <Compile Include="Dialogs\ChecksumDialog.xaml.cs">
       <DependentUpon>ChecksumDialog.xaml</DependentUpon>
@@ -134,7 +135,6 @@
     <Compile Include="FilesUtil\FilesExtensions.cs" />
     <Compile Include="Util\ChecksumCalculators.cs" />
     <Compile Include="Util\Constants.cs" />
-    <Compile Include="Util\FileNameToIconConverter.cs" />
     <Compile Include="Util\ProgressEventArgs.cs" />
     <Compile Include="Util\DbHelper.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">

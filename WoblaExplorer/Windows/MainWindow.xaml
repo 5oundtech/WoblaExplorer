@@ -35,7 +35,7 @@
     </Window.CommandBindings>
 
     <Window.Resources>
-        <util:FileNameToIconConverter x:Key="FileNameToIconConverter"/>
+        <converters:FileNameToIconConverter x:Key="FileNameToIconConverter"/>
         <converters:FileLengthToNormalConverter x:Key="FileLengthConverter"/>
         <converters:ReadedFilesToColorConverter x:Key="FilesToColorConverter"/>
         <Style x:Key="GridViewColumnHeaderMetroStyle" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}" TargetType="GridViewColumnHeader">
@@ -401,6 +401,11 @@
                    MouseEnter="Popup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
                 <Border BorderBrush="DarkBlue" BorderThickness="2" Background="White">
                     <StackPanel Margin="5">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Style>
+                        </StackPanel.Resources>
                         <TextBlock Margin="5" FontFamily="{StaticResource FontAwesome}"  HorizontalAlignment="Center" Text="{DynamicResource MwSearchPopupFirstTextBlock}"></TextBlock>
                         <TextBlock Margin="5" FontFamily="{StaticResource FontAwesome}"  HorizontalAlignment="Center">
                             <Run Text="{DynamicResource MwSearchPopupSecondTextBlock}"></Run>
@@ -413,6 +418,11 @@
                    MouseEnter="Popup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
                 <Border BorderBrush="DarkRed" BorderThickness="2" Background="White">
                     <StackPanel Margin="5">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Style>
+                        </StackPanel.Resources>
                         <TextBlock Margin="5" FontFamily="{StaticResource FontAwesome}"  HorizontalAlignment="Center" Text="{DynamicResource MwErrorPopupTextBlock}"></TextBlock>
                     </StackPanel>
                 </Border>
@@ -421,6 +431,11 @@
                    MouseEnter="Popup_OnMouseEnter" MouseLeftButtonUp="PopupLeftMouseButtonUp">
                 <Border BorderBrush="Blue" BorderThickness="2" Background="White">
                     <StackPanel Margin="5">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Style>
+                        </StackPanel.Resources>
                         <TextBlock Margin="5" FontFamily="{StaticResource FontAwesome}"  HorizontalAlignment="Center" Text="{DynamicResource MwCustomErrorPopupFirstTextBlock}"></TextBlock>
                         <TextBlock Name="CustomErrorPopupTextBlock" FontFamily="{StaticResource FontAwesome}"  HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>

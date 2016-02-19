@@ -6,9 +6,10 @@
         xmlns:params="http://schemas.codeplex.com/elysium/params"
         xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
         xmlns:util="clr-namespace:WoblaExplorer.Util"
+        xmlns:converters="clr-namespace:WoblaExplorer.Converters"
         Title="{DynamicResource SwTitle}" Height="400" Width="600" x:Name="SWindow">
     <metro:Window.Resources>
-        <util:FileNameToIconConverter x:Key="FileNameToIconConverter" />
+        <converters:FileNameToIconConverter x:Key="FileNameToIconConverter" />
     </metro:Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Open" CanExecute="DefaultCommand_CanExecute" Executed="OpenExecuted"></CommandBinding>

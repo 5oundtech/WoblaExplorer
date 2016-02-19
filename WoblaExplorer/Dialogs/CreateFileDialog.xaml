@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WoblaExplorer.Dialogs"
         xmlns:metro="http://schemas.codeplex.com/elysium"
         mc:Ignorable="d"
-        Title="{DynamicResource CrfTitle}" Height="150" Width="350" ResizeMode="NoResize">
+        Title="{DynamicResource CrfTitle}" Height="150" Width="350" ResizeMode="NoResize" Name="CreateFileDialogX">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -24,7 +24,7 @@
         </Grid>
         <Grid Grid.Row="2" Margin="0, 20, 0, 0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Label Content="{DynamicResource CrfCbFileTypes}"/>
+                <Label Foreground="{Binding ElementName=CreateFileDialogX, Path=GetCurrentContrastBrush}" Content="{DynamicResource CrfCbFileTypes}"/>
                 <ComboBox Focusable="True" Width="Auto" Name="CbFileType" SelectionChanged="CbFileType_OnSelectionChanged"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

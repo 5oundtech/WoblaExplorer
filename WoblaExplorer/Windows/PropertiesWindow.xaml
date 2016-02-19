@@ -8,10 +8,16 @@
         xmlns:params="http://schemas.codeplex.com/elysium/params"
         mc:Ignorable="d" FontFamily="{StaticResource FontAwesome}"
         Title="{DynamicResource PwTitle}" Height="400" Width="400"
-        MaxHeight="400" MaxWidth="400" MinHeight="400" MinWidth="400">
+        MaxHeight="400" MaxWidth="400" MinHeight="400" MinWidth="400" Name="PropertiesWindowX">
     <Window.CommandBindings>
         <CommandBinding Command="Copy" Executed="CopyExecuted" CanExecute="DefaultCommandsCanExecute"></CommandBinding>
     </Window.CommandBindings>
+    
+    <Window.Resources>
+        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+            <Setter Property="Foreground" Value="{Binding ElementName=PropertiesWindowX, Path=GetCurrentContrastBrush}"></Setter>
+        </Style>
+    </Window.Resources>
     
     <Grid>
         <Grid.RowDefinitions>

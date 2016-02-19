@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Data;
 using WoblaExplorer.FilesUtil;
 
-namespace WoblaExplorer.Util
+namespace WoblaExplorer.Converters
 {
     [ValueConversion(typeof(string), typeof(string))]
     public class FileNameToIconConverter : IValueConverter

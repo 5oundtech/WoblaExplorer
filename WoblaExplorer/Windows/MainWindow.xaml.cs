@@ -215,7 +215,7 @@ namespace WoblaExplorer.Windows
             ListViewExplorer.ItemsSource = await task;
             ListViewExplorer.Focus();
 
-            ChangeWindowTitle();
+            UpdateWindowTitle();
         }
 
         private async void BtnSearch_OnClick(object sender, RoutedEventArgs e)
@@ -335,7 +335,7 @@ namespace WoblaExplorer.Windows
                 });
                 ListViewExplorer.ItemsSource = await task;
 
-                ChangeWindowTitle();
+                UpdateWindowTitle();
 
                 DbHelper.InsertReadedFile(newPath);
 
@@ -379,7 +379,7 @@ namespace WoblaExplorer.Windows
             });
             ListViewExplorer.ItemsSource = await task;
 
-            ChangeWindowTitle();
+            UpdateWindowTitle();
 
             await PbVisualization.TogglePbVisibilityAsync();
         }
@@ -412,7 +412,7 @@ namespace WoblaExplorer.Windows
                     }
                 });
                 ListViewExplorer.ItemsSource = await task;
-                ChangeWindowTitle();
+                UpdateWindowTitle();
             }
             catch (Exception)
             {
@@ -425,7 +425,7 @@ namespace WoblaExplorer.Windows
             }
         }
 
-        private async void ChangeWindowTitle()
+        private async void UpdateWindowTitle()
         {
             string fileDiverPath = _fileDiver.CurrentPath;
             await MainWindowX.Dispatcher.InvokeAsync(() =>
@@ -473,7 +473,7 @@ namespace WoblaExplorer.Windows
                     });
                     ListViewExplorer.ItemsSource = await task;
 
-                    ChangeWindowTitle();
+                    UpdateWindowTitle();
 
                     DbHelper.InsertReadedFile(fsEntry.FullName);
 
@@ -512,7 +512,7 @@ namespace WoblaExplorer.Windows
                         });
                         ListViewExplorer.ItemsSource = await task;
 
-                        ChangeWindowTitle();
+                        UpdateWindowTitle();
 
                         DbHelper.InsertReadedFile(selectedItem.FullName);
 
@@ -865,7 +865,7 @@ namespace WoblaExplorer.Windows
             });
 
             ListViewExplorer.ItemsSource = await task;
-            ChangeWindowTitle();
+            UpdateWindowTitle();
 
             await PbVisualization.TogglePbVisibilityAsync();
         }
@@ -1509,7 +1509,7 @@ namespace WoblaExplorer.Windows
                 }
             });
             await diveTask;
-            ChangeWindowTitle();
+            UpdateWindowTitle();
 
             await PbVisualization.TogglePbVisibilityAsync();
         }
