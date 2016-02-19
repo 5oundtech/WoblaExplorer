@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -53,6 +54,17 @@ namespace WoblaExplorer.Util
         }
 #endregion
         #region UI
+
+        public static async Task ToggleControlVisibilityAsync(this Control self)
+        {
+            await self.Dispatcher.InvokeAsync(() =>
+            {
+                self.Visibility = self.Visibility == Visibility.Hidden || self.Visibility == Visibility.Collapsed
+                    ? Visibility.Visible
+                    : Visibility.Hidden;
+            });
+        }
+
         public static void TogglePbVisibility(this ProgressBar self)
         {
             self.Visibility = self.Visibility == Visibility.Hidden || self.Visibility == Visibility.Collapsed
@@ -88,5 +100,18 @@ namespace WoblaExplorer.Util
             return imageSource;
         }
         #endregion
+
+        #region logic 
+
+        public static bool EqualToOneFromList<T>(this List<T> self, T comparedItem)
+        {
+            for (int i = 0; i < self.Count; i++)
+            {
+                if (self[i].Equals(comparedItem))
+                    return true;
+            }
+            return false;
+        }
+#endregion
     }
 }

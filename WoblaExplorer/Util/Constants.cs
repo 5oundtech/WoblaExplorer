@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace WoblaExplorer.Util
+﻿namespace WoblaExplorer.Util
 {
     public static class Constants
     {

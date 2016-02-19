@@ -226,6 +226,12 @@
   <data name="MwWrongAppUpdate" xml:space="preserve">
     <value>Это приложение не может быть обновлено. Так как установлено не правильно или не с официальнного источника.</value>
   </data>
+  <data name="PdTitleDir" xml:space="preserve">
+    <value>Выберите каталог</value>
+  </data>
+  <data name="PdTitleFile" xml:space="preserve">
+    <value>Выберите файл</value>
+  </data>
   <data name="UdUpdateStageCheck" xml:space="preserve">
     <value>Проверка обновлений...</value>
   </data>

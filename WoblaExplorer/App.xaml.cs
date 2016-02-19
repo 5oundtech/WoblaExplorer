@@ -4,9 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Navigation;
-using Elysium;
 using WoblaExplorer.Properties;
 
 namespace WoblaExplorer

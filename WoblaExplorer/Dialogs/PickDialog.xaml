@@ -1,0 +1,32 @@
+﻿<metro:Window x:Class="WoblaExplorer.Dialogs.PickDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WoblaExplorer.Dialogs"
+        xmlns:metro="http://schemas.codeplex.com/elysium"
+        mc:Ignorable="d"
+        Title="PickDialog" Height="400" Width="400" Name="PickDialogX">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TreeView Grid.Row="0" Name="FileSystemTree" TreeViewItem.Expanded="FileSystemTree_OnExpanded"
+                  FontFamily="{StaticResource FontAwesome}" Focusable="True" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False">
+        </TreeView>
+        
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="2">
+                <Button Name="BtnOk" Content="{DynamicResource MdBtnOk}" Width="Auto" Click="BtnOk_OnClick"/>
+                <Button Name="BtnCancel" Margin="30, 0, 15, 0" IsCancel="True" Content="{DynamicResource CrfBtnCancel}" 
+                        Width="Auto" Click="BtnCancel_OnClick"/>
+            </StackPanel>
+        </Grid>
+        
+        <metro:ProgressBar State="Indeterminate" Visibility="Hidden" Name="ProgressBar" Grid.Row="2" HorizontalAlignment="Stretch"></metro:ProgressBar>
+    </Grid>
+</metro:Window>

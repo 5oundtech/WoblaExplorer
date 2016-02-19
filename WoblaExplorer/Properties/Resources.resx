@@ -226,6 +226,12 @@
   <data name="MwWrongAppUpdate" xml:space="preserve">
     <value>This application cannot be updated. It is likely not a ClickOnce application.</value>
   </data>
+  <data name="PdTitleDir" xml:space="preserve">
+    <value>Pick directory</value>
+  </data>
+  <data name="PdTitleFile" xml:space="preserve">
+    <value>Pick file</value>
+  </data>
   <data name="UdUpdateStageCheck" xml:space="preserve">
     <value>Checking for updates...</value>
   </data>

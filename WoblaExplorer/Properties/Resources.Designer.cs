@@ -388,6 +388,24 @@ namespace WoblaExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pick directory.
+        /// </summary>
+        internal static string PdTitleDir {
+            get {
+                return ResourceManager.GetString("PdTitleDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pick file.
+        /// </summary>
+        internal static string PdTitleFile {
+            get {
+                return ResourceManager.GetString("PdTitleFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking for updates....
         /// </summary>
         internal static string UdUpdateStageCheck {

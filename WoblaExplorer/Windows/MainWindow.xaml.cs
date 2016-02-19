@@ -616,16 +616,16 @@ namespace WoblaExplorer.Windows
             string destinationPath = string.Empty;
             await Dispatcher.InvokeAsync(() =>
             {
-                var folder = new FolderBrowserDialog
+                var dialog = new PickDialog(PickDialogType.Directory, _fileDiver.CurrentPath)
                 {
-                    ShowNewFolderButton = true,
-                    SelectedPath = _fileDiver.CurrentPath,
-                    Description = Properties.Resources.MwCopyToDescription
+                    Title = Properties.Resources.PdTitleDir,
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
                 };
-                if (folder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (dialog.ShowDialog() == true)
                 {
                     doMove = true;
-                    destinationPath = folder.SelectedPath;
+                    destinationPath = dialog.SelectedPath;
                 }
             });
 
@@ -666,15 +666,16 @@ namespace WoblaExplorer.Windows
         {
             if (ListViewExplorer.SelectedItems.Count <= 0) return;
             await PbVisualization.TogglePbVisibilityAsync();
-            var folder = new FolderBrowserDialog
+            var dialog = new PickDialog(PickDialogType.Directory, _fileDiver.CurrentPath)
             {
-                ShowNewFolderButton = true,
-                SelectedPath = _fileDiver.CurrentPath,
-                Description = Properties.Resources.MwCopyToDescription
+                Title = Properties.Resources.PdTitleDir,
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
-            if (folder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            dialog.ShowDialog();
+            if (dialog.PickDialogResult == PickDialogResult.Ok)
             {
-                var destinationPath = folder.SelectedPath;
+                var destinationPath = dialog.SelectedPath;
                 var fsEntries = ListViewExplorer.SelectedItems;
                 if (fsEntries != null)
                 {
@@ -699,7 +700,7 @@ namespace WoblaExplorer.Windows
                                     Dispatcher.InvokeAsync(() =>
                                     {
                                         copyDialog.Close();
-                                    }); 
+                                    });
                                     return;
                                 }
                                 Dispatcher.InvokeAsync(() =>
