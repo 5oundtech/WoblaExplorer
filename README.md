@@ -18,7 +18,7 @@ Simple explorer-like application with some new features.
 - [x] Checksums (md5, sha1, 256, 512)
 - [x] Highlighting readed files
 - [x] Ability to choose accent color and theme
-- [ ] Stylized folder browser dialog (when copying files)
+- [X] Stylized folder browser dialog (when copying files)
 
 I'm developing this app alone so i'll appreciate any help. (Criticism, pull requests etc)
 
