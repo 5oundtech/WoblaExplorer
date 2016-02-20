@@ -22,7 +22,7 @@
 
         <Grid Grid.Row="1" Margin="10, 10, 10, 0">
             <ProgressBar Name="PbCopyProgress" Maximum="5" Minimum="0" Height="33"></ProgressBar>
-            <TextBlock Name="TbCopyObject" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Name="TbCopyObject" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         </Grid>
 
         <Grid Grid.Row="2" Margin="0, 10, 0, 0">

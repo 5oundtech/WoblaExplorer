@@ -22,7 +22,7 @@
 
         <Grid Grid.Row="1" Margin="10, 10, 10, 0">
             <ProgressBar Name="PbCalculationProgress" Maximum="100" Minimum="0" Height="33"></ProgressBar>
-            <TextBlock Name="TbAlgorithmName" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Name="TbAlgorithmName" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         </Grid>
         
         <Grid Grid.Row="2" Margin="10, 10, 10, 0">

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Elysium;
 using WoblaExplorer.Converters;
 using WoblaExplorer.Util;
 
@@ -57,6 +59,7 @@ namespace WoblaExplorer.Dialogs
                                 _converter.Convert(dirInfo.FullName, typeof (string), null, CultureInfo.CurrentCulture)
                     };
                     textBlock.SetValue(Grid.ColumnProperty, 0);
+                    textBlock.Foreground = new SolidColorBrush(Colors.SlateGray);
                     textBlock.FontSize = 15;
                     grid.Children.Add(textBlock);
                     var driveTb = new TextBlock {Text = dirInfo.ToString()};
@@ -96,14 +99,9 @@ namespace WoblaExplorer.Dialogs
                     var grid = new Grid();
                     grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
                     grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(5, GridUnitType.Star) });
-                    var textBlock = new TextBlock
-                    {
-                        Text =
-                            (string)
-                                _converter.Convert(dirInfo.FullName, typeof(string), null, CultureInfo.CurrentCulture)
-                    };
-                    textBlock.SetValue(Grid.ColumnProperty, 0);
-                    textBlock.FontSize = 15;
+                    var textBlock = GetTreeViewItemTextBox((string)
+                                                        _converter.Convert(dirInfo.FullName, typeof(string), null,
+                                                            CultureInfo.CurrentCulture));
                     grid.Children.Add(textBlock);
                     var driveTb = new TextBlock { Text = dirInfo.ToString() };
                     driveTb.SetValue(Grid.ColumnProperty, 1);
@@ -242,15 +240,9 @@ namespace WoblaExplorer.Dialogs
                                 {
                                     Width = new GridLength(5, GridUnitType.Star)
                                 });
-                                var textBlock = new TextBlock
-                                {
-                                    Text =
-                                        (string)
-                                            _converter.Convert(subDirectory.FullName, typeof (string), null,
-                                                CultureInfo.CurrentCulture)
-                                };
-                                textBlock.SetValue(Grid.ColumnProperty, 0);
-                                textBlock.FontSize = 15;
+                                var textBlock = GetTreeViewItemTextBox((string)
+                                    _converter.Convert(subDirectory.FullName, typeof (string), null,
+                                        CultureInfo.CurrentCulture));
                                 grid.Children.Add(textBlock);
                                 var fsEntry = new TextBlock {Text = subDirectory.Name};
                                 fsEntry.SetValue(Grid.ColumnProperty, 1);
@@ -283,15 +275,9 @@ namespace WoblaExplorer.Dialogs
                                 {
                                     Width = new GridLength(5, GridUnitType.Star)
                                 });
-                                var textBlock = new TextBlock
-                                {
-                                    Text =
-                                        (string)
-                                            _converter.Convert(info.FullName, typeof (string), null,
-                                                CultureInfo.CurrentCulture)
-                                };
-                                textBlock.SetValue(Grid.ColumnProperty, 0);
-                                textBlock.FontSize = 15;
+                                var textBlock = GetTreeViewItemTextBox((string)
+                                    _converter.Convert(info.FullName, typeof(string), null,
+                                        CultureInfo.CurrentCulture));
                                 grid.Children.Add(textBlock);
                                 var fsEntry = new TextBlock {Text = info.Name};
                                 fsEntry.SetValue(Grid.ColumnProperty, 1);
@@ -316,6 +302,19 @@ namespace WoblaExplorer.Dialogs
             });
 
             await ProgressBar.ToggleControlVisibilityAsync();
+        }
+
+        private TextBlock GetTreeViewItemTextBox(string text)
+        {
+            DirectoryInfo subDirectory;
+            var textBlock = new TextBlock
+            {
+                Text = text
+            };
+            textBlock.SetValue(Grid.ColumnProperty, 0);
+            textBlock.FontSize = 15;
+            textBlock.Foreground = new SolidColorBrush(Colors.SlateGray);
+            return textBlock;
         }
 
         private void BtnOk_OnClick(object sender, RoutedEventArgs e)
