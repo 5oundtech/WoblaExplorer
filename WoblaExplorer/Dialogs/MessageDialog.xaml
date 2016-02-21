@@ -7,6 +7,15 @@
         xmlns:metro="http://schemas.codeplex.com/elysium"
         mc:Ignorable="d"
         Title="{DynamicResource MdDefaultTitle}" Height="150" Width="300" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Style.Triggers>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>

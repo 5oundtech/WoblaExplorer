@@ -80,7 +80,7 @@ namespace WoblaExplorer.Windows
 
                     return principal.IsInRole(WindowsBuiltInRole.Administrator);
                 }
-                catch (SecurityException securityException)
+                catch (SecurityException)
                 {
                 }
                 return false;
@@ -895,7 +895,7 @@ namespace WoblaExplorer.Windows
                 properties.TbFileName.Text = $"{((FileSystemInfo) entries[0]).Name}, ...";
                 properties.TbFilePath.Text = $"{_fileDiver.CurrentPath}";
                 properties.MultipleFilesPanel.Visibility = Visibility.Visible;
-                await properties.MainProgressBar.TogglePbVisibilityAsync();
+                await properties.MainProgressBar.ToggleControlVisibilityAsync();
                 var task = new Task(async () =>
                 {
                     try
@@ -947,7 +947,7 @@ namespace WoblaExplorer.Windows
                 });
                 task.Start();
                 await task;
-                await properties.MainProgressBar.TogglePbVisibilityAsync();
+                await properties.MainProgressBar.ToggleControlVisibilityAsync();
             }
             else if (entries.Count == 1)
             {
@@ -966,7 +966,7 @@ namespace WoblaExplorer.Windows
                         properties.Title += $" {dir.Name}";
                         properties.TbFileName.Text = $"{dir.Name}";
                         properties.TbFilePath.Text = dir.FullName;
-                        await properties.MainProgressBar.TogglePbVisibilityAsync();
+                        await properties.MainProgressBar.ToggleControlVisibilityAsync();
                         var calcTask = new Task(async () =>
                         {
                             try
@@ -1011,7 +1011,7 @@ namespace WoblaExplorer.Windows
                         });
                         calcTask.Start();
                         await calcTask;
-                        await properties.MainProgressBar.TogglePbVisibilityAsync();
+                        await properties.MainProgressBar.ToggleControlVisibilityAsync();
                     }
                 }
                 else

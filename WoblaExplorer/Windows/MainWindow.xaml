@@ -373,7 +373,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock FontFamily="{StaticResource FontAwesome}" FontSize="20" Foreground="Gray" Margin="0, 0, 10, 0" 
+                                        <TextBlock FontFamily="{StaticResource FontAwesome}" FontSize="20" Foreground="SlateGray" Margin="0, 0, 10, 0" 
                                                         Text="{Binding Path=FullName, Converter={StaticResource FileNameToIconConverter}}" VerticalAlignment="Center"/>
                                         <TextBlock FontSize="16" Foreground="{Binding Path=FullName, Converter={StaticResource FilesToColorConverter}}" 
                                                    Text="{Binding Name}">

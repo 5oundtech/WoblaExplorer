@@ -90,7 +90,8 @@ namespace WoblaExplorer.Dialogs
             _converter = new FileNameToIconConverter();
             try
             {
-                DialogType = PickDialogType.File;
+                DialogType = dialogType;
+                SelectedPath = selectedPath;
                 FileSystemTree.Focus();
                 foreach (var drive in Directory.GetLogicalDrives())
                 {
@@ -123,8 +124,6 @@ namespace WoblaExplorer.Dialogs
             {
                 Close();
             }
-            DialogType = dialogType;
-            SelectedPath = selectedPath;
         }
 
         public void GoToSelectedPath()
@@ -140,60 +139,10 @@ namespace WoblaExplorer.Dialogs
                 if (fsInfo != null && fsInfo.FullName == Path.GetPathRoot(SelectedPath))
                 {
                     item.IsExpanded = true;
+                    item.ExpandSubtree();
                     return;
                 }
             }
-
-/*            var partsOfWay = new List<string>();
-            var inputInfo = new DirectoryInfo(SelectedPath);
-            var currentDir = SelectedPath.Clone().ToString();
-            while (inputInfo.Parent != null)
-            {
-                partsOfWay.Add(currentDir);
-                currentDir = inputInfo.Parent.FullName;
-                inputInfo = new DirectoryInfo(currentDir);
-                if (inputInfo.Parent == null)
-                {
-                    partsOfWay.Add(inputInfo.FullName);
-                }
-            }
-
-            Action<TreeViewItem> action = null;
-            action = item =>
-            {
-                FileSystemTree.UpdateLayout();
-
-                foreach (object treeItem in item.Items)
-                {
-                    var treeViewItem = treeItem as TreeViewItem;
-                    var fsInfo = treeViewItem?.Tag as FileSystemInfo;
-                    if (fsInfo != null && partsOfWay.EqualToOneFromList(fsInfo.FullName))
-                    {
-                        treeViewItem.IsSelected = true;
-                        treeViewItem.ExpandSubtree();
-                        treeViewItem.Focus();
-                        try
-                        {
-                            action(treeViewItem);
-                        }
-                        catch (Exception exception)
-                        {
-                        }
-                    }
-                }
-            };
-
-            foreach (TreeViewItem item in FileSystemTree.Items)
-            {
-                var fsInfo = item.Tag as FileSystemInfo;
-                if (fsInfo != null && partsOfWay.EqualToOneFromList(fsInfo.FullName))
-                {
-                    item.IsExpanded = true;
-                    item.Focus();
-                    action(item);
-                    break;
-                }
-            }*/
         }
 
         private async void FileSystemTree_OnExpanded(object sender, RoutedEventArgs e)

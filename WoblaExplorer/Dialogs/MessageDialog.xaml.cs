@@ -36,13 +36,19 @@ namespace WoblaExplorer.Dialogs
             {
                 case MessageDialogButtons.Ok:
                     BtnOk.Visibility = Visibility.Visible;
+                    BtnOk.IsDefault = true;
+                    BtnOk.Focus();
                     break;
                 case MessageDialogButtons.YesNo:
                     BtnYes.Visibility = Visibility.Visible;
+                    BtnYes.IsDefault = true;
+                    BtnYes.Focus();
                     BtnNo.Visibility = Visibility.Visible;
                     break;
                 case MessageDialogButtons.YesNoCancel:
                     BtnYes.Visibility = Visibility.Visible;
+                    BtnYes.IsDefault = true;
+                    BtnYes.Focus();
                     BtnNo.Visibility = Visibility.Visible;
                     BtnCancel.Visibility = Visibility.Visible;
                     break;
@@ -55,6 +61,8 @@ namespace WoblaExplorer.Dialogs
             InitializeComponent();
             MainTextBlock.Text = text;
             BtnOk.Visibility = Visibility.Visible;
+            BtnOk.IsDefault = true;
+            BtnOk.Focus();
             MessageDialogResult = MessageDialogResult.Cancel;
         }
 

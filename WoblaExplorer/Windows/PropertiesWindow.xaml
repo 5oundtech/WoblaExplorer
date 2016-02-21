@@ -105,8 +105,8 @@
         </Grid>
         
         <Grid Grid.Row="5">
-            <StackPanel Orientation="Vertical" Margin="0, 70, 0, 0">
-                <ProgressBar Name="MainProgressBar" Width="385" IsIndeterminate="True" Visibility="Hidden" VerticalAlignment="Bottom"></ProgressBar>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                <metro:ProgressBar Name="MainProgressBar" Width="385" State="Indeterminate" Visibility="Hidden" VerticalAlignment="Bottom"/>
             </StackPanel>
         </Grid>
     </Grid>
