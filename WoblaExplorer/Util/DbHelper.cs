@@ -75,7 +75,31 @@ namespace WoblaExplorer.Util
                     {
                         var command = connection.CreateCommand();
                         command.CommandText = $"INSERT INTO readed_files(path) VALUES ('{path}');";
-                        command.ExecuteNonQuery();
+                        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
+
+                        return true;
+                    }
+                    catch (SQLiteException)
+                    {
+                        return false;
+                    }
+                }
+            }).Result;
+        }
+
+        /// <exception cref="ArgumentNullException">The exception that is thrown when the <paramref name="function" /> argument is null.</exception>
+        public static async Task<bool> RemoveReadedFile(string path)
+        {
+            return await Task.Factory.StartNew(async () =>
+            {
+                using (var connection = new SQLiteConnection(ConnectionString))
+                {
+                    await connection.OpenAsync();
+                    try
+                    {
+                        var command = connection.CreateCommand();
+                        command.CommandText = $"DELETE FROM readed_files WHERE path = '{path}';";
+                        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
 
                         return true;
                     }

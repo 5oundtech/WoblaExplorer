@@ -149,7 +149,7 @@ namespace WoblaExplorer.Windows
         private void ChangeLanguageClick(object sender, RoutedEventArgs routedEventArgs)
         {
             var menuItem = sender as MenuItem;
-            CultureInfo language = menuItem?.Tag as CultureInfo;
+            var language = menuItem?.Tag as CultureInfo;
             if (language != null)
             {
                 App.Language = language;
@@ -171,12 +171,7 @@ namespace WoblaExplorer.Windows
         {
             Closing += (sender, args) =>
             {
-                Settings.Default.LastDirectory = _fileDiver.CurrentPath;
-                Settings.Default.WindowSize = new Size((int)MainWindowX.Width, (int)MainWindowX.Height);
-                Settings.Default.WindowLocation = new Point((int)MainWindowX.Left, (int)MainWindowX.Top);
-                Settings.Default.DefaultAccentColor = GetCurrentAccentBrush;
-                Settings.Default.DefaultTheme = GetCurrenTheme == Theme.Light ? 0 : 1;
-                Settings.Default.Save();
+                SaveSettings();
             };
             var settings = Settings.Default;
             string path;
@@ -216,6 +211,16 @@ namespace WoblaExplorer.Windows
             ListViewExplorer.Focus();
 
             UpdateWindowTitle();
+        }
+
+        private void SaveSettings()
+        {
+            Settings.Default.LastDirectory = _fileDiver.CurrentPath;
+            Settings.Default.WindowSize = new Size((int) MainWindowX.Width, (int) MainWindowX.Height);
+            Settings.Default.WindowLocation = new Point((int) MainWindowX.Left, (int) MainWindowX.Top);
+            Settings.Default.DefaultAccentColor = GetCurrentAccentBrush;
+            Settings.Default.DefaultTheme = GetCurrenTheme == Theme.Light ? 0 : 1;
+            Settings.Default.Save();
         }
 
         private async void BtnSearch_OnClick(object sender, RoutedEventArgs e)
@@ -378,6 +383,7 @@ namespace WoblaExplorer.Windows
                 }
             });
             ListViewExplorer.ItemsSource = await task;
+            ListViewExplorer.UpdateLayout();
 
             UpdateWindowTitle();
 
@@ -785,20 +791,26 @@ namespace WoblaExplorer.Windows
                 }
                 try
                 {
-                    var delTask = Task.Factory.StartNew(() =>
+                    await Task.Factory.StartNew(async () =>
                     {
                         foreach (FileSystemInfo entry in fsEntries)
                         {
                             try
                             {
+                                string entryPath = entry.FullName;
+                                await DbHelper.RemoveReadedFile(entryPath);
                                 if (entry.IsDirectory())
                                 {
-                                    Directory.Delete(entry.FullName, true);
+                                    await Task.Factory.StartNew(() =>
+                                    {
+                                        Directory.Delete(entryPath, true);
+                                    });
                                 }
                                 else
                                 {
                                     entry.Delete();
                                 }
+                                
                             }
                             catch (Exception)
                             {
@@ -810,7 +822,6 @@ namespace WoblaExplorer.Windows
                             }
                         }
                     });
-                    await delTask;
                 }
                 catch (Exception)
                 {
@@ -1016,12 +1027,20 @@ namespace WoblaExplorer.Windows
                 }
                 else
                 {
-                    var properties = new PropertiesWindow((FileInfo) entry)
+                    try
                     {
-                        Owner = this,
-                        WindowStartupLocation = WindowStartupLocation.CenterOwner
-                    };
-                    properties.Show();
+                        var properties = new PropertiesWindow((FileInfo) entry)
+                        {
+                            Owner = this,
+                            WindowStartupLocation = WindowStartupLocation.CenterOwner
+                        };
+                        properties.Show();
+                    }
+                    catch (Exception)
+                    {
+                        ErrorPopup.IsOpen = true;
+                        SystemSounds.Exclamation.Play();
+                    }
                 }
             }
         }
@@ -1036,6 +1055,7 @@ namespace WoblaExplorer.Windows
 
             try
             {
+                SaveSettings();
                 Process.Start(processInfo);
 
                 Application.Current.Shutdown();
@@ -1123,6 +1143,7 @@ namespace WoblaExplorer.Windows
             }
             ListViewExplorer_Refresh();
         }
+
         private async void CreateFileExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Parameter == null) return;

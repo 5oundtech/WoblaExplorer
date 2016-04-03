@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security;
+using System.Threading.Tasks;
 using WoblaExplorer.Util;
 
 namespace WoblaExplorer.FilesUtil
@@ -14,6 +15,7 @@ namespace WoblaExplorer.FilesUtil
         public FileDiver()
         {}
 
+        /// <exception cref="ArgumentNullException"><paramref name="value" /> is null. </exception>
         public FileDiver(string currentPath)
         {
             CurrentPath = currentPath;
@@ -32,8 +34,9 @@ namespace WoblaExplorer.FilesUtil
             PathHistory.Push(item);
         }
 
-        
-        /// <exception cref="AggregateException">Occurs when app have no right to access dir or smth else.</exception>
+
+        /// <exception cref="SecurityException">The caller does not have the required permission. </exception>
+        /// <exception cref="DirectoryNotFoundException"><c>:)</c></exception>
         public IEnumerable<FileSystemInfo> DiveBack()
         {
             DirectoryInfo newPath = new DirectoryInfo(CurrentPath);
@@ -48,6 +51,7 @@ namespace WoblaExplorer.FilesUtil
 
         /// <exception cref="SecurityException">Occurs when app have propblems with access.</exception>
         /// <exception cref="DirectoryNotFoundException"><c>:)</c></exception>
+        /// <exception cref="ArgumentNullException"><paramref name="value" /> is null. </exception>
         public IEnumerable<FileSystemInfo> DiveInto(string path)
         {
             if (!path.EndsWith("\\"))
@@ -62,15 +66,7 @@ namespace WoblaExplorer.FilesUtil
 
                 return fsInfo;
             }
-            catch (IOException ioException)
-            {
-                throw;
-            }
             catch (ArgumentNullException argumentNullException)
-            {
-                throw;
-            }
-            catch (ArgumentException argumentException)
             {
                 throw;
             }
